@@ -52,13 +52,20 @@ const References = () => {
         </div>
       </section>
 
-      {/* Keine Referenzen */}
+      {/* Referenzprojekte */}
       <section className="section-padding bg-background">
-        <div className="container-narrow">
+        <div className="container-narrow space-y-6">
           <AnimatedSection>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Referenzprojekte</h2>
             <div className="rounded-2xl bg-primary/10 py-16 flex items-center justify-center">
               <p className="text-primary text-lg font-medium">Noch keine Projekte vorhanden.</p>
             </div>
+          </AnimatedSection>
+          <AnimatedSection>
+            <Link to="/#kontakt" className="rounded-2xl bg-primary py-6 flex items-center justify-center cursor-pointer hover:bg-primary-hover transition-colors gap-2">
+              <p className="text-primary-foreground text-lg font-semibold">Projekt anfragen</p>
+              <ArrowRight size={18} className="text-primary-foreground" />
+            </Link>
           </AnimatedSection>
         </div>
       </section>
@@ -76,22 +83,6 @@ const References = () => {
             <div className="rounded-2xl bg-primary py-6 flex items-center justify-center cursor-pointer hover:bg-primary-hover transition-colors">
               <p className="text-primary-foreground text-lg font-semibold">Bewerten Sie uns!</p>
             </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-padding bg-accent">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <h2 className="text-3xl md:text-4xl mb-4">Ihr Projekt ist das nächste.</h2>
-            <p className="text-muted-foreground mb-8 max-w-md mx-auto">Lassen Sie uns gemeinsam in die Zukunft starten.</p>
-            <Button size="xl" variant="hero" asChild>
-              <Link to="/#kontakt">
-                Projekt anfragen
-                <ArrowRight size={18} />
-              </Link>
-            </Button>
           </AnimatedSection>
         </div>
       </section>
