@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
 import ContactForm from "@/components/ContactForm";
+import miguelImg from "@/assets/miguel.png";
 import {
   CalendarCheck, Laptop, Rocket,
   ChevronDown } from
@@ -60,9 +61,7 @@ const Index = () => {
               </div>
             </AnimatedSection>
             <AnimatedSection delay={0.15}>
-              <div className="aspect-[4/5] rounded-2xl bg-muted flex items-center justify-center">
-                <span className="text-muted-foreground text-sm">Bild-Platzhalter</span>
-              </div>
+              <img src={miguelImg} alt="Miguel – Gründer" className="aspect-[4/5] rounded-2xl object-cover w-full" />
             </AnimatedSection>
           </div>
         </div>
