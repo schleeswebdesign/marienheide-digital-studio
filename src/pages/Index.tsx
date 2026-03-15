@@ -47,27 +47,23 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Warum wir */}
+      {/* Über uns */}
       <section className="section-padding bg-accent">
         <div className="container-narrow">
-          <AnimatedSection>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl mb-4">Warum mit uns arbeiten?</h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">Drei Gründe, die den Unterschied machen.</p>
-            </div>
-          </AnimatedSection>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {whyUsCards.map((card, i) =>
-            <AnimatedSection key={card.title} delay={i * 0.1}>
-                <div className="card-base text-center h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                    <card.icon size={28} className="text-primary" />
-                  </div>
-                  <h3 className="text-xl mb-3">{card.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
-                </div>
-              </AnimatedSection>
-            )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <AnimatedSection>
+              <div>
+                <h2 className="text-3xl md:text-4xl mb-6">Wer steckt dahinter?</h2>
+                <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
+                  Ich bin Miguel, 20 Jahre alt aus Marienheide. Als junger Gründer kenne ich die Region und weiß wie wichtig eine starke Online-Präsenz für lokale Unternehmen ist. Mein Ziel: Moderne, bezahlbare Websites die wirklich Kunden bringen – ohne Agentur-Preise.
+                </p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.15}>
+              <div className="aspect-[4/5] rounded-2xl bg-muted flex items-center justify-center">
+                <span className="text-muted-foreground text-sm">Bild-Platzhalter</span>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
