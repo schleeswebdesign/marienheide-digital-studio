@@ -47,10 +47,10 @@ const Footer = () => (
               <Mail size={16} className="text-primary" />
               <span>info@beispiel-agentur.de</span>
             </a>
-            <a href="https://www.google.com/maps/search/Marienheide,+NRW" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <div className="flex items-center gap-2">
               <MapPin size={16} className="text-primary" />
               <span>Marienheide, NRW</span>
-            </a>
+            </div>
           </div>
         </div>
       </div>
