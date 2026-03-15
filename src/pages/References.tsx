@@ -40,7 +40,7 @@ const projects = [
     tags: ["Mehrseitig", "SEO", "Referenzgalerie"],
     problem: "Gute Arbeit, aber online nicht sichtbar. Konkurrenz dominierte die Google-Ergebnisse.",
     solution: "Professionelle Website mit Referenzgalerie, Kundenbewertungen und lokaler SEO-Strategie.",
-    outcome: "Platz 1 bei Google für „Maler Marienheide" innerhalb von 4 Monaten.",
+    outcome: 'Platz 1 bei Google für "Maler Marienheide" innerhalb von 4 Monaten.',
   },
   {
     id: 6, branch: "Gastro", company: "Café Bergblick", result: "Neue Zielgruppe erreicht",
