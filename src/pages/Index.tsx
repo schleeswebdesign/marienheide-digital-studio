@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
 import ContactForm from "@/components/ContactForm";
 import {
   Search, Zap, TrendingUp, MessageSquare, Palette, Rocket,
-  ChevronDown, Star, ArrowRight } from
+  ChevronDown } from
 "lucide-react";
 import { useState } from "react";
 
@@ -20,18 +19,6 @@ const steps = [
 { num: "03", icon: Rocket, title: "Livegang & Betreuung", desc: "Ihre Website geht live. Danach betreuen wir Sie mit Updates, Wartung und Support." }];
 
 
-const references = [
-{ branch: "GaLaBau", title: "Garten & Landschaftsbau Müller", result: "+45 % mehr Anfragen über Google", tags: ["One-Pager", "SEO", "Kontaktformular"] },
-{ branch: "Elektro", title: "Elektro Schmidt Marienheide", result: "3x mehr Terminbuchungen", tags: ["Mehrseitig", "Terminbuchung", "SEO"] },
-{ branch: "Friseur", title: "Salon Haargenau", result: "Online-Buchungen statt Telefonwarteschlange", tags: ["One-Pager", "Online-Buchung", "Mobile First"] }];
-
-
-const testimonials = [
-{ name: "Thomas M.", role: "Geschäftsführer, GaLaBau", text: "Endlich eine Website, die zu unserem Betrieb passt. Seit dem Relaunch bekommen wir deutlich mehr Anfragen aus der Region." },
-{ name: "Sandra K.", role: "Inhaberin, Friseursalon", text: "Die Zusammenarbeit war super unkompliziert. Unsere Kunden buchen jetzt direkt online – das spart uns enorm viel Zeit." },
-{ name: "Michael W.", role: "Elektromeister", text: "Professionell, schnell und fair im Preis. Ich kann die Agentur jedem Handwerker empfehlen, der online sichtbar sein will." }];
-
-
 const faqs = [
 { q: "Wie lange dauert die Erstellung einer Website?", a: "Je nach Umfang zwischen 2 und 6 Wochen. Einen einfachen One-Pager können wir oft schon in 2 Wochen fertigstellen." },
 { q: "Was kostet eine Website?", a: "Unsere Pakete starten ab einem niedrigen vierstelligen Betrag. Den genauen Preis besprechen wir nach der Bedarfsanalyse – transparent und ohne versteckte Kosten." },
@@ -41,7 +28,6 @@ const faqs = [
 
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [testimonialIdx, setTestimonialIdx] = useState(0);
 
   return (
     <div className="min-h-screen">
@@ -120,84 +106,25 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Referenzen Teaser */}
-      <section className="section-padding bg-accent">
+      {/* Kontakt */}
+      <section id="kontakt" className="section-padding bg-accent">
         <div className="container-narrow">
           <AnimatedSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl mb-4">Unsere Referenzen</h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">Erfolgsgeschichten lokaler Unternehmen.</p>
-            </div>
-          </AnimatedSection>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {references.map((ref, i) =>
-            <AnimatedSection key={ref.branch} delay={i * 0.1}>
-                <div className="card-base h-full flex flex-col">
-                  <div className="w-full h-40 bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl mb-5 flex items-center justify-center">
-                    <span className="text-sm font-medium text-primary/40">{ref.branch}</span>
-                  </div>
-                  <p className="text-xs font-medium text-primary uppercase tracking-wider mb-1">{ref.branch}</p>
-                  <h3 className="text-lg mb-2">{ref.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4 flex-1">{ref.result}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {ref.tags.map((tag) =>
-                  <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium">{tag}</span>
-                  )}
-                  </div>
-                </div>
-              </AnimatedSection>
-            )}
-          </div>
-          <div className="text-center">
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/referenzen">
-                Alle Referenzen ansehen
-                <ArrowRight size={16} />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <AnimatedSection>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl mb-4">Das sagen unsere Kunden</h2>
+              <h2 className="text-3xl md:text-4xl mb-4">Kostenloses Erstgespräch</h2>
+              <p className="text-muted-foreground max-w-xl mx-auto">Erzählen Sie uns von Ihrem Projekt – wir melden uns innerhalb von 24 Stunden.</p>
             </div>
           </AnimatedSection>
           <AnimatedSection>
             <div className="max-w-2xl mx-auto">
-              <div className="card-base text-center py-10 px-8">
-                <div className="flex justify-center gap-1 mb-6">
-                  {[...Array(5)].map((_, i) =>
-                  <Star key={i} size={20} className="text-primary fill-primary" />
-                  )}
-                </div>
-                <p className="text-lg text-foreground leading-relaxed mb-6 italic">
-                  „{testimonials[testimonialIdx].text}"
-                </p>
-                <p className="font-semibold text-secondary">{testimonials[testimonialIdx].name}</p>
-                <p className="text-sm text-muted-foreground">{testimonials[testimonialIdx].role}</p>
-                <div className="flex justify-center gap-2 mt-6">
-                  {testimonials.map((_, i) =>
-                  <button
-                    key={i}
-                    onClick={() => setTestimonialIdx(i)}
-                    className={`w-2.5 h-2.5 rounded-full transition-colors ${i === testimonialIdx ? 'bg-primary' : 'bg-border'}`}
-                    aria-label={`Testimonial ${i + 1}`} />
-
-                  )}
-                </div>
-              </div>
+              <ContactForm />
             </div>
           </AnimatedSection>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="section-padding bg-accent">
+      <section className="section-padding bg-background">
         <div className="container-narrow">
           <AnimatedSection>
             <div className="text-center mb-16">
@@ -227,23 +154,6 @@ const Index = () => {
               </AnimatedSection>
             )}
           </div>
-        </div>
-      </section>
-
-      {/* Kontakt */}
-      <section id="kontakt" className="section-padding bg-background">
-        <div className="container-narrow">
-          <AnimatedSection>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl mb-4">Kostenloses Erstgespräch</h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">Erzählen Sie uns von Ihrem Projekt – wir melden uns innerhalb von 24 Stunden.</p>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection>
-            <div className="max-w-2xl mx-auto">
-              <ContactForm />
-            </div>
-          </AnimatedSection>
         </div>
       </section>
     </div>);
