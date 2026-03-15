@@ -61,7 +61,7 @@ const Index = () => {
               </div>
             </AnimatedSection>
             <AnimatedSection delay={0.15}>
-              <img src={miguelImg} alt="Miguel – Gründer" className="aspect-[4/5] rounded-2xl object-cover w-full" />
+              <img src={miguelImg} alt="Miguel – Gründer" className="rounded-2xl object-cover w-full h-auto max-h-[280px] md:max-h-none" />
             </AnimatedSection>
           </div>
         </div>
