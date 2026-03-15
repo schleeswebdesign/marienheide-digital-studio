@@ -60,8 +60,8 @@ const Index = () => {
                 </p>
               </div>
             </AnimatedSection>
-            <AnimatedSection delay={0.15}>
-              <img src={miguelImg} alt="Miguel – Gründer" className="rounded-2xl object-cover w-full h-auto max-h-[280px] md:max-h-none" />
+            <AnimatedSection delay={0.15} className="h-full">
+              <img src={miguelImg} alt="Miguel – Gründer" className="rounded-2xl object-cover w-full h-full" />
             </AnimatedSection>
           </div>
         </div>
