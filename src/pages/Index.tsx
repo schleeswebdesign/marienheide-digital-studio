@@ -34,7 +34,7 @@ const Index = () => {
           <AnimatedSection>
             <div className="max-w-3xl">
               <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-                Moderne Websites für Marienheide, die Kunden gewinnen.
+                ​"Sie sind gut in Ihrem Job. Wir sorgen dafür, dass Ihre Kunden das auch wissen."
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl">
                 Wir bauen schnelle, mobiloptimierte Websites für lokale Dienstleister – klar, bezahlbar, professionell.
