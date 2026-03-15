@@ -17,7 +17,7 @@ const Footer = () => (
 
         {/* Links */}
         <div>
-          <p className="font-semibold mb-4 text-sm uppercase tracking-wider text-secondary-foreground/50">Seiten</p>
+          <p className="font-semibold mb-4 text-sm uppercase tracking-wider text-secondary-foreground/50">Links</p>
           <nav className="flex flex-col gap-2">
             <Link to="/" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Home</Link>
             <Link to="/referenzen" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Referenzen</Link>
