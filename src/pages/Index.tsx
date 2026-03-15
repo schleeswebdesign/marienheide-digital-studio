@@ -20,7 +20,7 @@ const steps = [
 
 
 const faqs = [
-{ q: "Wie lange dauert die Erstellung einer Website?", a: "Je nach Umfang zwischen 2 und 6 Wochen. Einen einfachen One-Pager können wir oft schon in 2 Wochen fertigstellen." },
+{ q: "Wie lange dauert die Erstellung einer Website?", a: "Je nach Umfang zwischen 2 und 6 Wochen. Einen einfachen One-Pager können wir oft schon in unter 2 Wochen fertigstellen." },
 { q: "Was kostet eine Website?", a: "Unsere Pakete starten ab einem niedrigen vierstelligen Betrag. Den genauen Preis besprechen wir nach der Bedarfsanalyse – transparent und ohne versteckte Kosten." },
 { q: "Muss ich eigene Texte und Bilder liefern?", a: "Das ist optional. Wir bieten professionelle Texterstellung und Bildbearbeitung als Add-on an, damit Sie sich um nichts kümmern müssen." },
 { q: "Bieten Sie auch laufende Betreuung an?", a: "Ja. Von regelmäßigen Updates über technische Wartung bis hin zu inhaltlichen Änderungen – wir sind auch nach dem Livegang für Sie da." }];
