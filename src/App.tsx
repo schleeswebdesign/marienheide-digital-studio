@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import Index from "./pages/Index.tsx";
 import References from "./pages/References.tsx";
 import Pricing from "./pages/Pricing.tsx";
+import Impressum from "./pages/Impressum.tsx";
+import Datenschutz from "./pages/Datenschutz.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
