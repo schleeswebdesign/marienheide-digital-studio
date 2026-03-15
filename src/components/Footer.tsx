@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Instagram, Linkedin } from "lucide-react";
+import logoImg from "@/assets/logo-schlees.png";
 
 const Footer = () => (
   <footer className="bg-secondary text-secondary-foreground">
