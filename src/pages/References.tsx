@@ -10,7 +10,7 @@ const References = () => {
       <section className="section-padding bg-accent">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Unsere Referenzen</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Unser Portfolio</h1>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
               Erfolgreiche Projekte für Handwerk, Gastro und Dienstleister aus der Region.
             </p>
