@@ -2,21 +2,15 @@ import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
 import ContactForm from "@/components/ContactForm";
 import {
-  Search, Zap, TrendingUp, MessageSquare, Palette, Rocket,
+  CalendarCheck, Laptop, Rocket,
   ChevronDown } from
 "lucide-react";
 import { useState } from "react";
 
-const whyUsCards = [
-{ icon: Search, title: "Google-Sichtbarkeit", desc: "Wir optimieren Ihre Website für lokale Suchergebnisse – damit Kunden aus Marienheide und Umgebung Sie finden." },
-{ icon: Zap, title: "Schnell online", desc: "In wenigen Wochen steht Ihre professionelle Website. Kein monatelanges Warten, sondern schnelle Ergebnisse." },
-{ icon: TrendingUp, title: "Mehr Anfragen", desc: "Klare Struktur, starke Call-to-Actions und mobiloptimiertes Design sorgen für messbar mehr Kundenanfragen." }];
-
-
 const steps = [
-{ num: "01", icon: MessageSquare, title: "Beratung", desc: "Wir lernen Ihr Geschäft kennen und besprechen Ihre Ziele in einem kostenlosen Erstgespräch." },
-{ num: "02", icon: Palette, title: "Design & Umsetzung", desc: "Wir gestalten und entwickeln Ihre Website – modern, schnell und auf Ihre Branche zugeschnitten." },
-{ num: "03", icon: Rocket, title: "Livegang & Betreuung", desc: "Ihre Website geht live. Danach betreuen wir Sie mit Updates, Wartung und Support." }];
+{ num: "01", icon: CalendarCheck, title: "Kostenloses Erstgespräch", desc: "Wir lernen uns kennen, ich verstehe dein Business und wir besprechen was du brauchst." },
+{ num: "02", icon: Laptop, title: "Ich baue deine Website", desc: "In 1-3 Wochen entsteht deine moderne Website – mobiloptimiert und auf deine Branche zugeschnitten." },
+{ num: "03", icon: Rocket, title: "Livegang & Support", desc: "Deine Website geht live. Ich begleite dich danach mit Updates und Support." }];
 
 
 const faqs = [
