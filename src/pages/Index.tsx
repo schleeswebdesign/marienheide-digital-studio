@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
 import ContactForm from "@/components/ContactForm";
+import miguelImg from "@/assets/miguel.png";
 import {
   CalendarCheck, Laptop, Rocket,
   ChevronDown } from
