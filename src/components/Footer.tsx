@@ -14,10 +14,10 @@ const Footer = () => (
             Moderne Websites für Handwerk, Gastro &amp; lokale Dienstleister in Marienheide und Umgebung.
           </p>
           <div className="flex gap-3 mt-4">
-            <a href="#" aria-label="Instagram" className="text-secondary-foreground/70 hover:text-primary transition-colors">
+            <a href="https://instagram.com/DEINNAME" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-secondary-foreground/70 hover:text-primary transition-colors">
               <Instagram size={20} />
             </a>
-            <a href="#" aria-label="LinkedIn" className="text-secondary-foreground/70 hover:text-primary transition-colors">
+            <a href="https://linkedin.com/in/DEINNAME" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-secondary-foreground/70 hover:text-primary transition-colors">
               <Linkedin size={20} />
             </a>
           </div>
@@ -30,8 +30,8 @@ const Footer = () => (
             <Link to="/" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Home</Link>
             <Link to="/referenzen" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Portfolio</Link>
             <Link to="/preise" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Katalog</Link>
-            <a href="#" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Impressum</a>
-            <a href="#" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Datenschutz</a>
+            <Link to="/impressum" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Impressum</Link>
+            <Link to="/datenschutz" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Datenschutz</Link>
           </nav>
         </div>
 
@@ -43,14 +43,14 @@ const Footer = () => (
               <Phone size={16} className="text-primary" />
               <span>+49 (0) 123 456 789</span>
             </div>
-            <div className="flex items-center gap-2">
+            <a href="mailto:info@beispiel-agentur.de" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Mail size={16} className="text-primary" />
               <span>info@beispiel-agentur.de</span>
-            </div>
-            <div className="flex items-center gap-2">
+            </a>
+            <a href="https://www.google.com/maps/search/Marienheide,+NRW" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
               <MapPin size={16} className="text-primary" />
               <span>Marienheide, NRW</span>
-            </div>
+            </a>
           </div>
         </div>
       </div>

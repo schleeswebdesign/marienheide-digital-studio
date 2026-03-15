@@ -34,7 +34,7 @@ const Navbar = () => {
             </Link>
           ))}
           <Button size="default" asChild>
-            <Link to="/#kontakt">Erstgespräch</Link>
+            <Link to="/kontakt">Erstgespräch</Link>
           </Button>
         </nav>
 
@@ -65,7 +65,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Button size="default" asChild className="mt-2">
-              <Link to="/#kontakt" onClick={() => setOpen(false)}>Erstgespräch</Link>
+              <Link to="/kontakt" onClick={() => setOpen(false)}>Erstgespräch</Link>
             </Button>
           </nav>
         </div>
