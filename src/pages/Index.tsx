@@ -15,10 +15,11 @@ const steps = [
 
 
 const faqs = [
-{ q: "Wie lange dauert die Erstellung einer Website?", a: "Je nach Umfang zwischen 2 und 6 Wochen. Einen einfachen One-Pager können wir oft schon in unter 2 Wochen fertigstellen." },
-{ q: "Was kostet eine Website?", a: "Unsere Pakete starten ab einem niedrigen vierstelligen Betrag. Den genauen Preis besprechen wir nach der Bedarfsanalyse – transparent und ohne versteckte Kosten." },
-{ q: "Muss ich eigene Texte und Bilder liefern?", a: "Das ist optional. Wir bieten professionelle Texterstellung und Bildbearbeitung als Add-on an, damit Sie sich um nichts kümmern müssen." },
-{ q: "Bieten Sie auch laufende Betreuung an?", a: "Ja. Von regelmäßigen Updates über technische Wartung bis hin zu inhaltlichen Änderungen – wir sind auch nach dem Livegang für Sie da." }];
+{ q: "Wie lange dauert die Erstellung einer Website?", a: "Einen einfachen One-Pager liefere ich in ca. 1-2 Wochen. Größere Projekte mit mehreren Seiten dauern 3-4 Wochen – je nach Umfang und wie schnell du mir Infos und Bilder schickst." },
+{ q: "Was kostet eine Website?", a: "Meine Pakete starten ab 990€ für einen One-Pager. Den genauen Preis besprechen wir im kostenlosen Erstgespräch – ohne versteckte Kosten." },
+{ q: "Ich habe keine Ahnung von Technik – ist das ein Problem?", a: "Überhaupt nicht! Du musst nichts verstehen. Ich kümmere mich um alles – von Design bis Livegang. Du sagst mir was du willst, ich mache es." },
+{ q: "Was passiert nach dem Livegang?", a: "Ich biete laufende Betreuung an – Updates, kleine Änderungen, technischer Support. Auf Wunsch auch als monatliches Paket." },
+{ q: "Kann ich meine alte Website ersetzen lassen?", a: "Ja! Genau das ist meine Spezialität – veraltete Websites durch moderne, schnelle Seiten ersetzen die wirklich Kunden bringen." }];
 
 
 const Index = () => {
