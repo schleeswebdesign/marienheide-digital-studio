@@ -8,9 +8,7 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* Brand */}
         <div>
-          <p className="text-xl font-bold mb-4">
-            digital<span className="text-primary">marienheide</span>
-          </p>
+          <img src={logoImg} alt="digitalmarienheide Logo" className="h-12 mb-4" />
           <p className="text-secondary-foreground/70 text-sm leading-relaxed">
             Moderne Websites für Handwerk, Gastro &amp; lokale Dienstleister in Marienheide und Umgebung.
           </p>
