@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => (
   <footer className="bg-secondary text-secondary-foreground">
@@ -13,6 +13,14 @@ const Footer = () => (
           <p className="text-secondary-foreground/70 text-sm leading-relaxed">
             Moderne Websites für Handwerk, Gastro &amp; lokale Dienstleister in Marienheide und Umgebung.
           </p>
+          <div className="flex gap-3 mt-4">
+            <a href="#" aria-label="Instagram" className="text-secondary-foreground/70 hover:text-primary transition-colors">
+              <Instagram size={20} />
+            </a>
+            <a href="#" aria-label="LinkedIn" className="text-secondary-foreground/70 hover:text-primary transition-colors">
+              <Linkedin size={20} />
+            </a>
+          </div>
         </div>
 
         {/* Links */}
