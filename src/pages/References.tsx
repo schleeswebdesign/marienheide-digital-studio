@@ -34,8 +34,8 @@ const References = () => {
         <div className="container-narrow space-y-6">
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Bewertungen</h2>
-            <div className="rounded-2xl border-2 border-border bg-card py-12 flex items-center justify-center">
-              <p className="text-muted-foreground text-lg font-medium">Noch keine Bewertung vorhanden.</p>
+            <div className="rounded-2xl bg-primary/10 py-12 flex items-center justify-center">
+              <p className="text-primary text-lg font-medium">Noch keine Bewertung vorhanden.</p>
             </div>
           </AnimatedSection>
           <AnimatedSection>
