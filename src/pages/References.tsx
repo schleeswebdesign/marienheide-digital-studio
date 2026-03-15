@@ -51,7 +51,7 @@ const References = () => {
         <div className="container-narrow text-center">
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl mb-4">Ihr Projekt ist das nächste.</h2>
-            <p className="text-muted-foreground mb-8 max-w-md mx-auto">Lassen Sie uns gemeinsam Ihre Website planen.</p>
+            <p className="text-muted-foreground mb-8 max-w-md mx-auto">Lassen Sie uns gemeinsam in die Zukunft starten.</p>
             <Button size="xl" variant="hero" asChild>
               <Link to="/#kontakt">
                 Projekt anfragen
