@@ -60,9 +60,28 @@ const Pricing = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {packages.map((pkg, i) => (
             <AnimatedSection key={pkg.name} delay={i * 0.1}>
-              <div className={`card-base h-full flex flex-col relative ${pkg.highlight ? 'ring-2 ring-primary' : ''}`}>
+              <div
+                className="h-full flex flex-col relative rounded-2xl p-6 md:p-8 cursor-pointer"
+                style={{
+                  background: pkg.highlight ? '#ffffff' : 'hsl(var(--muted))',
+                  border: pkg.highlight ? '2px solid #378ADD' : '2px solid transparent',
+                  boxShadow: pkg.highlight ? '6px 6px 0px #378ADD' : '6px 6px 0px #888780',
+                  transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = pkg.highlight ? '10px 10px 0px #378ADD' : '10px 10px 0px #888780';
+                  e.currentTarget.style.transform = 'translateX(-2px) translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = pkg.highlight ? '6px 6px 0px #378ADD' : '6px 6px 0px #888780';
+                  e.currentTarget.style.transform = 'none';
+                }}
+              >
                 {pkg.highlight && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-4 py-1 rounded-full">
+                  <span
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-1 rounded-full"
+                    style={{ backgroundColor: '#E6F1FB', color: '#185FA5' }}
+                  >
                     Beliebteste Wahl
                   </span>
                 )}
@@ -71,7 +90,9 @@ const Pricing = () => (
                   <p className="text-sm text-muted-foreground">{pkg.subtitle}</p>
                 </div>
                 <div className="mb-6">
-                  <span className="text-3xl font-bold text-secondary">{pkg.price}</span>
+                  <span className="text-3xl font-bold" style={{ color: pkg.highlight ? '#185FA5' : undefined }}>
+                    {pkg.price}
+                  </span>
                   <p className="text-xs text-muted-foreground mt-1">Lieferzeit: {pkg.delivery}</p>
                 </div>
                 <ul className="space-y-3 mb-8 flex-1">
@@ -84,8 +105,11 @@ const Pricing = () => (
                 </ul>
                 <Button
                   size="lg"
-                  variant={pkg.highlight ? "hero" : "outline"}
                   className="w-full"
+                  style={pkg.highlight
+                    ? { backgroundColor: '#378ADD', color: '#ffffff' }
+                    : { backgroundColor: 'transparent', border: '2px solid hsl(var(--muted-foreground))', color: 'hsl(var(--muted-foreground))' }
+                  }
                   asChild
                 >
                   <Link to="/#kontakt">
