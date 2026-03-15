@@ -13,6 +13,14 @@ const Footer = () => (
           <p className="text-secondary-foreground/70 text-sm leading-relaxed">
             Moderne Websites für Handwerk, Gastro &amp; lokale Dienstleister in Marienheide und Umgebung.
           </p>
+          <div className="flex gap-3 mt-4">
+            <a href="#" aria-label="Instagram" className="text-secondary-foreground/70 hover:text-primary transition-colors">
+              <Instagram size={20} />
+            </a>
+            <a href="#" aria-label="LinkedIn" className="text-secondary-foreground/70 hover:text-primary transition-colors">
+              <Linkedin size={20} />
+            </a>
+          </div>
         </div>
 
         {/* Links */}
