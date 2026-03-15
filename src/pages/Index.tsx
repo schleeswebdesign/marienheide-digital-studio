@@ -61,12 +61,6 @@ const Index = () => {
                 <Button size="xl" variant="hero" asChild>
                   <a href="#kontakt">Kostenloses Erstgespräch</a>
                 </Button>
-                <Button size="xl" variant="heroOutline" asChild>
-                  <Link to="/referenzen">
-                    Referenzen ansehen
-                    <ArrowRight size={18} />
-                  </Link>
-                </Button>
               </div>
             </div>
           </AnimatedSection>
