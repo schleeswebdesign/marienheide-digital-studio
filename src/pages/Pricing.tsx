@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Check, ArrowRight, PenTool, Camera, Search, Wrench } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const packages = [
@@ -38,30 +38,6 @@ const packages = [
       "30 Tage Support nach Livegang",
     ],
   },
-  {
-    name: "Premium",
-    subtitle: "Individuell + SEO/Tracking",
-    price: "ab 4.990 €",
-    delivery: "ca. 5–6 Wochen",
-    highlight: false,
-    features: [
-      "Alles aus Business",
-      "Unbegrenzte Seitenzahl",
-      "Individuelle Funktionen & Animationen",
-      "Umfassendes SEO-Paket",
-      "Google Analytics & Tracking-Setup",
-      "Conversion-Optimierung",
-      "3 Korrekturschleifen",
-      "90 Tage Premium-Support",
-    ],
-  },
-];
-
-const addons = [
-  { icon: Search, name: "SEO-Paket", desc: "Keyword-Analyse, On-Page-Optimierung, lokale SEO-Strategie" },
-  { icon: PenTool, name: "Texterstellung", desc: "Professionelle, SEO-optimierte Texte für alle Seiten" },
-  { icon: Camera, name: "Fotografie", desc: "Professionelles Foto-Shooting vor Ort für Ihr Unternehmen" },
-  { icon: Wrench, name: "Wartungspaket", desc: "Monatliche Updates, Backups, technische Betreuung" },
 ];
 
 const Pricing = () => (
@@ -81,7 +57,7 @@ const Pricing = () => (
     {/* Packages */}
     <section className="section-padding bg-background">
       <div className="container-narrow">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {packages.map((pkg, i) => (
             <AnimatedSection key={pkg.name} delay={i * 0.1}>
               <div className={`card-base h-full flex flex-col relative ${pkg.highlight ? 'ring-2 ring-primary' : ''}`}>
@@ -117,49 +93,6 @@ const Pricing = () => (
                     <ArrowRight size={16} />
                   </Link>
                 </Button>
-              </div>
-            </AnimatedSection>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Individual hint */}
-    <section className="bg-accent">
-      <div className="container-narrow py-12">
-        <AnimatedSection>
-          <div className="card-base text-center bg-background">
-            <h3 className="text-xl font-bold text-secondary mb-2">Individuelle Anforderungen?</h3>
-            <p className="text-muted-foreground mb-6">Wir erstellen Ihnen ein maßgeschneidertes Angebot innerhalb von 24 Stunden.</p>
-            <Button size="lg" asChild>
-              <Link to="/#kontakt">
-                Jetzt anfragen
-                <ArrowRight size={16} />
-              </Link>
-            </Button>
-          </div>
-        </AnimatedSection>
-      </div>
-    </section>
-
-    {/* Add-ons */}
-    <section className="section-padding bg-background">
-      <div className="container-narrow">
-        <AnimatedSection>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl mb-4">Add-ons</h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">Ergänzen Sie Ihr Paket mit zusätzlichen Leistungen.</p>
-          </div>
-        </AnimatedSection>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {addons.map((addon, i) => (
-            <AnimatedSection key={addon.name} delay={i * 0.1}>
-              <div className="card-base text-center h-full">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <addon.icon size={24} className="text-primary" />
-                </div>
-                <h3 className="font-bold text-secondary mb-2">{addon.name}</h3>
-                <p className="text-sm text-muted-foreground">{addon.desc}</p>
               </div>
             </AnimatedSection>
           ))}
