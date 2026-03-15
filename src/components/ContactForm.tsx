@@ -6,10 +6,28 @@ import { Send, CheckCircle } from "lucide-react";
 
 const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("https://formspree.io/f/xpqyjbqa", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      }
+    } catch {
+      // silently fail
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -27,30 +45,30 @@ const ContactForm = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="text-sm font-medium text-secondary mb-1.5 block">Name *</label>
-          <Input placeholder="Max Mustermann" required />
+          <Input name="name" placeholder="Max Mustermann" required />
         </div>
         <div>
           <label className="text-sm font-medium text-secondary mb-1.5 block">Firma</label>
-          <Input placeholder="Firmenname" />
+          <Input name="firma" placeholder="Firmenname" />
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="text-sm font-medium text-secondary mb-1.5 block">E-Mail *</label>
-          <Input type="email" placeholder="max@beispiel.de" required />
+          <Input name="email" type="email" placeholder="max@beispiel.de" required />
         </div>
         <div>
           <label className="text-sm font-medium text-secondary mb-1.5 block">Telefon (optional)</label>
-          <Input type="tel" placeholder="+49 123 456 789" />
+          <Input name="telefon" type="tel" placeholder="+49 123 456 789" />
         </div>
       </div>
       <div>
         <label className="text-sm font-medium text-secondary mb-1.5 block">Nachricht *</label>
-        <Textarea placeholder="Erzählen Sie uns von Ihrem Projekt..." rows={4} required />
+        <Textarea name="nachricht" placeholder="Erzählen Sie uns von Ihrem Projekt..." rows={4} required />
       </div>
-      <Button type="submit" size="lg" className="w-full sm:w-auto">
+      <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={loading}>
         <Send size={16} />
-        Nachricht senden
+        {loading ? "Wird gesendet..." : "Nachricht senden"}
       </Button>
     </form>
   );
