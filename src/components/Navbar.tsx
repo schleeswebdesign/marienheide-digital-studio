@@ -18,7 +18,7 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
       <div className="container-narrow flex items-center justify-between h-16">
         <Link to="/">
-          <img src={logoImg} alt="digitalmarienheide Logo" className="h-8" />
+          <img src={logoImg} alt="digitalmarienheide Logo" className="h-10" />
         </Link>
 
         {/* Desktop nav */}
