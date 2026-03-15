@@ -33,8 +33,8 @@ const Index = () => {
         <div className="container-narrow relative">
           <AnimatedSection>
             <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-                ​"Sie sind gut in Ihrem Job. Wir sorgen dafür, dass Ihre Kunden das auch wissen."
+              <h1 className="text-4xl leading-tight mb-6 text-left md:text-5xl font-semibold font-serif mx-0 py-[20px] my-0 px-[20px]">
+                ​Sie sind gut in Ihrem Job. Wir sorgen dafür, dass Ihre Kunden das auch wissen.
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl">
                 Wir bauen schnelle, mobiloptimierte Websites für lokale Dienstleister – klar, bezahlbar, professionell.
