@@ -88,7 +88,7 @@ const Pricing = () => (
                   className="w-full"
                   asChild
                 >
-                  <Link to="/#kontakt">
+                  <Link to="/kontakt">
                     Angebot anfordern
                     <ArrowRight size={16} />
                   </Link>

@@ -43,11 +43,11 @@ const Footer = () => (
               <Phone size={16} className="text-primary" />
               <span>+49 (0) 123 456 789</span>
             </div>
-            <div className="flex items-center gap-2">
+            <a href="mailto:info@beispiel-agentur.de" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Mail size={16} className="text-primary" />
               <span>info@beispiel-agentur.de</span>
-            </div>
-            <div className="flex items-center gap-2">
+            </a>
+            <a href="https://www.google.com/maps/search/Marienheide,+NRW" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
               <MapPin size={16} className="text-primary" />
               <span>Marienheide, NRW</span>
             </div>
