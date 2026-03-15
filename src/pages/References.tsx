@@ -23,7 +23,7 @@ const References = () => {
         <div className="container-narrow">
           <AnimatedSection>
             <div className="rounded-2xl bg-primary/10 py-16 flex items-center justify-center">
-              <p className="text-primary text-lg font-medium">Noch keine Referenzen vorhanden.</p>
+              <p className="text-primary text-lg font-medium">Noch keine Projekte vorhanden.</p>
             </div>
           </AnimatedSection>
         </div>
