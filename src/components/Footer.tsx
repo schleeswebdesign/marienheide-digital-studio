@@ -28,7 +28,7 @@ const Footer = () => (
           <p className="font-semibold mb-4 text-sm uppercase tracking-wider text-secondary-foreground/50">Links</p>
           <nav className="flex flex-col gap-2">
             <Link to="/" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Home</Link>
-            <Link to="/referenzen" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Referenzen</Link>
+            <Link to="/referenzen" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Portfolio</Link>
             <Link to="/preise" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Preise</Link>
             <a href="#" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Impressum</a>
             <a href="#" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Datenschutz</a>
