@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const demos = [
-  { label: "Handwerk" },
-  { label: "Gastronomie" },
-  { label: "Dienstleister" },
+const projects = [
+  { name: "Grünwerk Oberberg", branch: "Garten & Landschaftsbau", url: "https://id-preview--70929813-767c-4033-9686-c33154e21e63.lovable.app" },
+  { name: "Elektro Wagner", branch: "Elektriker", url: "https://id-preview--4bf3fca1-cb6c-4a47-8e36-fec3f00157e3.lovable.app" },
+  { name: "Haarwerk Oberberg", branch: "Friseur", url: "https://id-preview--ec4acad4-58d0-41d1-b258-41806424f87f.lovable.app" },
 ];
 
 const References = () => {
