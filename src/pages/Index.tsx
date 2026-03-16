@@ -29,7 +29,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden" style={{ backgroundImage: 'url(/photo-1666698809123-44e998e93f.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden" style={{ backgroundImage: 'url(/istockphoto-1933752815-612x612.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
         {/* Dark overlay */}
         <div className="absolute inset-0" style={{ background: 'rgba(10, 20, 40, 0.55)' }} />
         <div className="container-narrow relative">
