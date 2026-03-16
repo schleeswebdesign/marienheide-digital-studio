@@ -7,39 +7,36 @@ const packages = [
   {
     name: "Starter",
     subtitle: "One-Pager",
-    price: "ab 990 €",
+    price: "ab 300 €",
     delivery: "ca. 2 Wochen",
     highlight: false,
     features: [
       "Responsive One-Page Website",
-      "Modernes, individuelles Design",
+      "Modernes individuelles Design",
       "Kontaktformular",
       "Google Maps Integration",
       "SSL-Zertifikat & Hosting-Setup",
       "Grundlegende SEO-Einrichtung",
+      "Performance-Optimierung",
       "1 Korrekturschleife",
-      "Einweisung ins CMS",
     ],
   },
   {
     name: "Business",
     subtitle: "Mehrseitig (3–6 Seiten)",
-    price: "ab 2.490 €",
+    price: "ab 1000 €",
     delivery: "ca. 3–4 Wochen",
     highlight: true,
     features: [
       "Alles aus Starter",
       "3–6 individuell gestaltete Seiten",
-      "Blog- oder News-Bereich",
+      "Terminbuchungs-Integration (Calendly)",
       "Erweiterte SEO-Optimierung",
-      "Terminbuchungs-Integration",
-      "Performance-Optimierung",
       "2 Korrekturschleifen",
       "30 Tage Support nach Livegang",
     ],
   },
 ];
-
 const Pricing = () => (
   <div className="min-h-screen pt-24" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
     {/* Header */}
