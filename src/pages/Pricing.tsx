@@ -68,7 +68,7 @@ const Pricing = () => (
               className="h-full flex flex-col relative rounded-2xl p-6 md:p-8 cursor-pointer"
               style={{
                 background: pkg.highlight ? '#ffffff' : 'hsl(var(--muted))',
-                border: pkg.highlight ? '2px solid #378ADD' : '2px solid transparent',
+                border: pkg.highlight ? '2px solid #7DD3FC' : '2px solid transparent',
                 boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
                 transition: 'box-shadow 0.2s ease, transform 0.2s ease',
                 opacity: 0,
