@@ -42,7 +42,7 @@ const Index = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4" style={{ animation: 'hero-fade-in 0.9s ease-out 0.35s both' }}>
                   <Button size="xl" variant="hero" asChild className="hover:scale-[1.04] transition-transform duration-200" style={{ boxShadow: '0 8px 24px rgba(55, 138, 221, 0.35)' }}>
-                    <a href="#kontakt">Kostenloses Erstgespräch</a>
+                    <a href="/#kontakt" onClick={(e) => { e.preventDefault(); document.getElementById("kontakt")?.scrollIntoView({ behavior: "smooth" }); }}>Kostenloses Erstgespräch</a>
                   </Button>
                 </div>
               </div>
