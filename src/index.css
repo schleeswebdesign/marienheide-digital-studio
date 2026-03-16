@@ -133,7 +133,7 @@
 
   .nav-link-underline::after {
     content: '';
-    @apply absolute bottom-0 left-0 h-[2px] w-0;
+    @apply absolute bottom-0 left-0 h-px w-0;
     background-color: #378ADD;
     transition: width 0.25s ease-out;
   }
