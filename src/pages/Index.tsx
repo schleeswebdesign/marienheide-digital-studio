@@ -35,10 +35,10 @@ const Index = () => {
         <div className="container-narrow relative">
           <AnimatedSection>
             <div className="max-w-3xl">
-              <h1 className="text-4xl leading-tight mb-6 text-left md:text-5xl font-semibold font-serif mx-0 py-[20px] my-0 px-[20px]" style={{ animation: 'hero-fade-in 0.9s ease-out 0.05s both' }}>
+              <h1 className="text-4xl leading-tight mb-6 text-left md:text-5xl font-semibold font-serif mx-0 py-[20px] my-0 px-[20px] text-white" style={{ animation: 'hero-fade-in 0.9s ease-out 0.05s both' }}>
                 ​Sie sind gut in Ihrem Job. Wir sorgen dafür, dass Ihre <span className="bg-gradient-to-r from-[#7DD3FC] to-[#7DD3FC] bg-clip-text text-transparent">Kunden</span> das auch wissen.
               </h1>
-              <p className="md:text-[1.2rem] text-muted-foreground mb-10 max-w-2xl text-lg" style={{ lineHeight: 1.8, animation: 'hero-fade-in 0.9s ease-out 0.2s both' }}>
+              <p className="md:text-[1.2rem] text-white/80 mb-10 max-w-2xl text-lg" style={{ lineHeight: 1.8, animation: 'hero-fade-in 0.9s ease-out 0.2s both' }}>
                 Wir bauen Websites, die begeistern – egal ob Handwerk, Startup, Gastronomie oder Konzern. Modern, schnell und so gemacht, dass eure Kunden nicht mehr wegklicken.
               </p>
               <div className="flex flex-col sm:flex-row gap-4" style={{ animation: 'hero-fade-in 0.9s ease-out 0.35s both' }}>
