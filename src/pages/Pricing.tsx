@@ -68,7 +68,7 @@ const Pricing = () => (
               className="h-full flex flex-col relative rounded-2xl p-6 md:p-8 cursor-pointer"
               style={{
                 background: pkg.highlight ? '#ffffff' : 'hsl(var(--muted))',
-                border: pkg.highlight ? '2px solid #378ADD' : '2px solid transparent',
+                border: pkg.highlight ? '2px solid #7DD3FC' : '2px solid transparent',
                 boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
                 transition: 'box-shadow 0.2s ease, transform 0.2s ease',
                 opacity: 0,
@@ -86,7 +86,7 @@ const Pricing = () => (
               {pkg.highlight && (
                 <span
                   className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-1 rounded-full"
-                  style={{ backgroundColor: '#E6F1FB', color: '#185FA5' }}
+                  style={{ backgroundColor: '#E6F1FB', color: '#7DD3FC' }}
                 >
                   Beliebteste Wahl
                 </span>
@@ -96,7 +96,7 @@ const Pricing = () => (
                 <p className="text-sm text-muted-foreground">{pkg.subtitle}</p>
               </div>
               <div className="mb-6">
-                <span className="text-3xl font-bold" style={{ color: pkg.highlight ? '#185FA5' : undefined }}>
+                <span className="text-3xl font-bold" style={{ color: pkg.highlight ? '#7DD3FC' : undefined }}>
                   {pkg.price}
                 </span>
                 <p className="text-xs text-muted-foreground mt-1">Lieferzeit: {pkg.delivery}</p>
@@ -113,7 +113,7 @@ const Pricing = () => (
                 size="lg"
                 className="w-full"
                 style={pkg.highlight
-                  ? { backgroundColor: '#378ADD', color: '#ffffff' }
+                  ? { backgroundColor: '#7DD3FC', color: '#ffffff' }
                   : { backgroundColor: '#1e3a5f', color: '#ffffff' }
                 }
                 asChild
