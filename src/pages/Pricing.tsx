@@ -75,12 +75,20 @@ const Pricing = () => (
                 animation: `hero-fade-in 0.9s ease-out ${i === 0 ? '0.1s' : '0.25s'} forwards`,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 24px 70px rgba(0,0,0,0.12)';
-                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)';
+                e.currentTarget.style.transform = 'translateY(-6px)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.08)';
                 e.currentTarget.style.transform = 'none';
+              }}
+              onMouseDown={(e) => {
+                e.currentTarget.style.transform = 'translateY(2px)';
+                e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.06)';
+              }}
+              onMouseUp={(e) => {
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)';
               }}
             >
               {pkg.highlight && (
@@ -111,7 +119,7 @@ const Pricing = () => (
               </ul>
               <Button
                 size="lg"
-                className="w-full"
+                className="w-full transition-all duration-200 hover:opacity-85 hover:-translate-y-0.5"
                 style={pkg.highlight
                   ? { backgroundColor: '#7DD3FC', color: '#ffffff' }
                   : { backgroundColor: '#1e3a5f', color: '#ffffff' }
