@@ -96,7 +96,7 @@ const Pricing = () => (
                 <p className="text-sm text-muted-foreground">{pkg.subtitle}</p>
               </div>
               <div className="mb-6">
-                <span className="text-3xl font-bold" style={{ color: pkg.highlight ? '#185FA5' : undefined }}>
+                <span className="text-3xl font-bold" style={{ color: pkg.highlight ? '#7DD3FC' : undefined }}>
                   {pkg.price}
                 </span>
                 <p className="text-xs text-muted-foreground mt-1">Lieferzeit: {pkg.delivery}</p>
