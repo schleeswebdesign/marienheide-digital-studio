@@ -80,6 +80,18 @@ export default {
           from: { opacity: "0", transform: "translateY(24px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "hero-blob-1": {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "50%": { transform: "translate(40px, 30px)" },
+        },
+        "hero-blob-2": {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "50%": { transform: "translate(-30px, -40px)" },
+        },
+        "hero-blob-3": {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "50%": { transform: "translate(20px, -25px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
