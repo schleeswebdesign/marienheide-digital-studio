@@ -113,7 +113,7 @@ const Pricing = () => (
                 size="lg"
                 className="w-full"
                 style={pkg.highlight
-                  ? { backgroundColor: '#378ADD', color: '#ffffff' }
+                  ? { backgroundColor: '#7DD3FC', color: '#ffffff' }
                   : { backgroundColor: '#1e3a5f', color: '#ffffff' }
                 }
                 asChild
