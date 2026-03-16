@@ -38,7 +38,7 @@ const Index = () => {
         <div className="container-narrow relative">
           <AnimatedSection>
             <div className="max-w-3xl">
-              <h1 className="text-4xl leading-tight mb-6 text-left md:text-5xl font-semibold font-serif mx-0 py-[20px] my-0 px-[20px]">
+              <h1 className="text-4xl leading-tight mb-6 text-left md:text-5xl font-semibold font-serif mx-0 py-[20px] my-0 px-[20px]" style={{ animation: 'hero-fade-in 0.9s ease-out 0.05s both' }}>
                 ​Sie sind gut in Ihrem Job. Wir sorgen dafür, dass Ihre <span className="bg-gradient-to-r from-[#378ADD] to-[#185FA5] bg-clip-text text-transparent">Kunden</span> das auch wissen.
               </h1>
               <p className="md:text-[1.2rem] text-muted-foreground mb-10 max-w-2xl text-lg" style={{ lineHeight: 1.8, animation: 'hero-fade-in 0.9s ease-out 0.2s both' }}>
