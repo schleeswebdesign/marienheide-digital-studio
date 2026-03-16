@@ -86,7 +86,7 @@ const Pricing = () => (
               {pkg.highlight && (
                 <span
                   className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-1 rounded-full"
-                  style={{ backgroundColor: '#E6F1FB', color: '#185FA5' }}
+                  style={{ backgroundColor: '#E6F1FB', color: '#7DD3FC' }}
                 >
                   Beliebteste Wahl
                 </span>
