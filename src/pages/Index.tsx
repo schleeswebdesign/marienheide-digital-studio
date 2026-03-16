@@ -41,8 +41,8 @@ const Index = () => {
               <h1 className="text-4xl leading-tight mb-6 text-left md:text-5xl font-semibold font-serif mx-0 py-[20px] my-0 px-[20px]">
                 ​Sie sind gut in Ihrem Job. Wir sorgen dafür, dass Ihre <span className="bg-gradient-to-r from-[#378ADD] to-[#185FA5] bg-clip-text text-transparent">Kunden</span> das auch wissen.
               </h1>
-              <p className="md:text-[1.2rem] text-muted-foreground mb-10 max-w-2xl text-lg" style={{ lineHeight: 1.8 }}>
-                Wir bauen schnelle, mobiloptimierte Websites für lokale Dienstleister – klar, bezahlbar, professionell.
+              <p className="md:text-[1.2rem] text-muted-foreground mb-10 max-w-2xl text-lg" style={{ lineHeight: 1.8, animation: 'hero-fade-in 0.9s ease-out 0.2s both' }}>
+                Wir bauen Websites, die begeistern – egal ob Handwerk, Startup, Gastronomie oder Konzern. Modern, schnell und so gemacht, dass eure Kunden nicht mehr wegklicken.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="xl" variant="hero" asChild className="hover:scale-[1.04] transition-transform duration-200" style={{ boxShadow: '0 8px 24px rgba(55, 138, 221, 0.35)' }}>
