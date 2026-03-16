@@ -10,7 +10,7 @@ const Footer = () => (
         <div>
           <img src={logoImg} alt="digitalmarienheide Logo" style={{ height: '80px', width: 'auto' }} className="mb-4" />
           <p className="text-secondary-foreground/70 text-sm leading-relaxed">
-            Moderne Websites für Handwerk, Gastro &amp; lokale Dienstleister in Marienheide und Umgebung.
+            Digitale Präsenz, die überzeugt – für jeden, der online mehr erreichen will.
           </p>
           <div className="flex gap-3 mt-4">
             <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-secondary-foreground/70 hover:text-primary transition-colors">
