@@ -58,18 +58,27 @@ const Index = () => {
       {/* Über uns */}
       <section className="section-padding bg-accent">
         <div className="container-narrow">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <AnimatedSection>
               <div>
                 <h2 className="text-3xl md:text-4xl mb-6">Wer steckt dahinter?</h2>
                 <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
-                  Ich bin Miguel, 20 Jahre alt aus Marienheide. Als junger Gründer kenne ich die Region und weiß wie wichtig eine starke Online-Präsenz für lokale Unternehmen ist. Mein Ziel: Moderne, bezahlbare Websites die wirklich Kunden bringen – ohne Agentur-Preise.
+                  Wir sind Miguel und Josh – zwei junge Typen aus dem Oberbergischen Kreis mit Hunger darauf, etwas Eigenes aufzubauen. Unser Ziel: lokalen Unternehmen zu einer Website verhelfen, die wirklich was bringt. Kein Bullshit, keine überteuerten Agenturen. Einfach gute Arbeit.
                 </p>
               </div>
             </AnimatedSection>
             <AnimatedSection delay={0.15}>
-              <div className="flex items-start">
-                <img src={miguelImg} alt="Miguel – Gründer" className="rounded-2xl object-cover w-auto max-h-[160px] md:max-h-[180px]" />
+              <div className="flex gap-6">
+                <div className="flex-1 text-center">
+                  <img src={joshImg} alt="Josh Schlief" className="rounded-2xl object-cover w-full aspect-[3/4]" />
+                  <p className="font-bold text-secondary mt-3">Josh Schlief</p>
+                  <p className="text-sm text-muted-foreground">Webdesign & Kundenberatung</p>
+                </div>
+                <div className="flex-1 text-center">
+                  <img src={miguelImg} alt="Miguel Klees" className="rounded-2xl object-cover w-full aspect-[3/4]" />
+                  <p className="font-bold text-secondary mt-3">Miguel Klees</p>
+                  <p className="text-sm text-muted-foreground">Webdesign & Kundenberatung</p>
+                </div>
               </div>
             </AnimatedSection>
           </div>
