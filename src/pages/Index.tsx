@@ -29,13 +29,9 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
-        {/* Animated blur circles */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute w-[500px] h-[500px] rounded-full top-[-10%] left-[-5%] animate-hero-blob-1" style={{ background: 'rgba(55, 138, 221, 0.06)', filter: 'blur(80px)' }} />
-          <div className="absolute w-[400px] h-[400px] rounded-full top-[20%] right-[-8%] animate-hero-blob-2" style={{ background: 'rgba(55, 138, 221, 0.07)', filter: 'blur(90px)' }} />
-          <div className="absolute w-[350px] h-[350px] rounded-full bottom-[-5%] left-[30%] animate-hero-blob-3" style={{ background: 'rgba(55, 138, 221, 0.05)', filter: 'blur(70px)' }} />
-        </div>
+      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden" style={{ backgroundImage: 'url(/photo-1666698809123-44e998e93f.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        {/* Dark overlay */}
+        <div className="absolute inset-0" style={{ background: 'rgba(10, 20, 40, 0.55)' }} />
         <div className="container-narrow relative">
           <AnimatedSection>
             <div className="max-w-3xl">
