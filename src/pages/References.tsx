@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const demos = [
-  { label: "Handwerk" },
-  { label: "Gastronomie" },
-  { label: "Dienstleister" },
+const projects = [
+  { name: "Grünwerk Oberberg", branch: "Garten & Landschaftsbau", url: "https://id-preview--70929813-767c-4033-9686-c33154e21e63.lovable.app" },
+  { name: "Elektro Wagner", branch: "Elektriker", url: "https://id-preview--4bf3fca1-cb6c-4a47-8e36-fec3f00157e3.lovable.app" },
+  { name: "Haarwerk Oberberg", branch: "Friseur", url: "https://id-preview--ec4acad4-58d0-41d1-b258-41806424f87f.lovable.app" },
 ];
 
 const References = () => {
@@ -36,15 +37,26 @@ const References = () => {
             </div>
           </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {demos.map((demo, i) => (
-              <AnimatedSection key={demo.label} delay={i * 0.1}>
-                <div className="card-base h-full flex flex-col">
-                  <div className="aspect-video rounded-xl bg-muted flex items-center justify-center mb-4">
-                    <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center">
-                      <Play size={28} className="text-primary ml-1" />
-                    </div>
+            {projects.map((project, i) => (
+              <AnimatedSection key={project.name} delay={i * 0.1}>
+                <div className="card-base h-full flex flex-col rounded-2xl shadow-md overflow-hidden">
+                  <div className="w-full h-[300px] overflow-hidden bg-muted">
+                    <iframe
+                      src={project.url}
+                      title={project.name}
+                      className="w-full h-full border-0 pointer-events-none"
+                      loading="lazy"
+                    />
                   </div>
-                  <p className="text-sm font-semibold text-secondary text-center">{demo.label}</p>
+                  <div className="p-5 flex flex-col gap-3">
+                    <p className="text-lg font-bold text-foreground">{project.name}</p>
+                    <Badge variant="secondary" className="w-fit">{project.branch}</Badge>
+                    <a href={project.url} target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" size="sm" className="w-full">
+                        Live ansehen →
+                      </Button>
+                    </a>
+                  </div>
                 </div>
               </AnimatedSection>
             ))}
