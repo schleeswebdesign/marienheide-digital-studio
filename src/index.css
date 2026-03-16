@@ -126,6 +126,21 @@
   .glass-nav {
     @apply backdrop-blur-xl bg-background/80 border-b border-border/50;
   }
+
+  .nav-link-underline {
+    @apply relative;
+  }
+
+  .nav-link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-[2px] w-0;
+    background-color: #378ADD;
+    transition: width 0.25s ease-out;
+  }
+
+  .nav-link-underline:hover::after {
+    @apply w-full;
+  }
 }
 
 @keyframes hero-fade-in {
