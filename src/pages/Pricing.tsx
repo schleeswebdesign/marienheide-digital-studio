@@ -119,7 +119,7 @@ const Pricing = () => (
               </ul>
               <Button
                 size="lg"
-                className="w-full"
+                className="w-full transition-all duration-200 hover:opacity-85 hover:-translate-y-0.5"
                 style={pkg.highlight
                   ? { backgroundColor: '#7DD3FC', color: '#ffffff' }
                   : { backgroundColor: '#1e3a5f', color: '#ffffff' }
