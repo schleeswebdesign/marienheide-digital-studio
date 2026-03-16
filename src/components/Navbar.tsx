@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useCallback } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logoImg from "@/assets/logo-schlees.png";
@@ -13,6 +13,17 @@ const navLinks = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleKontaktClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setOpen(false);
+    if (location.pathname === "/") {
+      document.getElementById("kontakt")?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/#kontakt");
+    }
+  }, [location.pathname, navigate]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
@@ -35,7 +46,7 @@ const Navbar = () => {
             </Link>
           ))}
           <Button size="default" asChild>
-            <Link to="/kontakt">Erstgespräch</Link>
+            <a href="/#kontakt" onClick={handleKontaktClick}>Erstgespräch</a>
           </Button>
         </nav>
 
@@ -66,7 +77,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Button size="default" asChild className="mt-2">
-              <Link to="/kontakt" onClick={() => setOpen(false)}>Erstgespräch</Link>
+              <a href="/#kontakt" onClick={handleKontaktClick}>Erstgespräch</a>
             </Button>
           </nav>
         </div>
