@@ -9,9 +9,9 @@ import {
 import { useState } from "react";
 
 const steps = [
-{ num: "01", icon: CalendarCheck, title: "Kostenloses Erstgespräch", desc: "Wir lernen uns kennen, ich verstehe dein Business und wir besprechen was du brauchst." },
-{ num: "02", icon: Laptop, title: "Ich baue deine Website", desc: "In 1-3 Wochen entsteht deine moderne Website – mobiloptimiert und auf deine Branche zugeschnitten." },
-{ num: "03", icon: Rocket, title: "Livegang & Support", desc: "Deine Website geht live. Ich begleite dich danach mit Updates und Support." }];
+{ num: "01", icon: CalendarCheck, title: "Kostenloses Erstgespräch", desc: "Wir lernen uns kennen, verstehen euer Business und besprechen gemeinsam, was ihr wirklich braucht – ohne Fachchinesisch, ohne Druck." },
+{ num: "02", icon: Laptop, title: "Wir bauen eure Website", desc: "In 1–3 Wochen entsteht eure moderne Website – mobiloptimiert, schnell und genau auf eure Branche zugeschnitten. Ihr seid bei jedem Schritt dabei." },
+{ num: "03", icon: Rocket, title: "Livegang & Support", desc: "Eure Website geht live – und wir bleiben an eurer Seite. Mit Updates, Anpassungen und einem Ansprechpartner, der sich wirklich kümmert." }];
 
 
 const faqs = [
