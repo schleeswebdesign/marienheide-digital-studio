@@ -29,25 +29,33 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden" style={{ backgroundImage: 'url(/istockphoto-1933752815-612x612.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        {/* Dark overlay */}
-        <div className="absolute inset-0" style={{ background: 'rgba(10, 20, 40, 0.55)' }} />
+      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden bg-secondary">
         <div className="container-narrow relative">
-          <AnimatedSection>
-            <div className="max-w-3xl">
-              <h1 className="text-4xl leading-tight mb-6 text-left md:text-5xl font-semibold font-serif mx-0 py-[20px] my-0 px-[20px] text-white" style={{ animation: 'hero-fade-in 0.9s ease-out 0.05s both' }}>
-                ​Sie sind gut in Ihrem Job. Wir sorgen dafür, dass Ihre <span className="bg-gradient-to-r from-[#7DD3FC] to-[#7DD3FC] bg-clip-text text-transparent">Kunden</span> das auch wissen.
-              </h1>
-              <p className="md:text-[1.2rem] text-white/80 mb-10 max-w-2xl text-lg" style={{ lineHeight: 1.8, animation: 'hero-fade-in 0.9s ease-out 0.2s both' }}>
-                Wir bauen Websites, die begeistern – egal ob Handwerk, Startup, Gastronomie oder Konzern. Modern, schnell und so gemacht, dass eure Kunden nicht mehr wegklicken.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4" style={{ animation: 'hero-fade-in 0.9s ease-out 0.35s both' }}>
-                <Button size="xl" variant="hero" asChild className="hover:scale-[1.04] transition-transform duration-200" style={{ boxShadow: '0 8px 24px rgba(55, 138, 221, 0.35)' }}>
-                  <a href="#kontakt">Kostenloses Erstgespräch</a>
-                </Button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <AnimatedSection>
+              <div>
+                <h1 className="text-4xl leading-tight mb-6 text-left md:text-5xl font-semibold font-serif text-white" style={{ animation: 'hero-fade-in 0.9s ease-out 0.05s both' }}>
+                  Sie sind gut in Ihrem Job. Wir sorgen dafür, dass Ihre <span className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">Kunden</span> das auch wissen.
+                </h1>
+                <p className="md:text-[1.2rem] text-white/80 mb-10 max-w-2xl text-lg" style={{ lineHeight: 1.8, animation: 'hero-fade-in 0.9s ease-out 0.2s both' }}>
+                  Wir bauen Websites, die begeistern – egal ob Handwerk, Startup, Gastronomie oder Konzern. Modern, schnell und so gemacht, dass eure Kunden nicht mehr wegklicken.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4" style={{ animation: 'hero-fade-in 0.9s ease-out 0.35s both' }}>
+                  <Button size="xl" variant="hero" asChild className="hover:scale-[1.04] transition-transform duration-200" style={{ boxShadow: '0 8px 24px rgba(55, 138, 221, 0.35)' }}>
+                    <a href="#kontakt">Kostenloses Erstgespräch</a>
+                  </Button>
+                </div>
               </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+            <AnimatedSection delay={0.15}>
+              <img
+                src="/234234.png"
+                alt="Modernes Büro-Interieur"
+                className="w-full h-auto object-cover rounded-2xl"
+                style={{ objectPosition: 'right center', boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}
+              />
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
