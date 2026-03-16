@@ -28,19 +28,24 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 bg-background overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-accent/50 to-transparent pointer-events-none" />
+      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
+        {/* Animated blur circles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute w-[500px] h-[500px] rounded-full top-[-10%] left-[-5%] animate-hero-blob-1" style={{ background: 'rgba(55, 138, 221, 0.06)', filter: 'blur(80px)' }} />
+          <div className="absolute w-[400px] h-[400px] rounded-full top-[20%] right-[-8%] animate-hero-blob-2" style={{ background: 'rgba(55, 138, 221, 0.07)', filter: 'blur(90px)' }} />
+          <div className="absolute w-[350px] h-[350px] rounded-full bottom-[-5%] left-[30%] animate-hero-blob-3" style={{ background: 'rgba(55, 138, 221, 0.05)', filter: 'blur(70px)' }} />
+        </div>
         <div className="container-narrow relative">
           <AnimatedSection>
             <div className="max-w-3xl">
               <h1 className="text-4xl leading-tight mb-6 text-left md:text-5xl font-semibold font-serif mx-0 py-[20px] my-0 px-[20px]">
-                ​Sie sind gut in Ihrem Job. Wir sorgen dafür, dass Ihre Kunden das auch wissen.
+                ​Sie sind gut in Ihrem Job. Wir sorgen dafür, dass Ihre <span className="bg-gradient-to-r from-[#378ADD] to-[#185FA5] bg-clip-text text-transparent">Kunden</span> das auch wissen.
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl">
+              <p className="md:text-[1.2rem] text-muted-foreground mb-10 max-w-2xl text-lg" style={{ lineHeight: 1.8 }}>
                 Wir bauen schnelle, mobiloptimierte Websites für lokale Dienstleister – klar, bezahlbar, professionell.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="xl" variant="hero" asChild>
+                <Button size="xl" variant="hero" asChild className="hover:scale-[1.04] transition-transform duration-200" style={{ boxShadow: '0 8px 24px rgba(55, 138, 221, 0.35)' }}>
                   <a href="#kontakt">Kostenloses Erstgespräch</a>
                 </Button>
               </div>
