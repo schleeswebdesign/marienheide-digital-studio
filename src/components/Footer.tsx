@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, Instagram } from "lucide-react";
 import logoImg from "@/assets/logo-schlees.png";
 
 const Footer = () => (
