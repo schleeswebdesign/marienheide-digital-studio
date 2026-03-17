@@ -79,7 +79,7 @@ const Index = () => {
     <div id="top" className="min-h-screen">
       {/* Hero */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden" style={{ backgroundColor: '#0a0f1a' }}>
-        <HexagonCanvas />
+        <HexagonCanvas opacity={0.12} interactive={true} />
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="max-w-3xl">
