@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Mail, Phone, Instagram } from "lucide-react";
 import logoImg from "@/assets/logo-schlees.png";
 
