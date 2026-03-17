@@ -1,54 +1,43 @@
 import { useRef, useEffect, useCallback } from "react";
-
-interface Hex {
-  cx: number;
-  cy: number;
-  ox: number;
-  oy: number;
-}
+import gitterImg from "@/assets/gitter.jpg";
 
 interface HexagonCanvasProps {
   opacity?: number;
   interactive?: boolean;
 }
 
-const HexagonCanvas = ({ opacity = 0.15, interactive = true }: HexagonCanvasProps) => {
+const HexagonCanvas = ({ opacity = 0.35, interactive = true }: HexagonCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouse = useRef({ x: -1000, y: -1000 });
-  const hexes = useRef<Hex[]>([]);
   const raf = useRef<number>(0);
-  const size = 40;
-  const influence = 120;
-  const strength = 12;
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const tiles = useRef<{ sx: number; sy: number; dx: number; dy: number; ox: number; oy: number; w: number; h: number }[]>([]);
+  const influence = 150;
+  const strength = 18;
+  const tileSize = 60;
 
-  const buildGrid = useCallback((w: number, h: number) => {
-    const grid: Hex[] = [];
-    const hSpacing = size * 1.75;
-    const vSpacing = size * 1.5;
-    const cols = Math.ceil(w / hSpacing) + 2;
-    const rows = Math.ceil(h / vSpacing) + 2;
-    for (let r = -1; r < rows; r++) {
-      for (let c = -1; c < cols; c++) {
-        const offset = r % 2 === 0 ? 0 : hSpacing / 2;
-        const cx = c * hSpacing + offset;
-        const cy = r * vSpacing;
-        grid.push({ cx, cy, ox: cx, oy: cy });
+  const buildGrid = useCallback((w: number, h: number, imgW: number, imgH: number) => {
+    const grid: typeof tiles.current = [];
+    const cols = Math.ceil(w / tileSize) + 1;
+    const rows = Math.ceil(h / tileSize) + 1;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const dx = c * tileSize;
+        const dy = r * tileSize;
+        const sx = (dx % imgW);
+        const sy = (dy % imgH);
+        grid.push({ sx, sy, dx, dy, ox: dx, oy: dy, w: tileSize, h: tileSize });
       }
     }
     return grid;
   }, []);
 
-  const drawHex = useCallback((ctx: CanvasRenderingContext2D, cx: number, cy: number, r: number) => {
-    ctx.beginPath();
-    for (let i = 0; i < 6; i++) {
-      const angle = (Math.PI / 3) * i - Math.PI / 6;
-      const x = cx + r * Math.cos(angle);
-      const y = cy + r * Math.sin(angle);
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.closePath();
-    ctx.stroke();
+  useEffect(() => {
+    const img = new Image();
+    img.src = gitterImg;
+    img.onload = () => {
+      imgRef.current = img;
+    };
   }, []);
 
   useEffect(() => {
@@ -66,37 +55,62 @@ const HexagonCanvas = ({ opacity = 0.15, interactive = true }: HexagonCanvasProp
       canvas.style.width = parent.offsetWidth + "px";
       canvas.style.height = parent.offsetHeight + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      hexes.current = buildGrid(parent.offsetWidth, parent.offsetHeight);
+      if (imgRef.current) {
+        tiles.current = buildGrid(parent.offsetWidth, parent.offsetHeight, imgRef.current.naturalWidth, imgRef.current.naturalHeight);
+      }
     };
 
-    resize();
+    const checkImg = setInterval(() => {
+      if (imgRef.current) {
+        clearInterval(checkImg);
+        resize();
+      }
+    }, 50);
+
     window.addEventListener("resize", resize);
 
     const animate = () => {
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       ctx.clearRect(0, 0, w, h);
-      ctx.strokeStyle = `rgba(125,211,252,${opacity})`;
-      ctx.lineWidth = 0.8;
+      ctx.globalAlpha = opacity;
+
+      const img = imgRef.current;
+      if (!img) {
+        raf.current = requestAnimationFrame(animate);
+        return;
+      }
 
       const mx = mouse.current.x;
       const my = mouse.current.y;
 
-      for (const hex of hexes.current) {
-        const dx = hex.ox - mx;
-        const dy = hex.oy - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+      for (const tile of tiles.current) {
+        const tcx = tile.ox + tileSize / 2;
+        const tcy = tile.oy + tileSize / 2;
+        const ddx = tcx - mx;
+        const ddy = tcy - my;
+        const dist = Math.sqrt(ddx * ddx + ddy * ddy);
+
+        let targetX = tile.ox;
+        let targetY = tile.oy;
+
         if (dist < influence && dist > 0) {
           const force = (1 - dist / influence) * strength;
-          hex.cx += (hex.ox + (dx / dist) * force - hex.cx) * 0.15;
-          hex.cy += (hex.oy + (dy / dist) * force - hex.cy) * 0.15;
-        } else {
-          hex.cx += (hex.ox - hex.cx) * 0.1;
-          hex.cy += (hex.oy - hex.cy) * 0.1;
+          targetX = tile.ox + (ddx / dist) * force;
+          targetY = tile.oy + (ddy / dist) * force;
         }
-        drawHex(ctx, hex.cx, hex.cy, size * 0.55);
+
+        tile.dx += (targetX - tile.dx) * 0.12;
+        tile.dy += (targetY - tile.dy) * 0.12;
+
+        const sw = Math.min(tileSize, img.naturalWidth - tile.sx);
+        const sh = Math.min(tileSize, img.naturalHeight - tile.sy);
+        if (sw > 0 && sh > 0) {
+          ctx.drawImage(img, tile.sx, tile.sy, sw, sh, tile.dx, tile.dy, tileSize, tileSize);
+        }
       }
 
+      ctx.globalAlpha = 1;
       raf.current = requestAnimationFrame(animate);
     };
 
@@ -104,9 +118,10 @@ const HexagonCanvas = ({ opacity = 0.15, interactive = true }: HexagonCanvasProp
 
     return () => {
       cancelAnimationFrame(raf.current);
+      clearInterval(checkImg);
       window.removeEventListener("resize", resize);
     };
-  }, [buildGrid, drawHex]);
+  }, [buildGrid, opacity]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     const rect = canvasRef.current?.getBoundingClientRect();
