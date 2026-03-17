@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, Instagram } from "lucide-react";
 import logoImg from "@/assets/logo-schlees.png";
 
 const Footer = () => (
@@ -10,14 +10,11 @@ const Footer = () => (
         <div>
           <img src={logoImg} alt="digitalmarienheide Logo" style={{ height: '80px', width: 'auto' }} className="mb-4" />
           <p className="text-secondary-foreground/70 text-sm leading-relaxed">
-            Digitale Präsenz, die überzeugt – für jeden, der online mehr erreichen will.
+            Digitale Präsenz, die überzeugt – für lokale Unternehmen und Selbständige, die online mehr erreichen wollen!
           </p>
           <div className="flex gap-3 mt-4">
-            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-secondary-foreground/70 hover:text-primary transition-colors">
+            <a href="https://www.instagram.com/schleesweb" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-secondary-foreground/70 hover:text-primary transition-colors">
               <Instagram size={20} />
-            </a>
-            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-secondary-foreground/70 hover:text-primary transition-colors">
-              <Linkedin size={20} />
             </a>
           </div>
         </div>
