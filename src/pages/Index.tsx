@@ -224,7 +224,7 @@ const Index = () => {
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-6">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Lassen Sie uns sprechen</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Jetzt durchstarten →</h2>
               <p className="text-white/60 text-lg max-w-xl mx-auto mb-10">
                 Bereit für eine Website, die wirklich was bringt? Schreiben Sie uns – wir melden uns innerhalb von 24 Stunden.
               </p>
