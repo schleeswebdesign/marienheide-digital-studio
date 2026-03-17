@@ -59,7 +59,7 @@ const Navbar = () => {
             </a>
           ))}
           <Button size="default" asChild>
-            <a href="/#kontakt" onClick={handleKontaktClick}>Erstgespräch</a>
+            <a href="/#kontakt" onClick={handleKontaktClick}>Lassen Sie uns sprechen</a>
           </Button>
         </nav>
 
