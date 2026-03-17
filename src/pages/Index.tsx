@@ -184,9 +184,9 @@ const Index = () => {
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Unsere Referenzprojekte</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">So könnte Ihre Website aussehen</h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
-                Beispiele aus verschiedenen Branchen – modern, schnell und mobiloptimiert.
+                Moderne Websites aus verschiedenen Branchen – individuell gestaltet, schnell und mobiloptimiert.
               </p>
             </div>
           </AnimatedSection>
