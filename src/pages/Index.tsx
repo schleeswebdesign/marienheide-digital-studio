@@ -226,7 +226,8 @@ const Index = () => {
       </section>
 
       {/* Referenzen / Portfolio */}
-      <section id="referenzen" className="section-padding bg-background">
+      <section id="referenzen" className="relative section-padding bg-background overflow-hidden">
+        <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow">
           <AnimatedSection>
             <div className="text-center mb-12">
