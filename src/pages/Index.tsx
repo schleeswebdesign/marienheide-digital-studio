@@ -268,7 +268,7 @@ const Index = () => {
       {/* Kontakt */}
       <section id="kontakt" className="relative section-padding bg-accent overflow-hidden">
         <HexagonCanvas opacity={0.06} interactive={false} />
-        <div className="container-narrow">
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl mb-4">Kostenloses Erstgespräch</h2>
