@@ -76,7 +76,7 @@ const HexagonCanvas = ({ opacity = 0.15, interactive = true }: HexagonCanvasProp
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       ctx.clearRect(0, 0, w, h);
-      ctx.strokeStyle = "rgba(125,211,252,0.15)";
+      ctx.strokeStyle = `rgba(125,211,252,${opacity})`;
       ctx.lineWidth = 0.8;
 
       const mx = mouse.current.x;
