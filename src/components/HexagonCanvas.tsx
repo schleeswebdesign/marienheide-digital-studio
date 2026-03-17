@@ -121,8 +121,8 @@ const HexagonCanvas = ({ opacity = 0.15, interactive = true }: HexagonCanvasProp
   return (
     <canvas
       ref={canvasRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={interactive ? handleMouseMove : undefined}
+      onMouseLeave={interactive ? handleMouseLeave : undefined}
       className="absolute inset-0 w-full h-full"
       style={{ zIndex: 0 }}
     />
