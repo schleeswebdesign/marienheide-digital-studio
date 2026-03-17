@@ -7,10 +7,9 @@ import joshImg from "@/assets/josh.jpg";
 import miguelImg from "@/assets/miguel-klees.webp";
 import {
   CalendarCheck, Laptop, Rocket,
-  ChevronDown, Check, ArrowRight
+  ChevronDown, Check, ArrowRight, Mail
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const steps = [
   { num: "01", icon: CalendarCheck, title: "Kostenloses Erstgespräch", desc: "Wir lernen uns kennen, verstehen euer Business und besprechen gemeinsam, was ihr wirklich braucht – ohne Fachchinesisch, ohne Druck." },
@@ -90,8 +89,8 @@ const Index = () => {
                 Wir bauen Websites, die begeistern – egal ob Handwerk, Startup, Gastronomie oder Konzern. Modern, schnell und so gemacht, dass eure Kunden nicht mehr wegklicken.
               </p>
               <div className="flex flex-col sm:flex-row gap-4" style={{ animation: 'hero-fade-in 0.9s ease-out 0.35s both' }}>
-                <Button size="xl" variant="hero" asChild className="hover:scale-[1.04] transition-transform duration-200" style={{ boxShadow: '0 8px 24px rgba(55, 138, 221, 0.35)' }}>
-                  <a href="#kontakt" onClick={scrollTo("kontakt")}>Kostenloses Erstgespräch</a>
+                <Button size="xl" variant="hero" asChild style={{ boxShadow: '0 8px 24px rgba(55, 138, 221, 0.35)' }}>
+                  <a href="#kontakt" onClick={scrollTo("kontakt")}>Lassen Sie uns sprechen</a>
                 </Button>
               </div>
             </div>
@@ -126,35 +125,6 @@ const Index = () => {
                 </div>
               </div>
             </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* So läuft's ab */}
-      <section className="relative section-padding bg-background overflow-hidden">
-        <HexagonCanvas opacity={0.06} interactive={false} />
-        <div className="container-narrow relative" style={{ zIndex: 1 }}>
-          <AnimatedSection>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl mb-4">So läuft's ab</h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">In drei Schritten zur fertigen Website.</p>
-            </div>
-          </AnimatedSection>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {steps.map((step, i) => (
-              <AnimatedSection key={step.num} delay={i * 0.1}>
-                <div className="relative">
-                  <span className="text-6xl font-bold text-primary/10 absolute -top-4 -left-2">{step.num}</span>
-                  <div className="relative pt-8 pl-2">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                      <step.icon size={24} className="text-primary" />
-                    </div>
-                    <h3 className="text-xl mb-2">{step.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
           </div>
         </div>
       </section>
@@ -210,7 +180,7 @@ const Index = () => {
                 </ul>
                 <Button
                   size="lg"
-                  className="w-full transition-all duration-200 hover:opacity-85 hover:-translate-y-0.5"
+                  className="w-full"
                   style={pkg.highlight ? { backgroundColor: '#7DD3FC', color: '#ffffff' } : { backgroundColor: '#1e3a5f', color: '#ffffff' }}
                   asChild
                 >
@@ -225,7 +195,36 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Referenzen / Portfolio */}
+      {/* So läuft's ab */}
+      <section className="relative section-padding bg-background overflow-hidden">
+        <HexagonCanvas opacity={0.06} interactive={false} />
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
+          <AnimatedSection>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl mb-4">So läuft's ab</h2>
+              <p className="text-muted-foreground max-w-xl mx-auto">In drei Schritten zur fertigen Website.</p>
+            </div>
+          </AnimatedSection>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {steps.map((step, i) => (
+              <AnimatedSection key={step.num} delay={i * 0.1}>
+                <div className="relative">
+                  <span className="text-6xl font-bold text-primary/10 absolute -top-4 -left-2">{step.num}</span>
+                  <div className="relative pt-8 pl-2">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                      <step.icon size={24} className="text-primary" />
+                    </div>
+                    <h3 className="text-xl mb-2">{step.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Referenzen */}
       <section id="referenzen" className="relative section-padding bg-background overflow-hidden">
         <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
@@ -265,17 +264,26 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Kontakt */}
-      <section id="kontakt" className="relative section-padding bg-accent overflow-hidden">
-        <HexagonCanvas opacity={0.06} interactive={false} />
+      {/* Kontakt – Lassen Sie uns sprechen */}
+      <section id="kontakt" className="relative section-padding overflow-hidden" style={{ backgroundColor: '#0a0f1a' }}>
+        <HexagonCanvas opacity={0.12} interactive={true} />
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl mb-4">Kostenloses Erstgespräch</h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">Erzählen Sie uns von Ihrem Projekt – wir melden uns innerhalb von 24 Stunden.</p>
+            <div className="text-center mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Lassen Sie uns sprechen</h2>
+              <p className="text-white/60 text-lg max-w-xl mx-auto mb-6">
+                Bereit für eine Website, die wirklich was bringt? Schreiben Sie uns – wir melden uns innerhalb von 24 Stunden.
+              </p>
+              <a
+                href="mailto:kontakt@schlees.de"
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-lg font-medium mb-8"
+              >
+                <Mail size={20} />
+                kontakt@schlees.de
+              </a>
             </div>
           </AnimatedSection>
-          <AnimatedSection>
+          <AnimatedSection delay={0.1}>
             <div className="max-w-2xl mx-auto">
               <ContactForm />
             </div>
