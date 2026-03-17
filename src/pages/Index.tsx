@@ -53,7 +53,7 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4" style={{ animation: 'hero-fade-in 0.9s ease-out 0.35s both' }}>
                 <Button size="xl" variant="hero" asChild style={{ boxShadow: '0 8px 24px rgba(55, 138, 221, 0.35)' }}>
-                  <a href="#kontakt" onClick={scrollTo("kontakt")}>Lassen Sie uns sprechen</a>
+                  <a href="#kontakt" onClick={scrollTo("kontakt")}>Jetzt durchstarten →</a>
                 </Button>
               </div>
             </div>
