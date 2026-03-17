@@ -5,15 +5,29 @@ import { Menu, X } from "lucide-react";
 import logoImg from "@/assets/logo-schlees.png";
 
 const navLinks = [
-  { label: "Home", to: "/" },
-  { label: "Portfolio", to: "/referenzen" },
-  { label: "Katalog", to: "/preise" },
+  { label: "Home", anchor: "top" },
+  { label: "Katalog", anchor: "preise" },
+  { label: "Portfolio", anchor: "referenzen" },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const handleScroll = useCallback((anchor: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setOpen(false);
+    if (location.pathname === "/") {
+      if (anchor === "top") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      navigate(anchor === "top" ? "/" : `/#${anchor}`);
+    }
+  }, [location.pathname, navigate]);
 
   const handleKontaktClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -35,15 +49,14 @@ const Navbar = () => {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`nav-link-underline text-sm font-medium transition-colors hover:text-primary ${
-                location.pathname === link.to ? "text-primary" : "text-muted-foreground"
-              }`}
+            <a
+              key={link.anchor}
+              href={`/#${link.anchor}`}
+              onClick={handleScroll(link.anchor)}
+              className="nav-link-underline text-sm font-medium transition-colors hover:text-primary text-muted-foreground cursor-pointer"
             >
               {link.label}
-            </Link>
+            </a>
           ))}
           <Button size="default" asChild>
             <a href="/#kontakt" onClick={handleKontaktClick}>Erstgespräch</a>
@@ -65,16 +78,14 @@ const Navbar = () => {
         <div className="md:hidden glass-nav border-t border-border/50 pb-4">
           <nav className="container-narrow flex flex-col gap-3 pt-3">
             {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setOpen(false)}
-                className={`text-sm font-medium py-2 transition-colors ${
-                  location.pathname === link.to ? "text-primary" : "text-muted-foreground"
-                }`}
+              <a
+                key={link.anchor}
+                href={`/#${link.anchor}`}
+                onClick={handleScroll(link.anchor)}
+                className="text-sm font-medium py-2 transition-colors text-muted-foreground cursor-pointer"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
             <Button size="default" asChild className="mt-2">
               <a href="/#kontakt" onClick={handleKontaktClick}>Erstgespräch</a>
