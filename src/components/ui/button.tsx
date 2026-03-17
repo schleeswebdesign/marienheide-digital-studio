@@ -9,14 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98]",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] active:scale-[0.98]",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:scale-[1.02]",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        default: "bg-primary text-primary-foreground hover:bg-primary-hover hover:-translate-y-1.5 active:translate-y-0.5 hover:shadow-lg",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:-translate-y-1.5 active:translate-y-0.5 hover:shadow-lg",
+        outline: "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground hover:-translate-y-1.5 active:translate-y-0.5 hover:shadow-lg",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:-translate-y-1.5 active:translate-y-0.5 hover:shadow-lg",
+        ghost: "hover:bg-accent hover:text-accent-foreground hover:-translate-y-1.5 active:translate-y-0.5",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-primary text-primary-foreground hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-primary/25",
-        heroOutline: "border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground hover:scale-[1.02] active:scale-[0.98]",
+        hero: "bg-primary text-primary-foreground hover:bg-primary-hover hover:-translate-y-1.5 active:translate-y-0.5 shadow-lg shadow-primary/25 hover:shadow-xl",
+        heroOutline: "border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground hover:-translate-y-1.5 active:translate-y-0.5 hover:shadow-lg",
       },
       size: {
         default: "h-10 px-5 py-2",
