@@ -247,7 +247,7 @@ const Index = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="w-full" style={{ backgroundColor: '#25D366', color: '#ffffff', boxShadow: '0 8px 24px rgba(37, 211, 102, 0.35)' }}>
+                <Button size="lg" className="w-full" style={{ backgroundColor: '#ffffff', color: '#0a1628', boxShadow: '0 8px 24px rgba(10, 22, 40, 0.15)' }}>
                   <MessageCircle size={20} />
                   Kontaktieren Sie uns per WhatsApp
                 </Button>
