@@ -6,8 +6,8 @@ import logoImg from "@/assets/logo-schlees.png";
 
 const navLinks = [
   { label: "Home", anchor: "top" },
-  { label: "Katalog", anchor: "preise" },
   { label: "Portfolio", anchor: "referenzen" },
+  { label: "Katalog", anchor: "preise" },
 ];
 
 const Navbar = () => {
