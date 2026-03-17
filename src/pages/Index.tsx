@@ -162,7 +162,7 @@ const Index = () => {
       {/* Preise */}
       <section id="preise" className="relative section-padding overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
         <HexagonCanvas opacity={0.06} interactive={false} />
-        <div className="container-narrow">
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-3">Unsere Pakete</h2>
