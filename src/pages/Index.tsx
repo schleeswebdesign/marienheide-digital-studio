@@ -68,9 +68,9 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <AnimatedSection>
               <div>
-                <h2 className="text-3xl md:text-4xl mb-6">Wer steckt dahinter?</h2>
+                <h2 className="text-3xl md:text-4xl mb-6">Unsere Vision</h2>
                 <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
-                  Wir sind Miguel und Josh – zwei junge Typen aus dem Oberbergischen Kreis mit Hunger darauf, etwas Eigenes aufzubauen. Unser Ziel: lokalen Unternehmen zu einer Website verhelfen, die wirklich was bringt. Kein Bullshit, keine überteuerten Agenturen. Einfach gute Arbeit.
+                  Verwurzelt im Oberbergischen, offen für jeden. Wir glauben dass gutes Webdesign kein Luxus ist – und das beweisen wir mit jedem Projekt.
                 </p>
               </div>
             </AnimatedSection>
