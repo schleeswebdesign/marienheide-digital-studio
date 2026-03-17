@@ -62,7 +62,7 @@ const Index = () => {
       </section>
 
       {/* Über uns */}
-      <section className="relative section-padding bg-accent overflow-hidden">
+      <section id="vision" className="relative section-padding bg-accent overflow-hidden">
         <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
