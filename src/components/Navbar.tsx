@@ -6,8 +6,8 @@ import logoImg from "@/assets/logo-schlees.png";
 
 const navLinks = [
   { label: "Home", anchor: "top" },
-  { label: "Portfolio", anchor: "referenzen" },
   { label: "Katalog", anchor: "preise" },
+  { label: "Portfolio", anchor: "referenzen" },
 ];
 
 const Navbar = () => {
@@ -59,7 +59,7 @@ const Navbar = () => {
             </a>
           ))}
           <Button size="default" asChild>
-            <a href="/#kontakt" onClick={handleKontaktClick}>Lassen Sie uns sprechen</a>
+            <a href="/#kontakt" onClick={handleKontaktClick}>Erstgespräch</a>
           </Button>
         </nav>
 
@@ -88,7 +88,7 @@ const Navbar = () => {
               </a>
             ))}
             <Button size="default" asChild className="mt-2">
-              <a href="/#kontakt" onClick={handleKontaktClick}>Lassen Sie uns sprechen</a>
+              <a href="/#kontakt" onClick={handleKontaktClick}>Erstgespräch</a>
             </Button>
           </nav>
         </div>
