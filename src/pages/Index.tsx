@@ -151,7 +151,7 @@ const Index = () => {
       </section>
 
       {/* Wie funktioniert's? */}
-      <section className="relative section-padding bg-background overflow-hidden">
+      <section id="prozess" className="relative section-padding bg-background overflow-hidden">
         <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
