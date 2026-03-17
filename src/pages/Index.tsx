@@ -266,7 +266,8 @@ const Index = () => {
       </section>
 
       {/* Kontakt */}
-      <section id="kontakt" className="section-padding bg-accent">
+      <section id="kontakt" className="relative section-padding bg-accent overflow-hidden">
+        <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow">
           <AnimatedSection>
             <div className="text-center mb-16">
