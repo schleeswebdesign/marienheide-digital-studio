@@ -40,16 +40,12 @@ const Footer = () => (
           <div className="flex flex-col gap-3 text-sm text-secondary-foreground/70">
             <div className="flex items-center gap-2">
               <Phone size={16} className="text-primary" />
-              <span>+49 (0) 123 456 789</span>
+              <span>+49 160 4809564</span>
             </div>
-            <a href="mailto:info@beispiel-agentur.de" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <a href="mailto:schlees.webdesign@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Mail size={16} className="text-primary" />
-              <span>info@beispiel-agentur.de</span>
+              <span>schlees.webdesign@gmail.com</span>
             </a>
-            <div className="flex items-center gap-2">
-              <MapPin size={16} className="text-primary" />
-              <span>Marienheide, NRW</span>
-            </div>
           </div>
         </div>
       </div>
