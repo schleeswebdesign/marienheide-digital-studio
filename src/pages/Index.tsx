@@ -228,7 +228,7 @@ const Index = () => {
       {/* Referenzen / Portfolio */}
       <section id="referenzen" className="relative section-padding bg-background overflow-hidden">
         <HexagonCanvas opacity={0.06} interactive={false} />
-        <div className="container-narrow">
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">So könnte Ihre Website aussehen</h2>
