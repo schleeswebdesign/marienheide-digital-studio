@@ -53,7 +53,7 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4" style={{ animation: 'hero-fade-in 0.9s ease-out 0.35s both' }}>
                 <Button size="xl" variant="hero" asChild style={{ boxShadow: '0 8px 24px rgba(55, 138, 221, 0.35)' }}>
-                  <a href="#kontakt" onClick={scrollTo("kontakt")}>Lassen Sie uns sprechen</a>
+                  <a href="#kontakt" onClick={scrollTo("kontakt")}>Jetzt durchstarten →</a>
                 </Button>
               </div>
             </div>
@@ -68,9 +68,9 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <AnimatedSection>
               <div>
-                <h2 className="text-3xl md:text-4xl mb-6">Wer steckt dahinter?</h2>
+                <h2 className="text-3xl md:text-4xl mb-6">Unsere Vision</h2>
                 <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
-                  Wir sind Miguel und Josh – zwei junge Typen aus dem Oberbergischen Kreis mit Hunger darauf, etwas Eigenes aufzubauen. Unser Ziel: lokalen Unternehmen zu einer Website verhelfen, die wirklich was bringt. Kein Bullshit, keine überteuerten Agenturen. Einfach gute Arbeit.
+                  Verwurzelt im Oberbergischen, offen für jeden. Wir glauben dass gutes Webdesign kein Luxus ist – und das beweisen wir mit jedem Projekt.
                 </p>
               </div>
             </AnimatedSection>
@@ -224,7 +224,7 @@ const Index = () => {
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-6">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Lassen Sie uns sprechen</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Jetzt durchstarten →</h2>
               <p className="text-white/60 text-lg max-w-xl mx-auto mb-10">
                 Bereit für eine Website, die wirklich was bringt? Schreiben Sie uns – wir melden uns innerhalb von 24 Stunden.
               </p>
