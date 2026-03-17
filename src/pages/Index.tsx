@@ -184,9 +184,9 @@ const Index = () => {
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Unsere Referenzprojekte</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">So könnte Ihre Website aussehen</h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
-                Beispiele aus verschiedenen Branchen – modern, schnell und mobiloptimiert.
+                Moderne Websites aus verschiedenen Branchen – individuell gestaltet, schnell und mobiloptimiert.
               </p>
             </div>
           </AnimatedSection>
@@ -247,8 +247,8 @@ const Index = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="w-full" style={{ backgroundColor: '#25D366', color: '#ffffff', boxShadow: '0 8px 24px rgba(37, 211, 102, 0.35)' }}>
-                  <MessageCircle size={20} />
+                <Button size="lg" className="w-full" style={{ backgroundColor: '#ffffff', color: '#0a1628', boxShadow: '0 8px 24px rgba(10, 22, 40, 0.15)' }}>
+                  <MessageCircle size={20} style={{ color: '#0a1628' }} />
                   Kontaktieren Sie uns per WhatsApp
                 </Button>
               </a>
