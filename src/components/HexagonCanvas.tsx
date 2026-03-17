@@ -7,7 +7,12 @@ interface Hex {
   oy: number;
 }
 
-const HexagonCanvas = () => {
+interface HexagonCanvasProps {
+  opacity?: number;
+  interactive?: boolean;
+}
+
+const HexagonCanvas = ({ opacity = 0.15, interactive = true }: HexagonCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouse = useRef({ x: -1000, y: -1000 });
   const hexes = useRef<Hex[]>([]);
