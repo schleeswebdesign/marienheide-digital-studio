@@ -79,7 +79,7 @@ const Index = () => {
     <div id="top" className="min-h-screen">
       {/* Hero */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden" style={{ backgroundColor: '#0a0f1a' }}>
-        <HexagonCanvas />
+        <HexagonCanvas opacity={0.12} interactive={true} />
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="max-w-3xl">
@@ -100,8 +100,9 @@ const Index = () => {
       </section>
 
       {/* Über uns */}
-      <section className="section-padding bg-accent">
-        <div className="container-narrow">
+      <section className="relative section-padding bg-accent overflow-hidden">
+        <HexagonCanvas opacity={0.06} interactive={false} />
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <AnimatedSection>
               <div>
@@ -130,8 +131,9 @@ const Index = () => {
       </section>
 
       {/* So läuft's ab */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
+      <section className="relative section-padding bg-background overflow-hidden">
+        <HexagonCanvas opacity={0.06} interactive={false} />
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl mb-4">So läuft's ab</h2>
@@ -158,8 +160,9 @@ const Index = () => {
       </section>
 
       {/* Preise */}
-      <section id="preise" className="section-padding" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
-        <div className="container-narrow">
+      <section id="preise" className="relative section-padding overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
+        <HexagonCanvas opacity={0.06} interactive={false} />
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-3">Unsere Pakete</h2>
@@ -223,8 +226,9 @@ const Index = () => {
       </section>
 
       {/* Referenzen / Portfolio */}
-      <section id="referenzen" className="section-padding bg-background">
-        <div className="container-narrow">
+      <section id="referenzen" className="relative section-padding bg-background overflow-hidden">
+        <HexagonCanvas opacity={0.06} interactive={false} />
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">So könnte Ihre Website aussehen</h2>
@@ -262,8 +266,9 @@ const Index = () => {
       </section>
 
       {/* Kontakt */}
-      <section id="kontakt" className="section-padding bg-accent">
-        <div className="container-narrow">
+      <section id="kontakt" className="relative section-padding bg-accent overflow-hidden">
+        <HexagonCanvas opacity={0.06} interactive={false} />
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl mb-4">Kostenloses Erstgespräch</h2>
@@ -279,8 +284,9 @@ const Index = () => {
       </section>
 
       {/* FAQ */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
+      <section className="relative section-padding bg-background overflow-hidden">
+        <HexagonCanvas opacity={0.06} interactive={false} />
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl mb-4">Häufige Fragen</h2>

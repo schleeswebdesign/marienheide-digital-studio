@@ -7,7 +7,12 @@ interface Hex {
   oy: number;
 }
 
-const HexagonCanvas = () => {
+interface HexagonCanvasProps {
+  opacity?: number;
+  interactive?: boolean;
+}
+
+const HexagonCanvas = ({ opacity = 0.15, interactive = true }: HexagonCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouse = useRef({ x: -1000, y: -1000 });
   const hexes = useRef<Hex[]>([]);
@@ -71,7 +76,7 @@ const HexagonCanvas = () => {
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       ctx.clearRect(0, 0, w, h);
-      ctx.strokeStyle = "rgba(125,211,252,0.15)";
+      ctx.strokeStyle = `rgba(125,211,252,${opacity})`;
       ctx.lineWidth = 0.8;
 
       const mx = mouse.current.x;
@@ -116,8 +121,8 @@ const HexagonCanvas = () => {
   return (
     <canvas
       ref={canvasRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={interactive ? handleMouseMove : undefined}
+      onMouseLeave={interactive ? handleMouseLeave : undefined}
       className="absolute inset-0 w-full h-full"
       style={{ zIndex: 0 }}
     />
