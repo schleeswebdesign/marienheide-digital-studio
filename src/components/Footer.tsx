@@ -51,7 +51,7 @@ const Footer = () => (
       </div>
 
       <div className="border-t border-secondary-foreground/10 mt-12 pt-8 text-center text-xs text-secondary-foreground/40">
-        © {new Date().getFullYear()} digitalmarienheide. Alle Rechte vorbehalten.
+        © 2026 Schlees. Alle Rechte vorbehalten.
       </div>
     </div>
   </footer>
