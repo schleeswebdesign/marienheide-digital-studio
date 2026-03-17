@@ -160,7 +160,8 @@ const Index = () => {
       </section>
 
       {/* Preise */}
-      <section id="preise" className="section-padding" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
+      <section id="preise" className="relative section-padding overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
+        <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow">
           <AnimatedSection>
             <div className="text-center mb-12">
