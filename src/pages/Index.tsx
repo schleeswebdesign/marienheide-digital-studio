@@ -131,7 +131,8 @@ const Index = () => {
       </section>
 
       {/* So läuft's ab */}
-      <section className="section-padding bg-background">
+      <section className="relative section-padding bg-background overflow-hidden">
+        <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow">
           <AnimatedSection>
             <div className="text-center mb-16">
