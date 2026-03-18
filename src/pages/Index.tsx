@@ -37,6 +37,66 @@ const scrollTo = (id: string) => (e: React.MouseEvent) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 };
 
+function VapiButton() {
+  const [status, setStatus] = React.useState<'idle' | 'connecting' | 'active'>('idle');
+  const vapiRef = React.useRef<any>(null);
+
+  const toggle = async () => {
+    if (status === 'active') {
+      vapiRef.current?.stop();
+      return;
+    }
+    setStatus('connecting');
+    if (!vapiRef.current) {
+      const { default: Vapi } = await import('https://cdn.jsdelivr.net/npm/@vapi-ai/web/dist/vapi.mjs' as any);
+      vapiRef.current = new Vapi('e4df177d-71b8-4217-83b1-2bba195fc07f');
+      vapiRef.current.on('call-start', () => setStatus('active'));
+      vapiRef.current.on('call-end', () => setStatus('idle'));
+      vapiRef.current.on('error', () => setStatus('idle'));
+    }
+    vapiRef.current.start('1d369f6c-b92a-4122-ae2c-717abc31ec7e');
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+      <div style={{ position: 'relative', width: 64, height: 64 }}>
+        {status === 'active' && [0, 0.6, 1.2].map((delay, i) => (
+          <span
+            key={i}
+            style={{
+              position: 'absolute', inset: 0, borderRadius: '50%',
+              border: '2px solid #6D28D9', opacity: 0,
+              animation: `vapi-pulse 2s ease-out ${delay}s infinite`,
+            }}
+          />
+        ))}
+        <button
+          onClick={toggle}
+          style={{
+            width: 64, height: 64, borderRadius: '50%',
+            background: status === 'active' ? '#6D28D9' : '#7DD3FC',
+            border: 'none', cursor: 'pointer', display: 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            position: 'relative', zIndex: 1,
+            transition: 'background 0.3s',
+          }}
+        >
+          <Phone size={24} color="#fff" />
+        </button>
+      </div>
+      <span style={{ fontSize: 13, fontWeight: 600, color: status === 'active' ? '#6D28D9' : '#64748B' }}>
+        {status === 'idle' ? 'Teste mich' : status === 'connecting' ? 'Verbinde...' : 'KI hört zu...'}
+      </span>
+      {status === 'active' && (
+        <button onClick={() => vapiRef.current?.stop()} style={{ fontSize: 11, color: '#6D28D9', background: 'none', border: '1px solid #A78BFA', borderRadius: 20, padding: '3px 12px', cursor: 'pointer' }}>
+          Beenden
+        </button>
+      )}
+      <style>{`@keyframes vapi-pulse { 0% { opacity: 0.5; transform: scale(1); } 100% { opacity: 0; transform: scale(2.5); } }`}</style>
+    </div>
+  );
+}
+
 const Index = () => {
   return (
     <div id="top" className="min-h-screen">
