@@ -163,7 +163,9 @@ const Index = () => {
               <p className="text-muted-foreground text-lg">Transparent. Fair. Ohne versteckte Kosten.</p>
             </div>
           </AnimatedSection>
-          <div className="max-w-lg mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+
+            {/* Webauftritt Karte */}
             <div
               className="flex flex-col relative rounded-2xl p-6 md:p-8"
               style={{
@@ -207,6 +209,51 @@ const Index = () => {
                 </a>
               </Button>
             </div>
+
+            {/* KI-Telefonassistent Karte */}
+            <div
+              className="flex flex-col relative rounded-2xl p-6 md:p-8"
+              style={{
+                background: '#ffffff',
+                border: '2px solid #A78BFA',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                animation: 'hero-fade-in 0.9s ease-out 0.25s forwards',
+                opacity: 0,
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; e.currentTarget.style.transform = 'translateY(-6px)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.08)'; e.currentTarget.style.transform = 'none'; }}
+              onMouseDown={(e) => { e.currentTarget.style.transform = 'translateY(2px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.06)'; }}
+              onMouseUp={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; }}
+            >
+              <span
+                className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-1 rounded-full"
+                style={{ backgroundColor: '#EDE9FE', color: '#6D28D9' }}
+              >
+                Neu
+              </span>
+              <div className="mb-4">
+                <h3 className="text-xl font-bold text-secondary">KI-Telefonassistent</h3>
+                <p className="text-sm text-muted-foreground">24/7 automatisch für Sie erreichbar – klingt wie ein echter Mensch.</p>
+              </div>
+              <div className="mb-6">
+                <span className="text-3xl font-bold" style={{ color: '#6D28D9' }}>350 €</span>
+                <p className="text-xs text-muted-foreground mt-1">Einmalige Einrichtungsgebühr – kein Abo</p>
+              </div>
+              <ul className="space-y-3 mb-8 flex-1">
+                {['Nimmt Anrufe automatisch entgegen', 'Beantwortet Kundenfragen', 'Bucht Termine im Kalender', 'Klingt wie ein echter Mensch', 'Rund um die Uhr verfügbar', 'Individuelle Konfiguration'].map(f => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-foreground">
+                    <Check size={16} className="text-primary mt-0.5 shrink-0" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-col items-center gap-3 mt-auto">
+                <VapiButton />
+                <p className="text-xs text-muted-foreground">Teste unsere KI live</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
