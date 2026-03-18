@@ -1,3 +1,4 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -6,7 +7,7 @@ import joshImg from "@/assets/josh.jpg";
 import miguelImg from "@/assets/miguel-klees.webp";
 import {
   Search, Lightbulb, Palette, Code, Rocket,
-  Check, ArrowRight, Mail, MessageCircle
+  Check, ArrowRight, Mail, MessageCircle, Phone
 } from "lucide-react";
 
 const steps = [
@@ -35,6 +36,66 @@ const scrollTo = (id: string) => (e: React.MouseEvent) => {
   e.preventDefault();
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 };
+
+function VapiButton() {
+  const [status, setStatus] = React.useState<'idle' | 'connecting' | 'active'>('idle');
+  const vapiRef = React.useRef<any>(null);
+
+  const toggle = async () => {
+    if (status === 'active') {
+      vapiRef.current?.stop();
+      return;
+    }
+    setStatus('connecting');
+    if (!vapiRef.current) {
+      const { default: Vapi } = await import('https://cdn.jsdelivr.net/npm/@vapi-ai/web/dist/vapi.mjs' as any);
+      vapiRef.current = new Vapi('e4df177d-71b8-4217-83b1-2bba195fc07f');
+      vapiRef.current.on('call-start', () => setStatus('active'));
+      vapiRef.current.on('call-end', () => setStatus('idle'));
+      vapiRef.current.on('error', () => setStatus('idle'));
+    }
+    vapiRef.current.start('1d369f6c-b92a-4122-ae2c-717abc31ec7e');
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+      <div style={{ position: 'relative', width: 64, height: 64 }}>
+        {status === 'active' && [0, 0.6, 1.2].map((delay, i) => (
+          <span
+            key={i}
+            style={{
+              position: 'absolute', inset: 0, borderRadius: '50%',
+              border: '2px solid #6D28D9', opacity: 0,
+              animation: `vapi-pulse 2s ease-out ${delay}s infinite`,
+            }}
+          />
+        ))}
+        <button
+          onClick={toggle}
+          style={{
+            width: 64, height: 64, borderRadius: '50%',
+            background: status === 'active' ? '#6D28D9' : '#7DD3FC',
+            border: 'none', cursor: 'pointer', display: 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            position: 'relative', zIndex: 1,
+            transition: 'background 0.3s',
+          }}
+        >
+          <Phone size={24} color="#fff" />
+        </button>
+      </div>
+      <span style={{ fontSize: 13, fontWeight: 600, color: status === 'active' ? '#6D28D9' : '#64748B' }}>
+        {status === 'idle' ? 'Teste mich' : status === 'connecting' ? 'Verbinde...' : 'KI hört zu...'}
+      </span>
+      {status === 'active' && (
+        <button onClick={() => vapiRef.current?.stop()} style={{ fontSize: 11, color: '#6D28D9', background: 'none', border: '1px solid #A78BFA', borderRadius: 20, padding: '3px 12px', cursor: 'pointer' }}>
+          Beenden
+        </button>
+      )}
+      <style>{`@keyframes vapi-pulse { 0% { opacity: 0.5; transform: scale(1); } 100% { opacity: 0; transform: scale(2.5); } }`}</style>
+    </div>
+  );
+}
 
 const Index = () => {
   return (
@@ -102,7 +163,9 @@ const Index = () => {
               <p className="text-muted-foreground text-lg">Transparent. Fair. Ohne versteckte Kosten.</p>
             </div>
           </AnimatedSection>
-          <div className="max-w-lg mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+
+            {/* Webauftritt Karte */}
             <div
               className="flex flex-col relative rounded-2xl p-6 md:p-8"
               style={{
@@ -146,6 +209,51 @@ const Index = () => {
                 </a>
               </Button>
             </div>
+
+            {/* KI-Telefonassistent Karte */}
+            <div
+              className="flex flex-col relative rounded-2xl p-6 md:p-8"
+              style={{
+                background: '#ffffff',
+                border: '2px solid #A78BFA',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                animation: 'hero-fade-in 0.9s ease-out 0.25s forwards',
+                opacity: 0,
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; e.currentTarget.style.transform = 'translateY(-6px)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.08)'; e.currentTarget.style.transform = 'none'; }}
+              onMouseDown={(e) => { e.currentTarget.style.transform = 'translateY(2px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.06)'; }}
+              onMouseUp={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; }}
+            >
+              <span
+                className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-1 rounded-full"
+                style={{ backgroundColor: '#EDE9FE', color: '#6D28D9' }}
+              >
+                Neu
+              </span>
+              <div className="mb-4">
+                <h3 className="text-xl font-bold text-secondary">KI-Telefonassistent</h3>
+                <p className="text-sm text-muted-foreground">24/7 automatisch für Sie erreichbar – klingt wie ein echter Mensch.</p>
+              </div>
+              <div className="mb-6">
+                <span className="text-3xl font-bold" style={{ color: '#6D28D9' }}>350 €</span>
+                <p className="text-xs text-muted-foreground mt-1">Einmalige Einrichtungsgebühr – kein Abo</p>
+              </div>
+              <ul className="space-y-3 mb-8 flex-1">
+                {['Nimmt Anrufe automatisch entgegen', 'Beantwortet Kundenfragen', 'Bucht Termine im Kalender', 'Klingt wie ein echter Mensch', 'Rund um die Uhr verfügbar', 'Individuelle Konfiguration'].map(f => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-foreground">
+                    <Check size={16} className="text-primary mt-0.5 shrink-0" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-col items-center gap-3 mt-auto">
+                <VapiButton />
+                <p className="text-xs text-muted-foreground">Teste unsere KI live</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
