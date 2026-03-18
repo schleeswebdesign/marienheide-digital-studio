@@ -1,3 +1,4 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -6,7 +7,7 @@ import joshImg from "@/assets/josh.jpg";
 import miguelImg from "@/assets/miguel-klees.webp";
 import {
   Search, Lightbulb, Palette, Code, Rocket,
-  Check, ArrowRight, Mail, MessageCircle
+  Check, ArrowRight, Mail, MessageCircle, Phone
 } from "lucide-react";
 
 const steps = [
