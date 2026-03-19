@@ -106,95 +106,256 @@ function DroneScene() {
   );
 }
 
-/* ─── Scene 2: Welding Helmet ─── */
+/* ─── Scene 2: WeldPro 3D Avatar ─── */
 function WeldScene() {
   const [helmetOn, setHelmetOn] = useState(false);
+  const [hintVisible, setHintVisible] = useState(true);
+  const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
+  const [headTilt, setHeadTilt] = useState({ rx: 0, ry: 0 });
+  const avatarRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sparksRef = useRef<{ x: number; y: number; vx: number; vy: number; life: number; maxLife: number; color: string }[]>([]);
+  const rafRef = useRef<number>(0);
 
+  // Auto-drop helmet after 1.5s
   useEffect(() => {
-    const t = setTimeout(() => setHelmetOn(true), 1200);
+    const t = setTimeout(() => {
+      setHelmetOn(true);
+      setHintVisible(false);
+    }, 1500);
     return () => clearTimeout(t);
   }, []);
 
+  // Mouse tracking for eyes and head tilt
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+      if (!avatarRef.current) return;
+      const rect = avatarRef.current.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (window.innerWidth / 2);
+      const dy = (e.clientY - cy) / (window.innerHeight / 2);
+      setEyeOffset({ x: Math.max(-4, Math.min(4, dx * 4)), y: Math.max(-4, Math.min(4, dy * 4)) });
+      setHeadTilt({ rx: Math.max(-6, Math.min(6, -dy * 6)), ry: Math.max(-8, Math.min(8, dx * 8)) });
+    };
+    window.addEventListener('mousemove', handleMove);
+    return () => window.removeEventListener('mousemove', handleMove);
+  }, []);
+
+  // Canvas spark particles
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const resize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvas.offsetWidth * dpr;
+      canvas.height = canvas.offsetHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+
+    const colors = ['#ff6b35', '#ffaa44', '#ff6b35', '#ff8c00'];
+    let lastSpawn = 0;
+
+    const tick = (time: number) => {
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+
+      if (helmetOn && time - lastSpawn > 50) {
+        lastSpawn = time;
+        for (let i = 0; i < 3; i++) {
+          sparksRef.current.push({
+            x: canvas.offsetWidth * 0.62 + (Math.random() - 0.5) * 30,
+            y: canvas.offsetHeight * 0.52,
+            vx: (Math.random() - 0.5) * 3,
+            vy: -(2 + Math.random() * 4),
+            life: 0,
+            maxLife: 30 + Math.random() * 30,
+            color: colors[Math.floor(Math.random() * colors.length)],
+          });
+        }
+      }
+
+      sparksRef.current = sparksRef.current.filter(s => s.life < s.maxLife);
+      for (const s of sparksRef.current) {
+        s.life++;
+        s.vy += 0.12;
+        s.x += s.vx;
+        s.y += s.vy;
+        const alpha = 1 - s.life / s.maxLife;
+        ctx.globalAlpha = alpha;
+        ctx.strokeStyle = s.color;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(s.x - s.vx * 2, s.y - s.vy * 2);
+        ctx.stroke();
+        ctx.fillStyle = s.color;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [helmetOn]);
+
+  const toggleHelmet = () => {
+    setHelmetOn(prev => {
+      if (!prev) setHintVisible(false);
+      return !prev;
+    });
+    sparksRef.current = [];
+  };
+
   return (
-    <div className="showcase-scene" style={{ background: "#0a0a0a" }}>
+    <div className="showcase-scene" style={{ background: "#080808" }}>
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-[8]" />
+
       {/* Navbar */}
       <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 md:px-6 py-3">
-        <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 14, color: "#fff", letterSpacing: 2 }}>WELDPRO</span>
+        <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 2 }}>
+          <span style={{ color: "#fff" }}>WELD</span><span style={{ color: "#ff6b35" }}>PRO</span>
+        </span>
+        <div className="hidden md:flex gap-4 text-[11px] text-white/40" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          <span>Helmets</span><span>Gear</span><span>Pro Series</span>
+        </div>
         <span className="text-[11px] px-3 py-1 rounded text-white font-semibold" style={{ backgroundColor: "#ff6b35", fontFamily: "'DM Sans', sans-serif" }}>Shop Now</span>
       </div>
 
       {/* Left text */}
       <div className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 max-w-[45%]">
-        <p className="text-white text-lg md:text-2xl font-bold leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <p className="text-white leading-none" style={{ fontFamily: "'Bebas Neue', 'Playfair Display', serif", fontSize: 'clamp(24px, 4.5vw, 48px)', fontWeight: 400 }}>
           BUILT FOR<br />
-          <span style={{ color: "#ff6b35" }}>FIRE</span> &<br />
+          <span style={{ color: "#ff6b35" }}>FIRE &</span><br />
           PRECISION
         </p>
+        <p className="text-white/30 text-[10px] mt-3 tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>Professional grade welding helmets for the pros</p>
+        <p className="mt-3" style={{ fontFamily: "'Bebas Neue', 'Playfair Display', serif", color: "#ff6b35", fontSize: 'clamp(20px, 3vw, 36px)' }}>€ 249</p>
       </div>
 
-      {/* Face + Helmet */}
+      {/* Orange glow behind avatar */}
       <div
-        className="absolute right-[15%] md:right-[25%] top-1/2 -translate-y-1/2 z-[5]"
-        onMouseEnter={() => setHelmetOn(true)}
-      >
-        <div className="relative" style={{ width: 120, height: 160 }}>
-          {/* Face SVG */}
-          <svg viewBox="0 0 120 160" fill="none" className="w-full h-full">
-            <ellipse cx="60" cy="70" rx="35" ry="45" fill="#d4a574" />
-            <ellipse cx="47" cy="62" rx="4" ry="3" fill="#333" />
-            <ellipse cx="73" cy="62" rx="4" ry="3" fill="#333" />
-            <path d="M52 82 Q60 88 68 82" stroke="#333" strokeWidth="1.5" fill="none" />
-            <ellipse cx="60" cy="25" rx="38" ry="20" fill="#2a1a0a" />
-            <rect x="25" y="100" width="70" height="50" rx="5" fill="#1a1a1a" />
-          </svg>
+        className="absolute right-[10%] md:right-[20%] top-1/2 -translate-y-1/2 rounded-full z-[3] transition-opacity duration-700"
+        style={{
+          width: 200, height: 200,
+          background: 'radial-gradient(circle, rgba(255,107,53,0.25) 0%, rgba(255,107,53,0.08) 40%, transparent 70%)',
+          opacity: helmetOn ? 1 : 0,
+        }}
+      />
 
-          {/* Helmet overlay */}
-          <div
-            className="absolute inset-0 transition-all duration-700"
-            style={{ opacity: helmetOn ? 1 : 0, transform: helmetOn ? "translateY(0)" : "translateY(-20px)" }}
-          >
-            <svg viewBox="0 0 120 160" fill="none" className="w-full h-full">
-              {/* Helmet shell */}
-              <path d="M15 50 Q15 10 60 8 Q105 10 105 50 L105 90 Q105 105 90 110 L30 110 Q15 105 15 90 Z" fill="#1a1a2e" stroke="#333" strokeWidth="1" />
-              {/* Visor */}
-              <rect x="22" y="48" width="76" height="35" rx="4" fill="#111" stroke="#ff6b35" strokeWidth="1.5" />
-              {/* Welding glow on visor */}
-              <rect x="22" y="48" width="76" height="35" rx="4" fill="url(#weldGlow)" opacity="0.6" />
-              <defs>
-                <linearGradient id="weldGlow" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#ff6b35" stopOpacity="0.3" />
-                  <stop offset="50%" stopColor="#ff8c00" stopOpacity="0.5" />
-                  <stop offset="100%" stopColor="#ff6b35" stopOpacity="0.1" />
-                </linearGradient>
-              </defs>
-              {/* Brand */}
-              <text x="60" y="72" textAnchor="middle" fill="#ff6b35" fontSize="7" fontWeight="bold" fontFamily="DM Sans, sans-serif">WELD PRO</text>
-              {/* Side vents */}
-              <rect x="18" y="60" width="3" height="12" rx="1" fill="#ff6b35" opacity="0.7" />
-              <rect x="99" y="60" width="3" height="12" rx="1" fill="#ff6b35" opacity="0.7" />
-              {/* Top ridge */}
-              <path d="M40 12 Q60 2 80 12" stroke="#ff6b35" strokeWidth="1.5" fill="none" />
-            </svg>
+      {/* 3D CSS Avatar */}
+      <div
+        ref={avatarRef}
+        className="absolute right-[12%] md:right-[22%] top-1/2 -translate-y-1/2 z-[5] cursor-pointer"
+        onClick={toggleHelmet}
+        style={{
+          transform: `translateY(-50%) rotateX(${headTilt.rx}deg) rotateY(${headTilt.ry}deg)`,
+          transition: 'transform 0.15s ease-out',
+          transformStyle: 'preserve-3d',
+        }}
+      >
+        <div style={{ width: 130, height: 220, position: 'relative' }}>
+          {/* Body / Jacket */}
+          <div style={{
+            position: 'absolute', bottom: 0, left: 10, width: 110, height: 90,
+            background: 'linear-gradient(135deg, #1a2a3a 0%, #0f1c2a 100%)',
+            borderRadius: '12px 12px 6px 6px',
+            boxShadow: 'inset 2px 0 8px rgba(255,255,255,0.03)',
+          }}>
+            <div style={{ position: 'absolute', top: 8, left: 4, width: 4, height: 60, background: 'linear-gradient(180deg, #ff6b35 0%, #ff6b35 70%, transparent)', borderRadius: 2, opacity: 0.8 }} />
+            <div style={{ position: 'absolute', top: 8, right: 4, width: 4, height: 60, background: 'linear-gradient(180deg, #ff6b35 0%, #ff6b35 70%, transparent)', borderRadius: 2, opacity: 0.8 }} />
+            <div style={{ position: 'absolute', top: -4, left: '50%', transform: 'translateX(-50%)', width: 40, height: 10, background: '#e8e8e8', borderRadius: '4px 4px 0 0' }} />
+            <div style={{ position: 'absolute', top: 4, left: '50%', transform: 'translateX(-50%)', width: 50, height: 4, background: 'rgba(0,0,0,0.2)', borderRadius: 2 }} />
+          </div>
+
+          {/* Neck */}
+          <div style={{
+            position: 'absolute', bottom: 82, left: '50%', transform: 'translateX(-50%)',
+            width: 24, height: 16,
+            background: 'linear-gradient(180deg, #d09060 0%, #c08050 100%)',
+            borderRadius: '2px 2px 4px 4px',
+          }} />
+
+          {/* Head */}
+          <div style={{
+            position: 'absolute', bottom: 90, left: '50%', transform: 'translateX(-50%)',
+            width: 72, height: 80,
+            background: 'radial-gradient(ellipse at 40% 35%, #f5c5a0 0%, #e0a878 50%, #d09060 100%)',
+            borderRadius: '38px 38px 28px 28px',
+            boxShadow: '4px 4px 12px rgba(0,0,0,0.3), inset -2px -2px 6px rgba(0,0,0,0.1)',
+          }}>
+            {/* Ears */}
+            <div style={{ position: 'absolute', left: -8, top: 28, width: 14, height: 18, background: 'radial-gradient(ellipse, #e0a878 0%, #d09060 100%)', borderRadius: '50%', boxShadow: '-2px 0 4px rgba(0,0,0,0.15)' }} />
+            <div style={{ position: 'absolute', right: -8, top: 28, width: 14, height: 18, background: 'radial-gradient(ellipse, #e0a878 0%, #d09060 100%)', borderRadius: '50%', boxShadow: '2px 0 4px rgba(0,0,0,0.15)' }} />
+            {/* Hair */}
+            <div style={{ position: 'absolute', top: -6, left: -2, width: 76, height: 36, background: 'linear-gradient(180deg, #1a1a1a 0%, #222 80%, transparent 100%)', borderRadius: '40px 40px 10px 10px' }} />
+            {/* Beard shadow */}
+            <div style={{ position: 'absolute', bottom: 2, left: '50%', transform: 'translateX(-50%)', width: 50, height: 20, background: 'radial-gradient(ellipse, rgba(60,40,20,0.2) 0%, transparent 70%)', borderRadius: '50%' }} />
+            {/* Glasses */}
+            <div style={{ position: 'absolute', top: 28, left: 10, display: 'flex', gap: 4, alignItems: 'center' }}>
+              <div style={{ width: 22, height: 16, border: '2px solid #1a1a1a', borderRadius: 4, background: 'rgba(200,220,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}>
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', transform: `translate(${eyeOffset.x * 0.5}px, ${eyeOffset.y * 0.5}px)`, transition: 'transform 0.1s ease-out' }}>
+                    <div style={{ width: 3, height: 3, borderRadius: '50%', background: '#111' }} />
+                  </div>
+                </div>
+              </div>
+              <div style={{ width: 4, height: 2, background: '#1a1a1a', borderRadius: 1 }} />
+              <div style={{ width: 22, height: 16, border: '2px solid #1a1a1a', borderRadius: 4, background: 'rgba(200,220,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}>
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', transform: `translate(${eyeOffset.x * 0.5}px, ${eyeOffset.y * 0.5}px)`, transition: 'transform 0.1s ease-out' }}>
+                    <div style={{ width: 3, height: 3, borderRadius: '50%', background: '#111' }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Nose */}
+            <div style={{ position: 'absolute', top: 44, left: '50%', transform: 'translateX(-50%)', width: 8, height: 10, background: 'linear-gradient(180deg, transparent 0%, rgba(180,120,60,0.3) 100%)', borderRadius: '50% 50% 40% 40%' }} />
+            {/* Smile */}
+            <div style={{ position: 'absolute', top: 58, left: '50%', transform: 'translateX(-50%)', width: 18, height: 6, borderBottom: '2px solid rgba(160,90,50,0.4)', borderRadius: '0 0 50% 50%' }} />
+          </div>
+
+          {/* Welding Helmet overlay */}
+          <div style={{
+            position: 'absolute', bottom: 78, left: '50%',
+            transform: `translateX(-50%) translateY(${helmetOn ? '0' : '-30px'})`,
+            opacity: helmetOn ? 1 : 0,
+            transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease',
+            width: 90, height: 100, zIndex: 10, pointerEvents: 'none',
+          }}>
+            <div style={{
+              position: 'absolute', inset: 0,
+              background: 'linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 40%, #111 100%)',
+              borderRadius: '45px 45px 20px 20px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.5), inset 1px 1px 4px rgba(255,255,255,0.05)',
+            }}>
+              <div style={{ position: 'absolute', top: 8, left: 12, width: 6, height: 50, background: 'linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%)', borderRadius: 4 }} />
+            </div>
+            <div style={{
+              position: 'absolute', top: 22, left: 10, right: 10, height: 34,
+              background: 'linear-gradient(135deg, #0a0a12 0%, #12121e 60%, #0a0a12 100%)',
+              borderRadius: 6, border: '1.5px solid rgba(255,107,53,0.3)', overflow: 'hidden',
+            }}>
+              <div style={{ position: 'absolute', bottom: 0, left: 0, width: '60%', height: '70%', background: 'radial-gradient(ellipse at 20% 100%, rgba(255,107,53,0.4) 0%, rgba(255,140,0,0.15) 40%, transparent 70%)' }} />
+            </div>
+            <div style={{ position: 'absolute', top: 62, left: '50%', transform: 'translateX(-50%)', color: '#ff6b35', fontSize: 7, fontWeight: 700, letterSpacing: 2, fontFamily: "'DM Sans', sans-serif", whiteSpace: 'nowrap' }}>WELD PRO</div>
+            <div style={{ position: 'absolute', top: 26, left: 4, width: 3, height: 24, background: '#ff6b35', borderRadius: 2, opacity: 0.7 }} />
+            <div style={{ position: 'absolute', top: 26, right: 4, width: 3, height: 24, background: '#ff6b35', borderRadius: 2, opacity: 0.7 }} />
+            <div style={{ position: 'absolute', top: 2, left: '50%', transform: 'translateX(-50%)', width: 40, height: 3, background: 'linear-gradient(90deg, transparent, rgba(255,107,53,0.5), transparent)', borderRadius: 2 }} />
+            <div style={{ position: 'absolute', bottom: -4, left: '50%', transform: 'translateX(-50%)', width: 60, height: 12, background: 'linear-gradient(180deg, #1a1a1a, #111)', borderRadius: '0 0 12px 12px', boxShadow: '0 2px 6px rgba(0,0,0,0.3)' }} />
           </div>
         </div>
       </div>
 
-      {/* Sparks */}
-      {helmetOn && (
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 pointer-events-none overflow-hidden z-[6]">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <div
-              key={i}
-              className="showcase-spark"
-              style={{
-                left: `${30 + Math.random() * 40}%`,
-                animationDelay: `${Math.random() * 2}s`,
-                animationDuration: `${0.8 + Math.random() * 1.2}s`,
-              }}
-            />
-          ))}
-        </div>
-      )}
+      {/* Hint text */}
+      <div className="absolute z-10 text-center transition-opacity duration-500" style={{ right: '12%', bottom: '10%', opacity: hintVisible ? 0.6 : 0, color: '#ff6b35', fontSize: 11, fontFamily: "'DM Sans', sans-serif", letterSpacing: 1 }}>
+        hover me ✦
+      </div>
     </div>
   );
 }
