@@ -39,62 +39,114 @@ const scrollTo = (id: string) => (e: React.MouseEvent) => {
 };
 
 function VapiButton() {
-  const [status, setStatus] = React.useState<'idle' | 'connecting' | 'active'>('idle');
+  const [status, setStatus] = React.useState<'idle' | 'connecting' | 'listening' | 'speaking'>('idle');
+  const [volume, setVolume] = React.useState(0);
   const vapiRef = React.useRef<any>(null);
 
-  const toggle = async () => {
-    if (status === 'active') {
-      vapiRef.current?.stop();
-      return;
-    }
+  const startCall = async () => {
+    if (status !== 'idle') return;
     setStatus('connecting');
     if (!vapiRef.current) {
-      const { default: Vapi } = await import('https://cdn.jsdelivr.net/npm/@vapi-ai/web/dist/vapi.mjs' as any);
+      const { default: Vapi } = await import('@vapi-ai/web');
       vapiRef.current = new Vapi('e4df177d-71b8-4217-83b1-2bba195fc07f');
-      vapiRef.current.on('call-start', () => setStatus('active'));
-      vapiRef.current.on('call-end', () => setStatus('idle'));
-      vapiRef.current.on('error', () => setStatus('idle'));
+      vapiRef.current.on('call-start', () => setStatus('listening'));
+      vapiRef.current.on('call-end', () => { setStatus('idle'); setVolume(0); });
+      vapiRef.current.on('error', () => { setStatus('idle'); setVolume(0); });
+      vapiRef.current.on('speech-start', () => setStatus('speaking'));
+      vapiRef.current.on('speech-end', () => setStatus('listening'));
+      vapiRef.current.on('volume-level', (vol: number) => setVolume(vol));
     }
     vapiRef.current.start('1d369f6c-b92a-4122-ae2c-717abc31ec7e');
   };
 
+  const endCall = () => {
+    vapiRef.current?.stop();
+  };
+
+  const isActive = status === 'listening' || status === 'speaking' || status === 'connecting';
+  const innerScale = 1 + volume * 0.5;
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-      <div style={{ position: 'relative', width: 64, height: 64 }}>
-        {status === 'active' && [0, 0.6, 1.2].map((delay, i) => (
-          <span
-            key={i}
-            style={{
-              position: 'absolute', inset: 0, borderRadius: '50%',
-              border: '2px solid #6D28D9', opacity: 0,
-              animation: `vapi-pulse 2s ease-out ${delay}s infinite`,
-            }}
-          />
-        ))}
+    <>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
         <button
-          onClick={toggle}
+          onClick={startCall}
           style={{
-            width: 64, height: 64, borderRadius: '50%',
-            background: status === 'active' ? '#6D28D9' : '#7DD3FC',
-            border: 'none', cursor: 'pointer', display: 'flex',
-            alignItems: 'center', justifyContent: 'center',
-            position: 'relative', zIndex: 1,
-            transition: 'background 0.3s',
+            padding: '10px 28px', borderRadius: 12, border: '2px solid #A78BFA',
+            background: 'linear-gradient(135deg, #7C3AED, #6D28D9)',
+            color: '#fff', fontWeight: 600, fontSize: 14, cursor: 'pointer',
+            display: 'flex', alignItems: 'center', gap: 8,
+            transition: 'transform 0.2s, box-shadow 0.2s',
+            boxShadow: '0 4px 16px rgba(109,40,217,0.3)',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(109,40,217,0.4)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(109,40,217,0.3)'; }}
+        >
+          <Phone size={18} />
+          Verbinden
+        </button>
+        <p className="text-xs text-muted-foreground">Teste unsere KI live</p>
+      </div>
+
+      {isActive && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: 'rgba(0,0,0,0.9)', backdropFilter: 'blur(20px)',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            animation: 'vapi-overlay-in 0.4s ease-out both',
           }}
         >
-          <Phone size={24} color="#fff" />
-        </button>
-      </div>
-      <span style={{ fontSize: 13, fontWeight: 600, color: status === 'active' ? '#6D28D9' : '#64748B' }}>
-        {status === 'idle' ? 'Teste mich' : status === 'connecting' ? 'Verbinde...' : 'KI hört zu...'}
-      </span>
-      {status === 'active' && (
-        <button onClick={() => vapiRef.current?.stop()} style={{ fontSize: 11, color: '#6D28D9', background: 'none', border: '1px solid #A78BFA', borderRadius: 20, padding: '3px 12px', cursor: 'pointer' }}>
-          Beenden
-        </button>
+          <div style={{ position: 'relative', width: 240, height: 240 }}>
+            <div style={{
+              position: 'absolute', inset: 0, borderRadius: '50%',
+              border: '2px solid rgba(91,200,245,0.15)',
+              animation: 'vapi-ring-pulse 3s ease-in-out infinite',
+            }} />
+            <div style={{
+              position: 'absolute', inset: 30, borderRadius: '50%',
+              border: '2px solid rgba(91,200,245,0.3)',
+              animation: 'vapi-ring-pulse 2s ease-in-out 0.5s infinite',
+            }} />
+            <div style={{
+              position: 'absolute', inset: 60, borderRadius: '50%',
+              background: 'radial-gradient(circle, #5bc8f5 0%, #3ba8d5 100%)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transform: `scale(${innerScale})`,
+              transition: 'transform 0.1s ease-out',
+              boxShadow: '0 0 60px rgba(91,200,245,0.4)',
+            }}>
+              <Phone size={36} color="#fff" />
+            </div>
+          </div>
+
+          <p style={{ color: '#fff', fontSize: 18, fontWeight: 500, marginTop: 32, letterSpacing: 0.5 }}>
+            {status === 'connecting' ? 'Verbinde...' : status === 'speaking' ? 'Sofia spricht...' : 'Sofia hört zu...'}
+          </p>
+
+          <button
+            onClick={endCall}
+            style={{
+              marginTop: 40, width: 64, height: 64, borderRadius: '50%',
+              background: '#EF4444', border: 'none', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 4px 20px rgba(239,68,68,0.5)',
+              transition: 'transform 0.2s',
+            }}
+            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            <Phone size={28} color="#fff" style={{ transform: 'rotate(135deg)' }} />
+          </button>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, marginTop: 12 }}>Auflegen</p>
+
+          <style>{`
+            @keyframes vapi-overlay-in { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes vapi-ring-pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.15); opacity: 1; } }
+          `}</style>
+        </div>
       )}
-      <style>{`@keyframes vapi-pulse { 0% { opacity: 0.5; transform: scale(1); } 100% { opacity: 0; transform: scale(2.5); } }`}</style>
-    </div>
+    </>
   );
 }
 
