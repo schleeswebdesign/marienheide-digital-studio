@@ -39,25 +39,42 @@ const scrollTo = (id: string) => (e: React.MouseEvent) => {
 };
 
 function VapiButton() {
-  const [status, setStatus] = React.useState<'idle' | 'connecting' | 'listening' | 'speaking'>('idle');
+  const [status, setStatus] = React.useState<'idle' | 'connecting' | 'listening' | 'speaking' | 'mic-denied'>('idle');
   const [volume, setVolume] = React.useState(0);
   const vapiRef = React.useRef<any>(null);
 
+  const getOrCreateVapi = async () => {
+    if (!vapiRef.current) {
+      const Vapi = (await import('@vapi-ai/web')).default;
+      const vapi = new Vapi('e4df177d-71b8-4217-83b1-2bba195fc07f');
+      vapi.on('call-start', () => setStatus('listening'));
+      vapi.on('call-end', () => { setStatus('idle'); setVolume(0); });
+      vapi.on('error', (e: any) => { console.error('VAPI Error:', e); setStatus('idle'); setVolume(0); });
+      vapi.on('speech-start', () => setStatus('speaking'));
+      vapi.on('speech-end', () => setStatus('listening'));
+      vapi.on('volume-level', (vol: number) => setVolume(vol));
+      vapiRef.current = vapi;
+    }
+    return vapiRef.current;
+  };
+
   const startCall = async () => {
     if (status !== 'idle') return;
-    setStatus('connecting');
-    if (!vapiRef.current) {
-      const VapiModule = await import('@vapi-ai/web');
-      const VapiClass = VapiModule.default;
-      vapiRef.current = new VapiClass('e4df177d-71b8-4217-83b1-2bba195fc07f');
-      vapiRef.current.on('call-start', () => setStatus('listening'));
-      vapiRef.current.on('call-end', () => { setStatus('idle'); setVolume(0); });
-      vapiRef.current.on('error', () => { setStatus('idle'); setVolume(0); });
-      vapiRef.current.on('speech-start', () => setStatus('speaking'));
-      vapiRef.current.on('speech-end', () => setStatus('listening'));
-      vapiRef.current.on('volume-level', (vol: number) => setVolume(vol));
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch {
+      setStatus('mic-denied');
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
     }
-    vapiRef.current.start('1d369f6c-b92a-4122-ae2c-717abc31ec7e');
+    setStatus('connecting');
+    try {
+      const vapi = await getOrCreateVapi();
+      await vapi.start('1d369f6c-b92a-4122-ae2c-717abc31ec7e');
+    } catch (error) {
+      console.error('VAPI Error:', error);
+      setStatus('idle');
+    }
   };
 
   const endCall = () => {
