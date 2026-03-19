@@ -47,8 +47,9 @@ function VapiButton() {
     if (status !== 'idle') return;
     setStatus('connecting');
     if (!vapiRef.current) {
-      const { default: Vapi } = await import('@vapi-ai/web');
-      vapiRef.current = new Vapi('e4df177d-71b8-4217-83b1-2bba195fc07f');
+      const VapiModule = await import('@vapi-ai/web');
+      const VapiClass = VapiModule.default;
+      vapiRef.current = new VapiClass('e4df177d-71b8-4217-83b1-2bba195fc07f');
       vapiRef.current.on('call-start', () => setStatus('listening'));
       vapiRef.current.on('call-end', () => { setStatus('idle'); setVolume(0); });
       vapiRef.current.on('error', () => { setStatus('idle'); setVolume(0); });
