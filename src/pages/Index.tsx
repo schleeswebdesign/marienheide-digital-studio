@@ -9,6 +9,7 @@ import {
   Search, Lightbulb, Palette, Code, Rocket,
   Check, ArrowRight, Mail, MessageCircle, Phone
 } from "lucide-react";
+import PortfolioShowcase from "@/components/PortfolioShowcase";
 
 const steps = [
   { num: "01", icon: Search, title: "Analyse", desc: "Ziele & Zielgruppe verstehen" },
