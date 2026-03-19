@@ -645,6 +645,11 @@ export default function PortfolioShowcase() {
           0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(200,169,110,0.6); }
           50% { opacity: 0.4; box-shadow: 0 0 12px rgba(200,169,110,0.9); }
         }
+        /* Portfolio card hover glow */
+        .portfolio-card-hover:hover {
+          border-color: rgba(91,200,245,0.4) !important;
+          box-shadow: 0 0 20px rgba(91,200,245,0.1);
+        }
       `}</style>
     </section>
   );
