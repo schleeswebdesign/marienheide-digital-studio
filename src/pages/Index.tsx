@@ -10,6 +10,7 @@ import {
   Check, ArrowRight, Mail, MessageCircle, Phone
 } from "lucide-react";
 import PortfolioShowcase from "@/components/PortfolioShowcase";
+import TeamSection from "@/components/TeamSection";
 
 const steps = [
   { num: "01", icon: Search, title: "Analyse", desc: "Ziele & Zielgruppe verstehen" },
