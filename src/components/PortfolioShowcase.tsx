@@ -56,6 +56,25 @@ const PortfolioShowcase = () => {
 
         {/* Sliding container - includes heading + content */}
         <div className="relative max-w-4xl mx-auto overflow-hidden">
+          {/* Arrows outside the sliding container so they're not clipped */}
+          {activeTab === 0 && (
+            <>
+              <button
+                onClick={prev}
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                aria-label="Vorheriges Projekt"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={next}
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                aria-label="Nächstes Projekt"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </>
+          )}
           <div
             className="flex transition-transform duration-500 ease-out"
             style={{ transform: `translateX(-${activeTab * 100}%)` }}
@@ -68,21 +87,6 @@ const PortfolioShowcase = () => {
               </div>
 
               <div className="relative">
-                <button
-                  onClick={prev}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
-                  aria-label="Vorheriges Projekt"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <button
-                  onClick={next}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
-                  aria-label="Nächstes Projekt"
-                >
-                  <ChevronRight size={20} />
-                </button>
-
                 <div className="rounded-xl overflow-hidden border border-white/10 bg-black shadow-2xl">
                   <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                     {projects.map((p, i) => (
