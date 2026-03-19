@@ -7,6 +7,7 @@ const scenes = [
   { name: "AeroVista X", category: "DROHNEN · TECH", num: "01" },
   { name: "WeldPro", category: "INDUSTRIE · PRODUKT", num: "02" },
   { name: "Aqua Bottles", category: "LIFESTYLE · PRODUKT", num: "03" },
+  { name: "Schlees Webdesign", category: "REFERENZEN", num: "04" },
 ];
 
 /* ─── Scene 1: Drone ─── */
@@ -369,6 +370,111 @@ function AquaScene() {
   );
 }
 
+/* ─── Scene 4: Portfolio Cards ─── */
+function PortfolioScene() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
+  const title = "BUILT FOR SCALE";
+  const cards = [
+    { tag: "WEBDESIGN", tagColor: "#5bc8f5", name: "Restaurant Meyer", desc: "Moderne Website für lokale Gastronomie" },
+    { tag: "WEBDESIGN · SEO", tagColor: "#a78bfa", name: "Kanzlei Hoffmann", desc: "Corporate Website mit Terminbuchung" },
+    { tag: "WEBDESIGN · SHOP", tagColor: "#34d399", name: "Aqua Bottles", desc: "Premium Produktseite mit 3D Animation" },
+  ];
+
+  return (
+    <div className="showcase-scene" style={{ background: "#0a0f1a" }}>
+      {/* Navbar */}
+      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 md:px-6 py-3">
+        <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 14, color: "#5bc8f5", letterSpacing: 2 }}>SC</span>
+        <div className="hidden md:flex gap-4 text-[11px] text-white/50" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          <span>Home</span><span>Work</span><span>About</span><span>Contact</span>
+        </div>
+      </div>
+
+      {/* Left side — title */}
+      <div className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 max-w-[40%]">
+        {["BUILT", "FOR", "SCALE"].map((word, wi) => (
+          <div key={word} className="overflow-hidden">
+            <div style={{ display: 'flex' }}>
+              {word.split("").map((ch, ci) => (
+                <span
+                  key={ci}
+                  style={{
+                    display: 'inline-block',
+                    fontFamily: "'Playfair Display', serif",
+                    fontWeight: 900,
+                    fontSize: 'clamp(28px, 5vw, 52px)',
+                    lineHeight: 1,
+                    color: word === "SCALE" ? "#5bc8f5" : "#fff",
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? 'translateY(0)' : 'translateY(100%)',
+                    transition: `opacity 0.4s ease ${(wi * word.length + ci) * 0.05}s, transform 0.4s ease ${(wi * word.length + ci) * 0.05}s`,
+                  }}
+                >
+                  {ch}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+        <p
+          className="text-[9px] tracking-[3px] text-white/30 uppercase mt-4"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            opacity: visible ? 1 : 0,
+            transition: 'opacity 0.6s ease 0.8s',
+          }}
+        >
+          Unsere bisherigen Projekte
+        </p>
+      </div>
+
+      {/* Right side — cards */}
+      <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 flex flex-col gap-3 w-[48%] md:w-[40%] max-w-[280px]">
+        {cards.map((card, i) => (
+          <div
+            key={card.name}
+            className="portfolio-card-hover"
+            style={{
+              background: "#111827",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 12,
+              padding: '12px 14px',
+              opacity: visible ? 1 : 0,
+              transform: visible ? 'translateX(0)' : 'translateX(60px)',
+              transition: `opacity 0.5s ease ${0.3 + i * 0.15}s, transform 0.5s ease ${0.3 + i * 0.15}s, border-color 0.3s ease, box-shadow 0.3s ease`,
+            }}
+          >
+            <span
+              style={{
+                display: 'inline-block',
+                fontSize: 8,
+                fontWeight: 700,
+                letterSpacing: 1.5,
+                color: card.tagColor,
+                background: `${card.tagColor}15`,
+                padding: '2px 8px',
+                borderRadius: 4,
+                fontFamily: "'DM Sans', sans-serif",
+                marginBottom: 6,
+              }}
+            >
+              {card.tag}
+            </span>
+            <p className="text-white text-xs font-bold" style={{ fontFamily: "'DM Sans', sans-serif" }}>{card.name}</p>
+            <p className="text-white/40 text-[10px] mt-0.5" style={{ fontFamily: "'DM Sans', sans-serif" }}>{card.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ─── Main Showcase ─── */
 export default function PortfolioShowcase() {
   const [active, setActive] = useState(0);
@@ -387,7 +493,7 @@ export default function PortfolioShowcase() {
       const pct = Math.min((elapsed / SCENE_DURATION) * 100, 100);
       setProgress(pct);
       if (elapsed >= SCENE_DURATION) {
-        setActive(a => (a + 1) % 3);
+        setActive(a => (a + 1) % scenes.length);
         setProgress(0);
         return;
       }
@@ -433,13 +539,13 @@ export default function PortfolioShowcase() {
           </div>
 
           {/* Scenes */}
-          {[DroneScene, WeldScene, AquaScene].map((Scene, i) => (
+          {[DroneScene, WeldScene, AquaScene, PortfolioScene].map((Scene, i) => (
             <div
               key={i}
               className="absolute inset-0 transition-opacity duration-[800ms]"
               style={{ opacity: active === i ? 1 : 0, pointerEvents: active === i ? "auto" : "none" }}
             >
-              <Scene />
+              {active === i && <Scene />}
             </div>
           ))}
         </div>
@@ -538,6 +644,11 @@ export default function PortfolioShowcase() {
         @keyframes aqua-uvc {
           0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(200,169,110,0.6); }
           50% { opacity: 0.4; box-shadow: 0 0 12px rgba(200,169,110,0.9); }
+        }
+        /* Portfolio card hover glow */
+        .portfolio-card-hover:hover {
+          border-color: rgba(91,200,245,0.4) !important;
+          box-shadow: 0 0 20px rgba(91,200,245,0.1);
         }
       `}</style>
     </section>
