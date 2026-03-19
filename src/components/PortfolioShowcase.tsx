@@ -523,28 +523,21 @@ export default function PortfolioShowcase() {
           0% { transform: translateY(0) scale(1); opacity: 1; }
           100% { transform: translateY(-120px) translateX(${Math.random() > 0.5 ? '' : '-'}20px) scale(0); opacity: 0; }
         }
-        /* Bottle float */
-        .showcase-bottle-float {
-          animation: showcase-float 4s ease-in-out infinite;
+        /* Aqua bottle float */
+        .aqua-bottle-float {
+          animation: aqua-float 3s ease-in-out infinite;
         }
-        /* UV-C pulse */
-        .showcase-uvc-pulse {
-          animation: showcase-uvc 2s ease-in-out infinite;
+        @keyframes aqua-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
         }
-        @keyframes showcase-uvc {
-          0%, 100% { opacity: 1; r: 3; }
-          50% { opacity: 0.4; r: 4; }
+        /* UV-C dot pulse */
+        .aqua-uvc-dot {
+          animation: aqua-uvc 2s ease-in-out infinite;
         }
-        /* Steam */
-        .showcase-steam {
-          width: 2px; height: 12px;
-          background: rgba(0,0,0,0.08);
-          border-radius: 2px;
-          animation: showcase-steam-rise 2s ease-out infinite;
-        }
-        @keyframes showcase-steam-rise {
-          0% { transform: translateY(0) scaleY(0.5); opacity: 0.6; }
-          100% { transform: translateY(-16px) scaleY(1.5); opacity: 0; }
+        @keyframes aqua-uvc {
+          0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(200,169,110,0.6); }
+          50% { opacity: 0.4; box-shadow: 0 0 12px rgba(200,169,110,0.9); }
         }
       `}</style>
     </section>
