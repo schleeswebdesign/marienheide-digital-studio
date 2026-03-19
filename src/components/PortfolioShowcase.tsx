@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 
 const projects = [
-  { name: "Grünwerk Oberberg (Demo)", branch: "Garten & Landschaftsbau", url: "https://id-preview--70929813-767c-4033-9686-c33154e21e63.lovable.app" },
-  { name: "Elektro Oberberg (Demo)", branch: "Elektriker", url: "https://id-preview--4bf3fca1-cb6c-4a47-8e36-fec3f00157e3.lovable.app" },
-  { name: "Haarwerk Oberberg (Demo)", branch: "Friseur", url: "https://id-preview--ec4acad4-58d0-41d1-b258-41806424f87f.lovable.app" },
+  { name: "Grünwerk Oberberg (Demo)", branch: "Garten & Landschaftsbau", url: "https://gruenwerk-oberberg.lovable.app" },
+  { name: "Elektro Oberberg (Demo)", branch: "Elektriker", url: "https://oberberg-elektro-page.lovable.app" },
+  { name: "Haarwerk Oberberg (Demo)", branch: "Friseur", url: "https://haarwerk-oberberg.lovable.app" },
 ];
 
 const PortfolioShowcase = () => {
