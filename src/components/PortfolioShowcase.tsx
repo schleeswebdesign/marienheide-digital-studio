@@ -55,7 +55,7 @@ const PortfolioShowcase = () => {
         </div>
 
         {/* Sliding container - includes heading + content */}
-        <div className="relative max-w-4xl mx-auto overflow-hidden">
+        <div className="relative max-w-4xl mx-auto overflow-hidden px-12 md:px-16 -mx-12 md:-mx-16">
           <div
             className="flex transition-transform duration-500 ease-out"
             style={{ transform: `translateX(-${activeTab * 100}%)` }}
