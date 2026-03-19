@@ -493,7 +493,7 @@ export default function PortfolioShowcase() {
       const pct = Math.min((elapsed / SCENE_DURATION) * 100, 100);
       setProgress(pct);
       if (elapsed >= SCENE_DURATION) {
-        setActive(a => (a + 1) % 3);
+        setActive(a => (a + 1) % scenes.length);
         setProgress(0);
         return;
       }
