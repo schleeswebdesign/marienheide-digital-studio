@@ -37,12 +37,7 @@ const PortfolioShowcase = () => {
   return (
     <section id="referenzen" className="section-padding" style={{ backgroundColor: '#0a0f1a' }}>
       <div className="container-narrow">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">So könnte Ihre Website aussehen</h2>
-          <p className="text-white/60 text-lg">Websites die nicht nur gut aussehen – sondern aktiv neue Kunden gewinnen und mehr Anfragen generieren</p>
-        </div>
-
-        {/* Tabs */}
+        {/* Tabs - above everything */}
         <div className="flex justify-center gap-2 mb-8">
           {tabs.map((tab, i) => (
             <button
@@ -59,16 +54,20 @@ const PortfolioShowcase = () => {
           ))}
         </div>
 
-        {/* Sliding container */}
+        {/* Sliding container - includes heading + content */}
         <div className="relative max-w-4xl mx-auto overflow-hidden">
           <div
             className="flex transition-transform duration-500 ease-out"
             style={{ transform: `translateX(-${activeTab * 100}%)` }}
           >
-            {/* Tab 1: Websites Slider */}
+            {/* Tab 1: Websites */}
             <div className="w-full flex-shrink-0">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">So könnte Ihre Website aussehen</h2>
+                <p className="text-white/60 text-lg">Websites die nicht nur gut aussehen – sondern aktiv neue Kunden gewinnen und mehr Anfragen generieren</p>
+              </div>
+
               <div className="relative">
-                {/* Arrows */}
                 <button
                   onClick={prev}
                   className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
@@ -84,7 +83,6 @@ const PortfolioShowcase = () => {
                   <ChevronRight size={20} />
                 </button>
 
-                {/* iframe preview */}
                 <div className="rounded-xl overflow-hidden border border-white/10 bg-black shadow-2xl">
                   <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                     {projects.map((p, i) => (
@@ -104,7 +102,6 @@ const PortfolioShowcase = () => {
                   </div>
                 </div>
 
-                {/* Project info */}
                 <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <h3 className="text-xl font-bold text-white">{project.name}</h3>
@@ -117,7 +114,6 @@ const PortfolioShowcase = () => {
                   </Button>
                 </div>
 
-                {/* Dots */}
                 <div className="flex justify-center gap-2 mt-6">
                   {projects.map((_, i) => (
                     <button
@@ -135,6 +131,11 @@ const PortfolioShowcase = () => {
 
             {/* Tab 2: Online Shops */}
             <div className="w-full flex-shrink-0">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">So könnte Ihr Online Shop aussehen</h2>
+                <p className="text-white/60 text-lg">Professionelle Online Shops die rund um die Uhr verkaufen – für Händler die mehr wollen als nur eine Visitenkarte.</p>
+              </div>
+
               <div className="rounded-xl overflow-hidden border border-white/10 bg-black shadow-2xl">
                 <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                   <img
@@ -145,7 +146,6 @@ const PortfolioShowcase = () => {
                 </div>
               </div>
 
-              {/* Project info */}
               <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <h3 className="text-xl font-bold text-white">{shopProject.name}</h3>
