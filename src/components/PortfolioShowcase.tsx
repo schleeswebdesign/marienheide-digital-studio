@@ -539,13 +539,13 @@ export default function PortfolioShowcase() {
           </div>
 
           {/* Scenes */}
-          {[DroneScene, WeldScene, AquaScene].map((Scene, i) => (
+          {[DroneScene, WeldScene, AquaScene, PortfolioScene].map((Scene, i) => (
             <div
               key={i}
               className="absolute inset-0 transition-opacity duration-[800ms]"
               style={{ opacity: active === i ? 1 : 0, pointerEvents: active === i ? "auto" : "none" }}
             >
-              <Scene />
+              {active === i && <Scene />}
             </div>
           ))}
         </div>
