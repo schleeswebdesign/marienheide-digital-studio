@@ -103,7 +103,9 @@ function VapiButton() {
           <Phone size={18} />
           Verbinden
         </button>
-        <p className="text-xs text-muted-foreground">Teste unsere KI live</p>
+        <p className="text-xs text-muted-foreground">
+          {status === 'mic-denied' ? '⚠️ Bitte Mikrofon erlauben...' : 'Teste unsere KI live'}
+        </p>
       </div>
 
       {isActive && (
