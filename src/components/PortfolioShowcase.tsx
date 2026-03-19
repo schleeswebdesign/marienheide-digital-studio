@@ -26,8 +26,8 @@ const PortfolioShowcase = () => {
     <section id="referenzen" className="section-padding" style={{ backgroundColor: '#0a0f1a' }}>
       <div className="container-narrow">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Unsere Referenzen</h2>
-          <p className="text-white/60 text-lg">Einige unserer bisherigen Projekte</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">So könnte Ihre Website aussehen</h2>
+          <p className="text-white/60 text-lg">Websites die nicht nur gut aussehen – sondern aktiv neue Kunden gewinnen und mehr Anfragen generieren</p>
         </div>
 
         {/* Carousel */}
