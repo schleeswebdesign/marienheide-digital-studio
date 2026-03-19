@@ -198,14 +198,39 @@ function WeldScene() {
   );
 }
 
-/* ─── Scene 3: Thermos Bottle ─── */
+/* ─── Scene 3: Thermos Bottle (3D CSS) ─── */
 function AquaScene() {
-  const [bottleIn, setBottleIn] = useState(false);
+  const [phase, setPhase] = useState<'intro'|'zoom'|'hold'|'out'|'float'>('intro');
+  const [logoVisible, setLogoVisible] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setBottleIn(true), 200);
-    return () => clearTimeout(t);
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    // Reset on mount
+    setPhase('intro');
+    setLogoVisible(false);
+    timers.push(setTimeout(() => setPhase('zoom'), 800));
+    timers.push(setTimeout(() => setPhase('hold'), 2200));
+    timers.push(setTimeout(() => setLogoVisible(true), 2400));
+    timers.push(setTimeout(() => setPhase('out'), 3500));
+    timers.push(setTimeout(() => setPhase('float'), 4500));
+    return () => timers.forEach(clearTimeout);
   }, []);
+
+  const bottleTransform = {
+    intro: 'translateX(120px) rotate(8deg) scale(1)',
+    zoom: 'translateX(0) rotate(0deg) scale(1.6) rotateY(360deg)',
+    hold: 'translateX(0) rotate(0deg) scale(1.6) rotateY(360deg)',
+    out: 'translateX(0) rotate(0deg) scale(1) rotateY(0deg)',
+    float: 'translateX(0) rotate(0deg) scale(1)',
+  };
+
+  const bottleTransition = {
+    intro: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease',
+    zoom: 'transform 1.4s ease-in-out',
+    hold: 'transform 0.3s ease',
+    out: 'transform 1s ease-in-out',
+    float: 'none',
+  };
 
   return (
     <div className="showcase-scene" style={{ background: "#f5f0ea" }}>
@@ -215,19 +240,33 @@ function AquaScene() {
           <span>HOME</span><span>ABOUT</span><span>SHOP</span>
         </div>
         <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 16, color: "#1a1a1a", letterSpacing: 3 }}>AQUA</span>
-        <div className="flex gap-2 text-[10px] text-black/40">
-          <span>🔍</span><span>🛒</span>
-        </div>
+        <span className="text-[10px] px-3 py-1 rounded border border-[#c8a96e]/40 text-black/50" style={{ fontFamily: "'DM Sans', sans-serif" }}>BUY NOW</span>
       </div>
 
       {/* Gold circle background */}
-      <div className="absolute right-[10%] md:right-[20%] top-1/2 -translate-y-1/2 w-[180px] h-[180px] md:w-[240px] md:h-[240px] rounded-full border border-[#c9a96e]/20 z-[1]" />
+      <div
+        className="absolute right-[10%] md:right-[20%] top-1/2 -translate-y-1/2 rounded-full border border-[#c8a96e]/15 z-[1] transition-all duration-[1.4s] ease-in-out"
+        style={{
+          width: phase === 'zoom' || phase === 'hold' ? 280 : 220,
+          height: phase === 'zoom' || phase === 'hold' ? 280 : 220,
+        }}
+      />
+
+      {/* Gold glow behind bottle during hold */}
+      <div
+        className="absolute right-[14%] md:right-[24%] top-1/2 -translate-y-1/2 rounded-full z-[2] transition-opacity duration-700"
+        style={{
+          width: 160, height: 160,
+          background: 'radial-gradient(circle, rgba(200,169,110,0.25) 0%, transparent 70%)',
+          opacity: phase === 'hold' || phase === 'out' || phase === 'float' ? 1 : 0,
+        }}
+      />
 
       {/* Left text */}
       <div className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 max-w-[50%]">
         <p className="text-black/80 text-base md:text-xl font-bold leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
           Say Goodbye<br />to Single Use<br />
-          <span className="text-[#c9a96e]">Water</span> Bottles
+          <span style={{ color: "#c8a96e" }}>Water</span> Bottles
         </p>
         <p className="text-[10px] text-black/40 mt-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>UV-C powered. Keeps drinks cold 24h. Built for life.</p>
         <button className="mt-3 text-[10px] px-4 py-2 bg-black text-white rounded font-semibold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>
@@ -235,42 +274,94 @@ function AquaScene() {
         </button>
       </div>
 
-      {/* Bottle */}
+      {/* 3D CSS Bottle */}
       <div
-        className="absolute right-[12%] md:right-[22%] top-1/2 -translate-y-1/2 z-[5] transition-all duration-1000"
+        className="absolute right-[12%] md:right-[22%] top-1/2 z-[5]"
         style={{
-          transform: bottleIn ? "translateY(-50%) translateX(0) rotate(0deg)" : "translateY(-50%) translateX(120%) rotate(5deg)",
-          opacity: bottleIn ? 1 : 0,
+          transform: `translateY(-50%) ${bottleTransform[phase]}`,
+          transition: bottleTransition[phase],
+          opacity: phase === 'intro' ? 0 : 1,
+          perspective: 800,
         }}
       >
-        <div className="showcase-bottle-float relative" style={{ width: 60, height: 200 }}>
-          <svg viewBox="0 0 60 200" fill="none" className="w-full h-full">
-            {/* Cap */}
-            <rect x="18" y="0" width="24" height="16" rx="4" fill="#1a1a1a" />
-            <rect x="16" y="14" width="28" height="4" rx="2" fill="#c9a96e" />
-            {/* Neck */}
-            <rect x="20" y="18" width="20" height="12" rx="2" fill="#111" />
-            {/* Body */}
-            <rect x="12" y="30" width="36" height="160" rx="8" fill="#111" />
-            {/* Gold rings */}
-            <rect x="12" y="40" width="36" height="2" rx="1" fill="#c9a96e" opacity="0.6" />
-            <rect x="12" y="175" width="36" height="2" rx="1" fill="#c9a96e" opacity="0.6" />
-            {/* AQUA text */}
-            <text x="30" y="120" textAnchor="middle" fill="#c9a96e" fontSize="8" fontWeight="bold" fontFamily="DM Sans, sans-serif"
-              transform="rotate(-90 30 120)" letterSpacing="3">AQUA</text>
-            {/* UV-C dot */}
-            <circle cx="30" cy="155" r="3" fill="#c9a96e" className="showcase-uvc-pulse" />
-          </svg>
+        <div className={phase === 'float' ? 'aqua-bottle-float' : ''} style={{ width: 56, height: 200 }}>
+          {/* Shadow */}
+          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2" style={{
+            width: 50, height: 10, borderRadius: '50%',
+            background: 'radial-gradient(ellipse, rgba(0,0,0,0.18) 0%, transparent 70%)',
+          }} />
 
-          {/* Steam lines */}
-          <div className="absolute -top-6 left-1/2 -translate-x-1/2 flex gap-1">
-            {[0, 0.3, 0.6].map((d, i) => (
-              <div
-                key={i}
-                className="showcase-steam"
-                style={{ animationDelay: `${d}s` }}
-              />
-            ))}
+          {/* Bottle body */}
+          <div className="relative" style={{ width: 56, height: 200 }}>
+            {/* Cap */}
+            <div style={{
+              position: 'absolute', top: 0, left: 14, width: 28, height: 18,
+              background: 'linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 40%, #1a1a1a 100%)',
+              borderRadius: '6px 6px 2px 2px',
+            }} />
+            {/* Gold ring under cap */}
+            <div style={{
+              position: 'absolute', top: 16, left: 12, width: 32, height: 4,
+              background: 'linear-gradient(90deg, #8a6e3e, #c8a96e 50%, #8a6e3e)',
+              borderRadius: 2,
+            }} />
+            {/* Neck */}
+            <div style={{
+              position: 'absolute', top: 20, left: 16, width: 24, height: 14,
+              background: 'linear-gradient(90deg, #0a0a0a 0%, #1a1a1a 35%, #0f0f0f 100%)',
+              borderRadius: 2,
+            }} />
+            {/* Main body */}
+            <div style={{
+              position: 'absolute', top: 34, left: 8, width: 40, height: 158,
+              background: 'linear-gradient(90deg, #080808 0%, #1a1a1a 25%, #141414 50%, #0d0d0d 75%, #060606 100%)',
+              borderRadius: '6px 6px 8px 8px',
+              boxShadow: 'inset 2px 0 8px rgba(255,255,255,0.04), inset -3px 0 6px rgba(0,0,0,0.5)',
+            }}>
+              {/* 3D highlight stripe */}
+              <div style={{
+                position: 'absolute', top: 0, left: 6, width: 3, height: '100%',
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.07) 100%)',
+                borderRadius: 2,
+              }} />
+              {/* Texture grain overlay */}
+              <div style={{
+                position: 'absolute', inset: 0, borderRadius: 'inherit', opacity: 0.15,
+                backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03) 1px, transparent 1px), radial-gradient(circle at 60% 70%, rgba(255,255,255,0.02) 1px, transparent 1px)',
+                backgroundSize: '8px 8px, 6px 6px',
+              }} />
+            </div>
+            {/* Gold ring top of body */}
+            <div style={{
+              position: 'absolute', top: 42, left: 8, width: 40, height: 2,
+              background: 'linear-gradient(90deg, #7a5e2e, #c8a96e 50%, #7a5e2e)',
+              borderRadius: 1, opacity: 0.7,
+            }} />
+            {/* Gold ring bottom of body */}
+            <div style={{
+              position: 'absolute', top: 178, left: 8, width: 40, height: 2,
+              background: 'linear-gradient(90deg, #7a5e2e, #c8a96e 50%, #7a5e2e)',
+              borderRadius: 1, opacity: 0.7,
+            }} />
+            {/* AQUA text vertical */}
+            <div style={{
+              position: 'absolute', top: '50%', left: '50%',
+              transform: 'translate(-50%, -50%) rotate(-90deg)',
+              color: '#c8a96e', fontSize: 9, fontWeight: 700, letterSpacing: 4,
+              fontFamily: "'DM Sans', sans-serif",
+              opacity: logoVisible ? 1 : 0,
+              transition: 'opacity 0.5s ease',
+              whiteSpace: 'nowrap',
+            }}>
+              AQUA
+            </div>
+            {/* UV-C indicator dot */}
+            <div className="aqua-uvc-dot" style={{
+              position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)',
+              width: 6, height: 6, borderRadius: '50%',
+              background: '#c8a96e',
+              boxShadow: '0 0 6px rgba(200,169,110,0.6)',
+            }} />
           </div>
         </div>
       </div>
@@ -432,28 +523,21 @@ export default function PortfolioShowcase() {
           0% { transform: translateY(0) scale(1); opacity: 1; }
           100% { transform: translateY(-120px) translateX(${Math.random() > 0.5 ? '' : '-'}20px) scale(0); opacity: 0; }
         }
-        /* Bottle float */
-        .showcase-bottle-float {
-          animation: showcase-float 4s ease-in-out infinite;
+        /* Aqua bottle float */
+        .aqua-bottle-float {
+          animation: aqua-float 3s ease-in-out infinite;
         }
-        /* UV-C pulse */
-        .showcase-uvc-pulse {
-          animation: showcase-uvc 2s ease-in-out infinite;
+        @keyframes aqua-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
         }
-        @keyframes showcase-uvc {
-          0%, 100% { opacity: 1; r: 3; }
-          50% { opacity: 0.4; r: 4; }
+        /* UV-C dot pulse */
+        .aqua-uvc-dot {
+          animation: aqua-uvc 2s ease-in-out infinite;
         }
-        /* Steam */
-        .showcase-steam {
-          width: 2px; height: 12px;
-          background: rgba(0,0,0,0.08);
-          border-radius: 2px;
-          animation: showcase-steam-rise 2s ease-out infinite;
-        }
-        @keyframes showcase-steam-rise {
-          0% { transform: translateY(0) scaleY(0.5); opacity: 0.6; }
-          100% { transform: translateY(-16px) scaleY(1.5); opacity: 0; }
+        @keyframes aqua-uvc {
+          0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(200,169,110,0.6); }
+          50% { opacity: 0.4; box-shadow: 0 0 12px rgba(200,169,110,0.9); }
         }
       `}</style>
     </section>
