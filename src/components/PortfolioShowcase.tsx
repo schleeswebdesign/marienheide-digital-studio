@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 
 const SCENE_DURATION = 5000;
 const WORLD_DURATION = 2000;
