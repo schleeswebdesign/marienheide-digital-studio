@@ -18,5 +18,60 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      var vapiInstance = null;
+
+      function startVapi() {
+        var btn = document.getElementById('vapi-btn');
+        var status = document.getElementById('vapi-status');
+        if (!btn || !status) return;
+
+        status.innerText = '⏳ Lade...';
+
+        var script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.1.1/dist/vapi.iife.js';
+        script.onload = function() {
+          vapiInstance = new Vapi('e4df177d-71b8-4217-83b1-2bba195fc07f');
+
+          vapiInstance.on('call-start', function() {
+            document.getElementById('vapi-status').innerText = '🟢 Sofia hört zu...';
+            document.getElementById('vapi-btn').innerText = '🔴 Auflegen';
+            document.getElementById('vapi-btn').style.background = 'linear-gradient(135deg, #ff4444, #cc0000)';
+            document.getElementById('vapi-btn').onclick = stopVapi;
+          });
+
+          vapiInstance.on('speech-start', function() {
+            document.getElementById('vapi-status').innerText = '🔵 Sofia spricht...';
+          });
+
+          vapiInstance.on('speech-end', function() {
+            document.getElementById('vapi-status').innerText = '🟢 Sofia hört zu...';
+          });
+
+          vapiInstance.on('call-end', function() {
+            document.getElementById('vapi-status').innerText = '';
+            document.getElementById('vapi-btn').innerText = '🎙️ KI jetzt testen';
+            document.getElementById('vapi-btn').style.background = 'linear-gradient(135deg, #5bc8f5, #3ab0e0)';
+            document.getElementById('vapi-btn').onclick = function() { startVapi(); };
+          });
+
+          vapiInstance.on('error', function(e) {
+            document.getElementById('vapi-status').innerText = '❌ Fehler: ' + (e.message || 'Unbekannt');
+          });
+
+          vapiInstance.start('1d369f6c-b92a-4122-ae2c-717abc31ec7e');
+        };
+        document.head.appendChild(script);
+      }
+
+      function stopVapi() {
+        if (vapiInstance) {
+          vapiInstance.stop();
+        }
+      }
+
+      window.startVapi = startVapi;
+      window.stopVapi = stopVapi;
+    </script>
   </body>
 </html>
