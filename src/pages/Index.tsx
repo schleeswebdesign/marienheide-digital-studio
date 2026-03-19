@@ -192,8 +192,24 @@ const Index = () => {
                 ))}
               </ul>
               <div className="flex flex-col items-center gap-3 mt-auto">
-                <VapiButton />
-                <p className="text-xs text-muted-foreground">Teste unsere KI live</p>
+                <button
+                  id="vapi-btn"
+                  style={{
+                    background: 'linear-gradient(135deg, #5bc8f5, #3ab0e0)',
+                    color: 'white',
+                    border: 'none',
+                    padding: '16px 32px',
+                    borderRadius: 50,
+                    fontSize: 16,
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    boxShadow: '0 8px 30px rgba(91,200,245,0.4)',
+                  }}
+                  onClick={() => (window as any).startVapi?.()}
+                >
+                  🎙️ KI jetzt testen
+                </button>
+                <div id="vapi-status" style={{ marginTop: 12, fontSize: 13, color: '#888', textAlign: 'center' }} />
               </div>
             </div>
 
