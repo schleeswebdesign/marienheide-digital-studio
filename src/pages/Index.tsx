@@ -10,7 +10,6 @@ import {
   Check, ArrowRight, Mail, MessageCircle, Phone
 } from "lucide-react";
 import PortfolioShowcase from "@/components/PortfolioShowcase";
-import TeamSection from "@/components/TeamSection";
 
 const steps = [
   { num: "01", icon: Search, title: "Analyse", desc: "Ziele & Zielgruppe verstehen" },
@@ -125,7 +124,35 @@ const Index = () => {
       </section>
 
       {/* Über uns */}
-      <TeamSection />
+      <section id="vision" className="relative section-padding bg-accent overflow-hidden">
+        <HexagonCanvas opacity={0.06} interactive={false} />
+        <div className="container-narrow relative" style={{ zIndex: 1 }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <AnimatedSection>
+              <div>
+                <h2 className="text-3xl md:text-4xl mb-6">Unsere Vision</h2>
+                <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
+                  Verwurzelt im Oberbergischen, offen für jeden. Wir glauben dass gutes Webdesign kein Luxus ist – und das beweisen wir mit jedem Projekt.
+                </p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.15}>
+              <div className="flex gap-6">
+                <div className="flex-1 text-center">
+                  <img src={joshImg} alt="Josh Schlief" className="rounded-2xl object-cover w-full aspect-[3/4]" />
+                  <p className="font-bold text-secondary mt-3">Josh Schlief</p>
+                  <p className="text-sm text-muted-foreground">Webdesign & Kundenberatung</p>
+                </div>
+                <div className="flex-1 text-center">
+                  <img src={miguelImg} alt="Miguel Klees" className="rounded-2xl object-cover w-full aspect-[3/4]" />
+                  <p className="font-bold text-secondary mt-3">Miguel Klees</p>
+                  <p className="text-sm text-muted-foreground">Webdesign & Kundenberatung</p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
 
       {/* Preise */}
       <section id="angebot" className="relative section-padding overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
