@@ -7,6 +7,7 @@ const scenes = [
   { name: "AeroVista X", category: "DROHNEN · TECH", num: "01" },
   { name: "WeldPro", category: "INDUSTRIE · PRODUKT", num: "02" },
   { name: "Aqua Bottles", category: "LIFESTYLE · PRODUKT", num: "03" },
+  { name: "Schlees Webdesign", category: "REFERENZEN", num: "04" },
 ];
 
 /* ─── Scene 1: Drone ─── */
