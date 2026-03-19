@@ -7,7 +7,7 @@ import joshImg from "@/assets/josh.jpg";
 import miguelImg from "@/assets/miguel-klees.webp";
 import {
   Search, Lightbulb, Palette, Code, Rocket,
-  Check, ArrowRight, Mail, MessageCircle, Phone
+  Check, ArrowRight, Mail, MessageCircle
 } from "lucide-react";
 import PortfolioShowcase from "@/components/PortfolioShowcase";
 
