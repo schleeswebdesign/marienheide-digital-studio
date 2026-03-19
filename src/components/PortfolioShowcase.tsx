@@ -778,18 +778,7 @@ export default function PortfolioShowcase() {
           from { transform: translateY(-10px); }
           to { transform: translateY(calc(100vh)); }
         }
-        /* Sparks */
-        .showcase-spark {
-          position: absolute; bottom: 0;
-          width: 2px; height: 2px; border-radius: 50%;
-          background: #ff6b35;
-          box-shadow: 0 0 4px #ff6b35, 0 0 8px #ff8c00;
-          animation: showcase-spark-up ease-out infinite;
-        }
-        @keyframes showcase-spark-up {
-          0% { transform: translateY(0) scale(1); opacity: 1; }
-          100% { transform: translateY(-120px) translateX(${Math.random() > 0.5 ? '' : '-'}20px) scale(0); opacity: 0; }
-        }
+        /* (Sparks now rendered via canvas in WeldScene) */
         /* Aqua bottle float */
         .aqua-bottle-float {
           animation: aqua-float 3s ease-in-out infinite;
