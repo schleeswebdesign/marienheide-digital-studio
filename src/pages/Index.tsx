@@ -1,6 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
 import HexagonCanvas from "@/components/HexagonCanvas";
 import joshImg from "@/assets/josh.jpg";
@@ -19,18 +19,50 @@ const steps = [
   { num: "05", icon: Rocket, title: "Launch", desc: "Live-Schaltung & Optimierung" },
 ];
 
-const projects = [
-  { name: "Grünwerk Oberberg (Demo)", branch: "Garten & Landschaftsbau", url: "https://id-preview--70929813-767c-4033-9686-c33154e21e63.lovable.app" },
-  { name: "Elektro Oberberg (Demo)", branch: "Elektriker", url: "https://id-preview--4bf3fca1-cb6c-4a47-8e36-fec3f00157e3.lovable.app" },
-  { name: "Haarwerk Oberberg (Demo)", branch: "Friseur", url: "https://id-preview--ec4acad4-58d0-41d1-b258-41806424f87f.lovable.app" },
+const teamMembers = [
+  {
+    name: "Josh Schlief",
+    role: "Design & Strategie",
+    img: joshImg,
+    description: "Josh verantwortet den kreativen Kern – von der ersten Skizze bis zum fertigen Webauftritt. Mit Fokus auf Branding, visuelle Kommunikation und digitale Werbung sorgt er dafür, dass jede Website nicht nur gut aussieht, sondern gezielt Kunden anzieht.",
+    tags: ["Webdesign", "Branding", "Social Media"],
+    experience: "1,5 Jahre Erfahrung",
+  },
+  {
+    name: "Miguel Klees",
+    role: "Vertrieb & Kundenberatung",
+    img: miguelImg,
+    description: "Miguel ist das Gesicht von Schlees. Mit 3 Jahren kaufmännischer Erfahrung begleitet er Kunden vom ersten Gespräch bis zur Übergabe – direkt, verbindlich und auf Augenhöhe. Er kennt die Herausforderungen lokaler Unternehmen aus eigener Erfahrung.",
+    tags: ["Kundenberatung", "Vertrieb", "Projektleitung"],
+    experience: "3 Jahre Erfahrung",
+  },
 ];
 
-const features = [
-  "Moderne Unternehmenswebsite",
-  "Individuelles professionelles Design",
-  "Kontaktformular",
-  "Grundlegende SEO-Optimierung",
-  "Hosting & laufende Betreuung",
+const packages = [
+  {
+    id: "website",
+    badge: "Beliebt",
+    badgeClass: "bg-primary text-primary-foreground",
+    borderClass: "border-primary",
+    icon: "🌐",
+    title: "Webauftritt",
+    subtitle: "Ihr professioneller Online-Auftritt – modern, schnell und auf Ihr Unternehmen zugeschnitten.",
+    features: ["Moderne Unternehmenswebsite", "Individuelles professionelles Design", "Mobile optimiert (Smartphone & Tablet)", "Kontaktformular", "Grundlegende SEO-Optimierung", "Hosting & laufende Betreuung"],
+    href: "/preis-website",
+    btnClass: "bg-primary text-primary-foreground hover:opacity-90",
+  },
+  {
+    id: "shop",
+    badge: "Neu",
+    badgeClass: "bg-[hsl(263,67%,52%)] text-white",
+    borderClass: "border-[hsl(263,67%,52%)]/40",
+    icon: "🛒",
+    title: "Online-Shop",
+    subtitle: "Verkaufen Sie Ihre Produkte online – mit einem Shop-Design, das Vertrauen schafft und konvertiert.",
+    features: ["Professionelles Shop-Design", "Produkt- & Kategorieseiten", "Warenkorb & sicherer Checkout", "Zahlungsarten nach Wunsch (PayPal, Klarna etc.)", "Mobile optimiert", "Hosting & laufende Betreuung"],
+    href: "/preis-shop",
+    btnClass: "bg-secondary text-secondary-foreground border border-[hsl(263,67%,52%)]/50 hover:opacity-90",
+  },
 ];
 
 const scrollTo = (id: string) => (e: React.MouseEvent) => {
