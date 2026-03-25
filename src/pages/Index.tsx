@@ -106,124 +106,57 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Preise */}
+      {/* Angebot / Pakete */}
       <section id="angebot" className="relative section-padding overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
         <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">Unser Angebot</h2>
-              <p className="text-muted-foreground text-lg">Transparent. Fair. Ohne versteckte Kosten.</p>
+            <div className="text-center mb-14">
+              <p className="text-xs font-semibold tracking-[3px] uppercase text-primary mb-3">Unser Angebot</p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Transparent. Fair. Ohne versteckte Kosten.</h2>
+              <p className="text-muted-foreground text-base max-w-lg mx-auto leading-relaxed">
+                Kein Einheitspreis – Ihr Projekt ist einzigartig. Berechnen Sie in wenigen Klicks Ihren persönlichen Richtwert.
+              </p>
             </div>
           </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-
-            {/* Webauftritt Karte */}
-            <div
-              className="flex flex-col relative rounded-2xl p-6 md:p-8"
-              style={{
-                background: '#ffffff',
-                border: '2px solid #7DD3FC',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
-                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-                animation: 'hero-fade-in 0.9s ease-out 0.1s forwards',
-                opacity: 0,
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; e.currentTarget.style.transform = 'translateY(-6px)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.08)'; e.currentTarget.style.transform = 'none'; }}
-              onMouseDown={(e) => { e.currentTarget.style.transform = 'translateY(2px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.06)'; }}
-              onMouseUp={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; }}
-            >
-              <div className="mb-4">
-                <h3 className="text-xl font-bold text-secondary">Webauftritt</h3>
-                <p className="text-sm text-muted-foreground">Ihr professioneller Online-Auftritt – modern, schnell und auf Ihr Unternehmen zugeschnitten.</p>
-              </div>
-              <div className="mb-6">
-                <span className="text-3xl font-bold" style={{ color: '#7DD3FC' }}>500 €</span>
-                <p className="text-xs text-muted-foreground mt-1">zzgl. 100 € / mtl. für Hosting und laufende Betreuung</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                {features.map(f => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-foreground">
-                    <Check size={16} className="text-primary mt-0.5 shrink-0" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button
-                size="lg"
-                className="w-full"
-                style={{ backgroundColor: '#7DD3FC', color: '#ffffff' }}
-                asChild
-              >
-                <a href="#kontakt" onClick={scrollTo("kontakt")}>
-                  Jetzt Webauftritt starten!
-                  <ArrowRight size={16} />
-                </a>
-              </Button>
-            </div>
-
-            {/* KI-Telefonassistent Karte */}
-            <div
-              className="flex flex-col relative rounded-2xl p-6 md:p-8"
-              style={{
-                background: '#ffffff',
-                border: '2px solid #A78BFA',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
-                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-                animation: 'hero-fade-in 0.9s ease-out 0.25s forwards',
-                opacity: 0,
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; e.currentTarget.style.transform = 'translateY(-6px)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.08)'; e.currentTarget.style.transform = 'none'; }}
-              onMouseDown={(e) => { e.currentTarget.style.transform = 'translateY(2px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.06)'; }}
-              onMouseUp={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; }}
-            >
-              <span
-                className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-1 rounded-full"
-                style={{ backgroundColor: '#EDE9FE', color: '#6D28D9' }}
-              >
-                Neu
-              </span>
-              <div className="mb-4">
-                <h3 className="text-xl font-bold text-secondary">KI-Telefonassistent</h3>
-                <p className="text-sm text-muted-foreground">24/7 automatisch für Sie erreichbar – klingt wie ein echter Mensch.</p>
-              </div>
-              <div className="mb-6">
-                <span className="text-3xl font-bold" style={{ color: '#6D28D9' }}>350 €</span>
-                <p className="text-xs text-muted-foreground mt-1">Einmalige Einrichtungsgebühr – kein Abo</p>
-              </div>
-              <ul className="space-y-3 mb-8 flex-1">
-                {['Nimmt Anrufe automatisch entgegen', 'Beantwortet Kundenfragen', 'Bucht Termine im Kalender', 'Klingt wie ein echter Mensch', 'Rund um die Uhr verfügbar', 'Individuelle Konfiguration'].map(f => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-foreground">
-                    <Check size={16} className="text-primary mt-0.5 shrink-0" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-col items-center gap-3 mt-auto">
-                <button
-                  id="vapi-btn"
-                  style={{
-                    background: 'linear-gradient(135deg, #5bc8f5, #3ab0e0)',
-                    color: 'white',
-                    border: 'none',
-                    padding: '16px 32px',
-                    borderRadius: 50,
-                    fontSize: 16,
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    boxShadow: '0 8px 30px rgba(91,200,245,0.4)',
-                  }}
-                  onClick={() => (window as any).startVapi?.()}
-                >
-                  🎙️ KI jetzt testen
-                </button>
-                <div id="vapi-status" style={{ marginTop: 12, fontSize: 13, color: '#888', textAlign: 'center' }} />
-              </div>
-            </div>
-
+            {packages.map((pkg, i) => (
+              <AnimatedSection key={pkg.id} delay={i * 0.15}>
+                <div className={`relative rounded-2xl border-2 ${pkg.borderClass} bg-card p-8 flex flex-col h-full`}>
+                  <span className={`absolute -top-3 left-8 text-xs font-bold px-3 py-1 rounded-full ${pkg.badgeClass}`}>
+                    {pkg.badge}
+                  </span>
+                  <div className="mb-6 mt-2">
+                    <div className="text-3xl mb-3">{pkg.icon}</div>
+                    <h3 className="text-xl font-bold text-secondary mb-2">{pkg.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{pkg.subtitle}</p>
+                  </div>
+                  <div className="mb-6 py-4 border-t border-b border-border">
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Preis</p>
+                    <p className="text-sm font-semibold text-secondary">Preis abhängig von Ihrem Projekt</p>
+                    <p className="text-xs text-muted-foreground mt-1">zzgl. 100 € / mtl. für Hosting &amp; Betreuung</p>
+                  </div>
+                  <ul className="space-y-3 mb-8 flex-1">
+                    {pkg.features.map(f => (
+                      <li key={f} className="flex items-start gap-3 text-sm text-foreground">
+                        <Check size={16} className="text-primary mt-0.5 shrink-0" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button size="lg" className={`w-full ${pkg.btnClass}`} asChild>
+                    <Link to={pkg.href}>
+                      Preis berechnen
+                      <ArrowRight size={16} />
+                    </Link>
+                  </Button>
+                </div>
+              </AnimatedSection>
+            ))}
           </div>
+          <p className="text-center text-xs text-muted-foreground mt-8">
+            Beide Pakete beinhalten eine persönliche Beratung vor dem Start. Wir melden uns innerhalb von 24 Stunden.
+          </p>
         </div>
       </section>
 
