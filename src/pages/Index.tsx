@@ -21,14 +21,6 @@ const steps = [
 
 const teamMembers = [
   {
-    name: "Josh Schlief",
-    role: "Design & Strategie",
-    img: joshImg,
-    description: "Josh verantwortet den kreativen Kern – von der ersten Skizze bis zum fertigen Webauftritt. Mit Fokus auf Branding, visuelle Kommunikation und digitale Werbung sorgt er dafür, dass jede Website nicht nur gut aussieht, sondern gezielt Kunden anzieht.",
-    tags: ["Webdesign", "Branding", "Social Media"],
-    experience: "1,5 Jahre Erfahrung",
-  },
-  {
     name: "Miguel Klees",
     role: "Vertrieb & Kundenberatung",
     img: miguelImg,
@@ -36,32 +28,53 @@ const teamMembers = [
     tags: ["Kundenberatung", "Vertrieb", "Projektleitung"],
     experience: "3 Jahre Erfahrung",
   },
+  {
+    name: "Josh Schlief",
+    role: "Design & Strategie",
+    img: joshImg,
+    description: "Josh verantwortet den kreativen Kern – von der ersten Skizze bis zum fertigen Webauftritt. Mit Fokus auf Branding, visuelle Kommunikation und digitale Werbung sorgt er dafür, dass jede Website nicht nur gut aussieht, sondern gezielt Kunden anzieht.",
+    tags: ["Webdesign", "Branding", "Social Media"],
+    experience: "1,5 Jahre Erfahrung",
+  },
 ];
 
 const packages = [
   {
     id: "website",
     badge: "Beliebt",
-    badgeClass: "bg-primary text-primary-foreground",
-    borderClass: "border-primary",
+    badgeStyle: { background: "linear-gradient(135deg, #29b6d8, #00d4ff)", color: "#0d1b2a" } as React.CSSProperties,
+    borderColor: "#29b6d8",
+    shadowColor: "rgba(41,182,216,0.35)",
     icon: "🌐",
     title: "Webauftritt",
     subtitle: "Ihr professioneller Online-Auftritt – modern, schnell und auf Ihr Unternehmen zugeschnitten.",
     features: ["Moderne Unternehmenswebsite", "Individuelles professionelles Design", "Mobile optimiert (Smartphone & Tablet)", "Kontaktformular", "Grundlegende SEO-Optimierung", "Hosting & laufende Betreuung"],
     href: "/preis-website",
-    btnClass: "bg-primary text-primary-foreground hover:opacity-90",
+    ctaStyle: {
+      background: "linear-gradient(135deg, #29b6d8, #00d4ff)",
+      color: "#0d1b2a",
+      boxShadow: "0 6px 0 #1a8faa, 0 8px 12px rgba(41,182,216,0.3)",
+    } as React.CSSProperties,
+    ctaActiveBoxShadow: "0 2px 0 #1a8faa, 0 3px 6px rgba(41,182,216,0.2)",
   },
   {
     id: "shop",
     badge: "Neu",
-    badgeClass: "bg-[hsl(263,67%,52%)] text-white",
-    borderClass: "border-[hsl(263,67%,52%)]/40",
+    badgeStyle: { background: "#7c3aed", color: "#fff" } as React.CSSProperties,
+    borderColor: "rgba(124,58,237,0.5)",
+    shadowColor: "rgba(124,58,237,0.2)",
     icon: "🛒",
     title: "Online-Shop",
     subtitle: "Verkaufen Sie Ihre Produkte online – mit einem Shop-Design, das Vertrauen schafft und konvertiert.",
     features: ["Professionelles Shop-Design", "Produkt- & Kategorieseiten", "Warenkorb & sicherer Checkout", "Zahlungsarten nach Wunsch (PayPal, Klarna etc.)", "Mobile optimiert", "Hosting & laufende Betreuung"],
     href: "/preis-shop",
-    btnClass: "bg-secondary text-secondary-foreground border border-[hsl(263,67%,52%)]/50 hover:opacity-90",
+    ctaStyle: {
+      background: "#0d1b2a",
+      color: "#f0f4f8",
+      border: "1px solid rgba(124,58,237,0.6)",
+      boxShadow: "0 6px 0 #060e18, 0 8px 12px rgba(0,0,0,0.25)",
+    } as React.CSSProperties,
+    ctaActiveBoxShadow: "0 2px 0 #060e18, 0 3px 6px rgba(0,0,0,0.15)",
   },
 ];
 
@@ -154,8 +167,27 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {packages.map((pkg, i) => (
               <AnimatedSection key={pkg.id} delay={i * 0.15}>
-                <div className={`relative rounded-2xl border-2 ${pkg.borderClass} bg-card p-8 flex flex-col h-full`}>
-                  <span className={`absolute -top-3 left-8 text-xs font-bold px-3 py-1 rounded-full ${pkg.badgeClass}`}>
+                <div
+                  className="relative rounded-2xl bg-card p-8 flex flex-col h-full"
+                  style={{
+                    border: `2px solid ${pkg.borderColor}`,
+                    boxShadow: `0 4px 24px ${pkg.shadowColor}, 0 1px 3px rgba(0,0,0,0.06)`,
+                    transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = 'translateY(-3px)';
+                    e.currentTarget.style.boxShadow = `0 12px 32px ${pkg.shadowColor}, 0 2px 6px rgba(0,0,0,0.08)`;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = `0 4px 24px ${pkg.shadowColor}, 0 1px 3px rgba(0,0,0,0.06)`;
+                  }}
+                >
+                  {/* Badge */}
+                  <span
+                    className="absolute -top-3 left-8 text-xs font-bold px-3 py-1 rounded-full"
+                    style={pkg.badgeStyle}
+                  >
                     {pkg.badge}
                   </span>
                   <div className="mb-6 mt-2">
@@ -165,7 +197,7 @@ const Index = () => {
                   </div>
                   <div className="mb-6 py-4 border-t border-b border-border">
                     <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Preis</p>
-                    <p className="text-sm font-semibold text-secondary">Preis abhängig von Ihrem Projekt</p>
+                    <p className="text-sm font-semibold text-secondary">Individuell nach Ihrem Projekt</p>
                     <p className="text-xs text-muted-foreground mt-1">zzgl. 100 € / mtl. für Hosting &amp; Betreuung</p>
                   </div>
                   <ul className="space-y-3 mb-8 flex-1">
@@ -176,12 +208,38 @@ const Index = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button size="lg" className={`w-full ${pkg.btnClass}`} asChild>
-                    <Link to={pkg.href}>
-                      Preis berechnen
-                      <ArrowRight size={16} />
-                    </Link>
-                  </Button>
+                  {/* 3D Button */}
+                  <Link
+                    to={pkg.href}
+                    className="block w-full text-center py-4 rounded-xl font-bold text-sm no-underline select-none"
+                    style={{
+                      ...pkg.ctaStyle,
+                      transition: 'all 0.1s ease',
+                      letterSpacing: 0.3,
+                    }}
+                    onMouseDown={e => {
+                      e.currentTarget.style.transform = 'translateY(4px)';
+                      e.currentTarget.style.boxShadow = pkg.ctaActiveBoxShadow;
+                    }}
+                    onMouseUp={e => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = pkg.ctaStyle.boxShadow || '';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = pkg.ctaStyle.boxShadow || '';
+                    }}
+                    onTouchStart={e => {
+                      e.currentTarget.style.transform = 'translateY(4px)';
+                      e.currentTarget.style.boxShadow = pkg.ctaActiveBoxShadow;
+                    }}
+                    onTouchEnd={e => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = pkg.ctaStyle.boxShadow || '';
+                    }}
+                  >
+                    Preis berechnen →
+                  </Link>
                 </div>
               </AnimatedSection>
             ))}
