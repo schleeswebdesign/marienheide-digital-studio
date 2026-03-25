@@ -167,8 +167,27 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {packages.map((pkg, i) => (
               <AnimatedSection key={pkg.id} delay={i * 0.15}>
-                <div className={`relative rounded-2xl border-2 ${pkg.borderClass} bg-card p-8 flex flex-col h-full`}>
-                  <span className={`absolute -top-3 left-8 text-xs font-bold px-3 py-1 rounded-full ${pkg.badgeClass}`}>
+                <div
+                  className="relative rounded-2xl bg-card p-8 flex flex-col h-full"
+                  style={{
+                    border: `2px solid ${pkg.borderColor}`,
+                    boxShadow: `0 4px 24px ${pkg.shadowColor}, 0 1px 3px rgba(0,0,0,0.06)`,
+                    transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = 'translateY(-3px)';
+                    e.currentTarget.style.boxShadow = `0 12px 32px ${pkg.shadowColor}, 0 2px 6px rgba(0,0,0,0.08)`;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = `0 4px 24px ${pkg.shadowColor}, 0 1px 3px rgba(0,0,0,0.06)`;
+                  }}
+                >
+                  {/* Badge */}
+                  <span
+                    className="absolute -top-3 left-8 text-xs font-bold px-3 py-1 rounded-full"
+                    style={pkg.badgeStyle}
+                  >
                     {pkg.badge}
                   </span>
                   <div className="mb-6 mt-2">
@@ -178,7 +197,7 @@ const Index = () => {
                   </div>
                   <div className="mb-6 py-4 border-t border-b border-border">
                     <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Preis</p>
-                    <p className="text-sm font-semibold text-secondary">Preis abhängig von Ihrem Projekt</p>
+                    <p className="text-sm font-semibold text-secondary">Individuell nach Ihrem Projekt</p>
                     <p className="text-xs text-muted-foreground mt-1">zzgl. 100 € / mtl. für Hosting &amp; Betreuung</p>
                   </div>
                   <ul className="space-y-3 mb-8 flex-1">
@@ -189,12 +208,38 @@ const Index = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button size="lg" className={`w-full ${pkg.btnClass}`} asChild>
-                    <Link to={pkg.href}>
-                      Preis berechnen
-                      <ArrowRight size={16} />
-                    </Link>
-                  </Button>
+                  {/* 3D Button */}
+                  <Link
+                    to={pkg.href}
+                    className="block w-full text-center py-4 rounded-xl font-bold text-sm no-underline select-none"
+                    style={{
+                      ...pkg.ctaStyle,
+                      transition: 'all 0.1s ease',
+                      letterSpacing: 0.3,
+                    }}
+                    onMouseDown={e => {
+                      e.currentTarget.style.transform = 'translateY(4px)';
+                      e.currentTarget.style.boxShadow = pkg.ctaActiveBoxShadow;
+                    }}
+                    onMouseUp={e => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = pkg.ctaStyle.boxShadow || '';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = pkg.ctaStyle.boxShadow || '';
+                    }}
+                    onTouchStart={e => {
+                      e.currentTarget.style.transform = 'translateY(4px)';
+                      e.currentTarget.style.boxShadow = pkg.ctaActiveBoxShadow;
+                    }}
+                    onTouchEnd={e => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = pkg.ctaStyle.boxShadow || '';
+                    }}
+                  >
+                    Preis berechnen →
+                  </Link>
                 </div>
               </AnimatedSection>
             ))}
