@@ -65,33 +65,43 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Über uns */}
+      {/* Über uns / Team */}
       <section id="vision" className="relative section-padding bg-accent overflow-hidden">
         <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <AnimatedSection>
-              <div>
-                <h2 className="text-3xl md:text-4xl mb-6">Unsere Vision</h2>
-                <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
-                  Verwurzelt im Oberbergischen, offen für jeden. Wir glauben dass gutes Webdesign kein Luxus ist – und das beweisen wir mit jedem Projekt.
-                </p>
-              </div>
-            </AnimatedSection>
-            <AnimatedSection delay={0.15}>
-              <div className="flex gap-6">
-                <div className="flex-1 text-center">
-                  <img src={joshImg} alt="Josh Schlief" className="rounded-2xl object-cover w-full aspect-[3/4]" />
-                  <p className="font-bold text-secondary mt-3">Josh Schlief</p>
-                  <p className="text-sm text-muted-foreground">Webdesign & Kundenberatung</p>
+          <AnimatedSection>
+            <div className="mb-14">
+              <p className="text-xs font-semibold tracking-[3px] uppercase text-primary mb-3">Das Team</p>
+              <h2 className="text-3xl md:text-4xl mb-4">Zwei Köpfe. Eine Mission.</h2>
+              <p className="text-muted-foreground text-base max-w-xl leading-relaxed">
+                Verwurzelt im Oberbergischen – wir glauben, dass gutes Webdesign kein Luxus ist. Das beweisen wir mit jedem Projekt.
+              </p>
+            </div>
+          </AnimatedSection>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {teamMembers.map((member, i) => (
+              <AnimatedSection key={member.name} delay={i * 0.15}>
+                <div className="bg-card rounded-2xl p-8 border border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <div className="w-20 h-20 rounded-xl bg-primary/10 mb-6 overflow-hidden">
+                    <img src={member.img} alt={member.name} className="w-full h-full object-cover object-top" />
+                  </div>
+                  <div className="mb-4">
+                    <h3 className="text-lg font-bold text-secondary">{member.name}</h3>
+                    <p className="text-sm font-medium text-primary">{member.role}</p>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5">{member.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {member.tags.map(tag => (
+                      <span key={tag} className="text-xs font-medium px-3 py-1 rounded-full bg-accent text-muted-foreground">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-2 pt-4 border-t border-border">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="text-xs text-muted-foreground">{member.experience}</span>
+                  </div>
                 </div>
-                <div className="flex-1 text-center">
-                  <img src={miguelImg} alt="Miguel Klees" className="rounded-2xl object-cover w-full aspect-[3/4]" />
-                  <p className="font-bold text-secondary mt-3">Miguel Klees</p>
-                  <p className="text-sm text-muted-foreground">Webdesign & Kundenberatung</p>
-                </div>
-              </div>
-            </AnimatedSection>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
