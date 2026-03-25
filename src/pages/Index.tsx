@@ -104,7 +104,7 @@ const Index = () => {
           <AnimatedSection>
             <div className="mb-14">
               <p className="text-xs font-semibold tracking-[3px] uppercase text-primary mb-3">Das Team</p>
-              <h2 className="text-3xl md:text-4xl mb-4">Zwei Köpfe. Eine Mission.</h2>
+              <h2 className="text-3xl md:text-4xl mb-4">Unsere Vision</h2>
               <p className="text-muted-foreground text-base max-w-xl leading-relaxed">
                 Verwurzelt im Oberbergischen – wir glauben, dass gutes Webdesign kein Luxus ist. Das beweisen wir mit jedem Projekt.
               </p>
