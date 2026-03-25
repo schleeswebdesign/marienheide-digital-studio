@@ -115,8 +115,9 @@ const PriceShop = () => {
     });
     const raw = MIN_PRICE + total;
     const low = Math.max(MIN_PRICE, Math.min(MAX_PRICE, raw));
-    const high = Math.max(MIN_PRICE, Math.min(MAX_PRICE, Math.round(raw * 1.15)));
-    return { low, high: Math.max(low, high) };
+    const highRaw = Math.round(raw * 1.08);
+    const high = Math.max(low, Math.min(MAX_PRICE, highRaw));
+    return { low, high };
   };
 
   const restart = () => { setStep(0); setAnswers([]); setMultiAnswers({}); setShowResult(false); };
