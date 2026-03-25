@@ -21,20 +21,20 @@ const steps = [
 
 const teamMembers = [
   {
-    name: "Josh Schlief",
-    role: "Design & Strategie",
-    img: joshImg,
-    description: "Josh verantwortet den kreativen Kern – von der ersten Skizze bis zum fertigen Webauftritt. Mit Fokus auf Branding, visuelle Kommunikation und digitale Werbung sorgt er dafür, dass jede Website nicht nur gut aussieht, sondern gezielt Kunden anzieht.",
-    tags: ["Webdesign", "Branding", "Social Media"],
-    experience: "1,5 Jahre Erfahrung",
-  },
-  {
     name: "Miguel Klees",
     role: "Vertrieb & Kundenberatung",
     img: miguelImg,
     description: "Miguel ist das Gesicht von Schlees. Mit 3 Jahren kaufmännischer Erfahrung begleitet er Kunden vom ersten Gespräch bis zur Übergabe – direkt, verbindlich und auf Augenhöhe. Er kennt die Herausforderungen lokaler Unternehmen aus eigener Erfahrung.",
     tags: ["Kundenberatung", "Vertrieb", "Projektleitung"],
     experience: "3 Jahre Erfahrung",
+  },
+  {
+    name: "Josh Schlief",
+    role: "Design & Strategie",
+    img: joshImg,
+    description: "Josh verantwortet den kreativen Kern – von der ersten Skizze bis zum fertigen Webauftritt. Mit Fokus auf Branding, visuelle Kommunikation und digitale Werbung sorgt er dafür, dass jede Website nicht nur gut aussieht, sondern gezielt Kunden anzieht.",
+    tags: ["Webdesign", "Branding", "Social Media"],
+    experience: "1,5 Jahre Erfahrung",
   },
 ];
 
