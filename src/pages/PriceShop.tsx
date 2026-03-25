@@ -5,35 +5,34 @@ import { ArrowLeft } from "lucide-react";
 const questions = [
   {
     step: "Schritt 1 von 5",
-    title: "Was möchten Sie verkaufen?",
-    sub: "Dies hilft uns, den Umfang Ihres Shops einzuschätzen.",
+    title: "Wie viele Produkte soll Ihr Shop haben?",
+    sub: "Die Produktanzahl beeinflusst den Aufwand beim Aufbau.",
     options: [
-      { icon: "👕", label: "Physische Produkte", desc: "Kleidung, Möbel, Lebensmittel etc.", value: 500 },
-      { icon: "📱", label: "Digitale Produkte", desc: "E-Books, Kurse, Software etc.", value: 400 },
-      { icon: "🎨", label: "Handgemachtes & Kunst", desc: "Unikate, Schmuck, Deko etc.", value: 450 },
-      { icon: "📦", label: "Gemischtes Sortiment", desc: "Verschiedene Produktarten", value: 550 },
+      { icon: "📦", label: "Bis 20 Produkte", desc: "Kleiner, übersichtlicher Shop", value: 0 },
+      { icon: "📋", label: "21–100 Produkte", desc: "Mittlerer Produktkatalog", value: 30 },
+      { icon: "🏬", label: "100+ Produkte", desc: "Großer Shop mit vielen Kategorien", value: 60 },
     ],
   },
   {
     step: "Schritt 2 von 5",
-    title: "Wie viele Produkte planen Sie?",
-    sub: "Die Produktanzahl beeinflusst den Aufwand.",
+    title: "Welche Zahlungsarten brauchen Sie?",
+    sub: "Wählen Sie alle gewünschten Optionen.",
+    multi: true,
     options: [
-      { icon: "🔢", label: "1–20 Produkte", desc: "Kleines Sortiment", value: 0 },
-      { icon: "📋", label: "21–100 Produkte", desc: "Mittleres Sortiment", value: 300 },
-      { icon: "🏬", label: "100+ Produkte", desc: "Großes Sortiment", value: 700 },
+      { icon: "💳", label: "Kreditkarte", desc: "Visa, Mastercard etc.", value: 10 },
+      { icon: "🅿️", label: "PayPal", desc: "Standard-Zahlungsmethode", value: 5 },
+      { icon: "🏦", label: "Klarna", desc: "Kauf auf Rechnung / Raten", value: 15 },
+      { icon: "🏧", label: "Überweisung", desc: "Klassische Banküberweisung", value: 0 },
     ],
   },
   {
     step: "Schritt 3 von 5",
-    title: "Welche Zahlungsarten?",
-    sub: "Mehr Optionen = höhere Conversion.",
-    multi: true,
+    title: "Welches Design schwebt Ihnen vor?",
+    sub: "Je individueller, desto aufwendiger.",
     options: [
-      { icon: "💳", label: "Kreditkarte", desc: "Visa, Mastercard etc.", value: 0 },
-      { icon: "🅿️", label: "PayPal", desc: "Standard-Zahlungsmethode", value: 0 },
-      { icon: "🏦", label: "Klarna / Rechnung", desc: "Kauf auf Rechnung", value: 100 },
-      { icon: "📱", label: "Apple Pay / Google Pay", desc: "Mobile Wallets", value: 50 },
+      { icon: "📐", label: "Template", desc: "Bewährtes Standarddesign", value: 0 },
+      { icon: "🎨", label: "Angepasst", desc: "Template mit Anpassungen", value: 30 },
+      { icon: "✨", label: "Individuell", desc: "Komplett maßgeschneidert", value: 60 },
     ],
   },
   {
@@ -42,24 +41,27 @@ const questions = [
     sub: "Wählen Sie alle gewünschten Funktionen.",
     multi: true,
     options: [
-      { icon: "🔍", label: "Produktsuche & Filter", desc: "Suche, Kategorien, Filter", value: 200 },
-      { icon: "⭐", label: "Bewertungssystem", desc: "Kundenbewertungen", value: 150 },
-      { icon: "📧", label: "E-Mail-Marketing", desc: "Newsletter, Gutscheine", value: 150 },
-      { icon: "📊", label: "Analytics & Tracking", desc: "Verkaufsstatistiken", value: 50 },
-      { icon: "🌍", label: "Mehrsprachig", desc: "DE + EN oder mehr", value: 250 },
+      { icon: "🌍", label: "Mehrsprachigkeit", desc: "DE + EN oder mehr", value: 20 },
+      { icon: "🔍", label: "SEO-Optimierung", desc: "Erweiterte Suchmaschinenoptimierung", value: 10 },
+      { icon: "📊", label: "Lagerverwaltung", desc: "Bestandsmanagement", value: 15 },
+      { icon: "📈", label: "Analytics", desc: "Verkaufsstatistiken & Tracking", value: 10 },
+      { icon: "📧", label: "E-Mail Marketing", desc: "Newsletter & Automationen", value: 15 },
     ],
   },
   {
     step: "Schritt 5 von 5",
-    title: "Wie schnell soll es gehen?",
-    sub: "Express kostet einen Aufschlag.",
+    title: "Was beschreibt Ihr Projekt am besten?",
+    sub: "Neuer Shop, Redesign oder Migration?",
     options: [
-      { icon: "🐢", label: "Standard (4–6 Wochen)", desc: "Normaler Zeitrahmen", value: 0 },
-      { icon: "⚡", label: "Express (2–3 Wochen)", desc: "Schnellere Umsetzung", value: 400 },
-      { icon: "🚀", label: "Sofort (unter 2 Wochen)", desc: "Höchste Priorität", value: 800 },
+      { icon: "🆕", label: "Neuer Shop", desc: "Komplett neuer Online-Shop", value: 0 },
+      { icon: "🔄", label: "Redesign", desc: "Bestehenden Shop neu gestalten", value: 10 },
+      { icon: "🔀", label: "Migration", desc: "Shop von anderer Plattform umziehen", value: 25 },
     ],
   },
 ];
+
+const MIN_PRICE = 150;
+const MAX_PRICE = 400;
 
 const baseIncludes = [
   "Professionelles Shop-Design",
@@ -77,7 +79,7 @@ const PriceShop = () => {
   const [showResult, setShowResult] = useState(false);
 
   const q = questions[step];
-  const isMulti = q.multi;
+  const isMulti = !!q.multi;
   const currentMulti = multiAnswers[step] || [];
   const selected = isMulti ? currentMulti : (answers[step] !== undefined ? [answers[step]] : []);
   const progress = ((step + 1) / questions.length) * 100;
@@ -86,7 +88,9 @@ const PriceShop = () => {
     if (isMulti) {
       setMultiAnswers(prev => ({
         ...prev,
-        [step]: (prev[step] || []).includes(i) ? (prev[step] || []).filter(x => x !== i) : [...(prev[step] || []), i],
+        [step]: (prev[step] || []).includes(i)
+          ? (prev[step] || []).filter(x => x !== i)
+          : [...(prev[step] || []), i],
       }));
     } else {
       const next = [...answers];
@@ -96,12 +100,7 @@ const PriceShop = () => {
   };
 
   const canProceed = isMulti ? true : answers[step] !== undefined;
-
-  const goNext = () => {
-    if (step < questions.length - 1) setStep(step + 1);
-    else setShowResult(true);
-  };
-
+  const goNext = () => { if (step < questions.length - 1) setStep(step + 1); else setShowResult(true); };
   const goBack = () => { if (step > 0) setStep(step - 1); };
 
   const calcPrice = () => {
@@ -114,7 +113,10 @@ const PriceShop = () => {
     Object.entries(multiAnswers).forEach(([qi, indices]) => {
       indices.forEach(i => { total += questions[Number(qi)].options[i].value; });
     });
-    return { low: total, high: Math.round(total * 1.3) };
+    const raw = MIN_PRICE + total;
+    const low = Math.max(MIN_PRICE, Math.min(MAX_PRICE, raw));
+    const high = Math.max(MIN_PRICE, Math.min(MAX_PRICE, Math.round(raw * 1.15)));
+    return { low, high: Math.max(low, high) };
   };
 
   const restart = () => { setStep(0); setAnswers([]); setMultiAnswers({}); setShowResult(false); };
@@ -123,8 +125,8 @@ const PriceShop = () => {
   return (
     <div className="min-h-screen pt-24 pb-20" style={{ backgroundColor: '#0a0f1a' }}>
       <div className="max-w-[600px] mx-auto px-6">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm text-primary mb-8 hover:underline">
-          <ArrowLeft size={16} /> Zurück zur Startseite
+        <Link to="/preise" className="inline-flex items-center gap-2 text-sm text-[#29b6d8] mb-8 hover:underline">
+          <ArrowLeft size={16} /> Zurück zur Übersicht
         </Link>
 
         {!showResult ? (
@@ -135,12 +137,12 @@ const PriceShop = () => {
                 <span>{Math.round(progress)} %</span>
               </div>
               <div className="h-0.5 bg-white/10 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-[hsl(263,67%,52%)] to-[hsl(280,80%,65%)] rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
+                <div className="h-full bg-gradient-to-r from-[#29b6d8] to-[#00d4ff] rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
               </div>
             </div>
 
-            <div className="rounded-2xl p-8 border border-[hsl(263,67%,52%)]/20 animate-in fade-in slide-in-from-bottom-4 duration-300" style={{ backgroundColor: '#162233' }}>
-              <p className="text-xs font-semibold tracking-[2px] uppercase text-[hsl(263,67%,52%)] mb-3">{q.step}</p>
+            <div className="rounded-2xl p-8 border border-[#29b6d8]/20 animate-in fade-in slide-in-from-bottom-4 duration-300" style={{ backgroundColor: '#162233' }}>
+              <p className="text-xs font-semibold tracking-[2px] uppercase text-[#29b6d8] mb-3">{q.step}</p>
               <h2 className="text-xl font-bold text-white mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>{q.title}</h2>
               <p className="text-sm text-white/50 mb-6 leading-relaxed">{q.sub}</p>
 
@@ -150,7 +152,7 @@ const PriceShop = () => {
                     key={i}
                     onClick={() => selectOption(i)}
                     className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition-all duration-200 select-none
-                      ${selected.includes(i) ? 'border-[hsl(263,67%,52%)] bg-[hsl(263,67%,52%)]/10' : 'border-white/10 bg-white/[0.02] hover:border-[hsl(263,67%,52%)]/40 hover:bg-[hsl(263,67%,52%)]/5'}`}
+                      ${selected.includes(i) ? 'border-[#29b6d8] bg-[#29b6d8]/10' : 'border-white/10 bg-white/[0.02] hover:border-[#29b6d8]/40 hover:bg-[#29b6d8]/5'}`}
                   >
                     <span className="text-xl w-7 text-center shrink-0">{opt.icon}</span>
                     <div className="flex-1">
@@ -158,8 +160,8 @@ const PriceShop = () => {
                       <p className="text-xs text-white/50 mt-0.5">{opt.desc}</p>
                     </div>
                     <div className={`w-[18px] h-[18px] rounded-full border-[1.5px] flex items-center justify-center shrink-0 transition-all
-                      ${selected.includes(i) ? 'bg-[hsl(263,67%,52%)] border-[hsl(263,67%,52%)]' : 'border-white/20'}`}>
-                      {selected.includes(i) && <span className="text-[10px] font-extrabold text-white">✓</span>}
+                      ${selected.includes(i) ? 'bg-[#29b6d8] border-[#29b6d8]' : 'border-white/20'}`}>
+                      {selected.includes(i) && <span className="text-[10px] font-extrabold" style={{ color: '#0d1b2a' }}>✓</span>}
                     </div>
                   </div>
                 ))}
@@ -176,8 +178,8 @@ const PriceShop = () => {
                   disabled={!canProceed}
                   className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all
                     ${canProceed
-                      ? 'bg-[hsl(263,67%,52%)] text-white cursor-pointer hover:shadow-lg hover:shadow-[hsl(263,67%,52%)]/30 hover:-translate-y-0.5'
-                      : 'bg-[hsl(263,67%,52%)] text-white opacity-35 pointer-events-none'}`}
+                      ? 'bg-gradient-to-r from-[#29b6d8] to-[#00d4ff] text-[#0d1b2a] cursor-pointer hover:shadow-lg hover:shadow-[#29b6d8]/30 hover:-translate-y-0.5'
+                      : 'bg-gradient-to-r from-[#29b6d8] to-[#00d4ff] text-[#0d1b2a] opacity-35 pointer-events-none'}`}
                   style={{ fontFamily: "'Syne', sans-serif" }}
                 >
                   Weiter →
@@ -186,8 +188,8 @@ const PriceShop = () => {
             </div>
           </>
         ) : (
-          <div className="rounded-2xl p-9 border border-[hsl(263,67%,52%)]/20 animate-in fade-in slide-in-from-bottom-4 duration-300" style={{ backgroundColor: '#162233' }}>
-            <p className="text-xs font-semibold tracking-[2px] uppercase text-[hsl(263,67%,52%)] mb-2">Ihr Richtwert</p>
+          <div className="rounded-2xl p-9 border border-[#29b6d8]/20 animate-in fade-in slide-in-from-bottom-4 duration-300" style={{ backgroundColor: '#162233' }}>
+            <p className="text-xs font-semibold tracking-[2px] uppercase text-[#29b6d8] mb-2">Ihr Richtwert</p>
             <h2 className="text-xl font-bold text-white mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>Geschätzter Projektpreis</h2>
             <p className="text-sm text-white/50 leading-relaxed mb-7">Basierend auf Ihren Angaben – unverbindlich und kostenlos.</p>
 
@@ -201,13 +203,13 @@ const PriceShop = () => {
             <ul className="mb-6 space-y-1.5">
               {baseIncludes.map(item => (
                 <li key={item} className="flex items-center gap-2.5 text-sm text-white">
-                  <span className="text-[hsl(263,67%,52%)] text-xs font-bold shrink-0">✓</span>
+                  <span className="text-[#29b6d8] text-xs font-bold shrink-0">✓</span>
                   {item}
                 </li>
               ))}
             </ul>
 
-            <a href="mailto:schlees.webdesign@gmail.com" className="block w-full text-center py-4 rounded-xl font-bold text-sm bg-[hsl(263,67%,52%)] text-white hover:shadow-lg hover:shadow-[hsl(263,67%,52%)]/30 hover:-translate-y-0.5 transition-all mb-2.5" style={{ fontFamily: "'Syne', sans-serif" }}>
+            <a href="mailto:schlees.webdesign@gmail.com" className="block w-full text-center py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-[#29b6d8] to-[#00d4ff] text-[#0d1b2a] hover:shadow-lg hover:shadow-[#29b6d8]/30 hover:-translate-y-0.5 transition-all mb-2.5" style={{ fontFamily: "'Syne', sans-serif" }}>
               Angebot anfragen →
             </a>
             <button onClick={restart} className="w-full py-3 rounded-xl border border-white/10 text-white/50 text-sm hover:text-white hover:border-white/25 transition-all">
