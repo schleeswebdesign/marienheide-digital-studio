@@ -11,6 +11,8 @@ import LoadingScreen from "@/components/LoadingScreen";
 import Index from "./pages/Index.tsx";
 import References from "./pages/References.tsx";
 import Pricing from "./pages/Pricing.tsx";
+import PriceWebsite from "./pages/PriceWebsite.tsx";
+import PriceShop from "./pages/PriceShop.tsx";
 import Impressum from "./pages/Impressum.tsx";
 import Datenschutz from "./pages/Datenschutz.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -34,6 +36,8 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/referenzen" element={<References />} />
             <Route path="/preise" element={<Pricing />} />
+            <Route path="/preis-website" element={<PriceWebsite />} />
+            <Route path="/preis-shop" element={<PriceShop />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="*" element={<NotFound />} />

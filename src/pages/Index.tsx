@@ -1,6 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import AnimatedSection from "@/components/AnimatedSection";
 import HexagonCanvas from "@/components/HexagonCanvas";
 import joshImg from "@/assets/josh.jpg";
@@ -19,18 +19,50 @@ const steps = [
   { num: "05", icon: Rocket, title: "Launch", desc: "Live-Schaltung & Optimierung" },
 ];
 
-const projects = [
-  { name: "Grünwerk Oberberg (Demo)", branch: "Garten & Landschaftsbau", url: "https://id-preview--70929813-767c-4033-9686-c33154e21e63.lovable.app" },
-  { name: "Elektro Oberberg (Demo)", branch: "Elektriker", url: "https://id-preview--4bf3fca1-cb6c-4a47-8e36-fec3f00157e3.lovable.app" },
-  { name: "Haarwerk Oberberg (Demo)", branch: "Friseur", url: "https://id-preview--ec4acad4-58d0-41d1-b258-41806424f87f.lovable.app" },
+const teamMembers = [
+  {
+    name: "Josh Schlief",
+    role: "Design & Strategie",
+    img: joshImg,
+    description: "Josh verantwortet den kreativen Kern – von der ersten Skizze bis zum fertigen Webauftritt. Mit Fokus auf Branding, visuelle Kommunikation und digitale Werbung sorgt er dafür, dass jede Website nicht nur gut aussieht, sondern gezielt Kunden anzieht.",
+    tags: ["Webdesign", "Branding", "Social Media"],
+    experience: "1,5 Jahre Erfahrung",
+  },
+  {
+    name: "Miguel Klees",
+    role: "Vertrieb & Kundenberatung",
+    img: miguelImg,
+    description: "Miguel ist das Gesicht von Schlees. Mit 3 Jahren kaufmännischer Erfahrung begleitet er Kunden vom ersten Gespräch bis zur Übergabe – direkt, verbindlich und auf Augenhöhe. Er kennt die Herausforderungen lokaler Unternehmen aus eigener Erfahrung.",
+    tags: ["Kundenberatung", "Vertrieb", "Projektleitung"],
+    experience: "3 Jahre Erfahrung",
+  },
 ];
 
-const features = [
-  "Moderne Unternehmenswebsite",
-  "Individuelles professionelles Design",
-  "Kontaktformular",
-  "Grundlegende SEO-Optimierung",
-  "Hosting & laufende Betreuung",
+const packages = [
+  {
+    id: "website",
+    badge: "Beliebt",
+    badgeClass: "bg-primary text-primary-foreground",
+    borderClass: "border-primary",
+    icon: "🌐",
+    title: "Webauftritt",
+    subtitle: "Ihr professioneller Online-Auftritt – modern, schnell und auf Ihr Unternehmen zugeschnitten.",
+    features: ["Moderne Unternehmenswebsite", "Individuelles professionelles Design", "Mobile optimiert (Smartphone & Tablet)", "Kontaktformular", "Grundlegende SEO-Optimierung", "Hosting & laufende Betreuung"],
+    href: "/preis-website",
+    btnClass: "bg-primary text-primary-foreground hover:opacity-90",
+  },
+  {
+    id: "shop",
+    badge: "Neu",
+    badgeClass: "bg-[hsl(263,67%,52%)] text-white",
+    borderClass: "border-[hsl(263,67%,52%)]/40",
+    icon: "🛒",
+    title: "Online-Shop",
+    subtitle: "Verkaufen Sie Ihre Produkte online – mit einem Shop-Design, das Vertrauen schafft und konvertiert.",
+    features: ["Professionelles Shop-Design", "Produkt- & Kategorieseiten", "Warenkorb & sicherer Checkout", "Zahlungsarten nach Wunsch (PayPal, Klarna etc.)", "Mobile optimiert", "Hosting & laufende Betreuung"],
+    href: "/preis-shop",
+    btnClass: "bg-secondary text-secondary-foreground border border-[hsl(263,67%,52%)]/50 hover:opacity-90",
+  },
 ];
 
 const scrollTo = (id: string) => (e: React.MouseEvent) => {
@@ -65,155 +97,98 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Über uns */}
+      {/* Über uns / Team */}
       <section id="vision" className="relative section-padding bg-accent overflow-hidden">
         <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <AnimatedSection>
-              <div>
-                <h2 className="text-3xl md:text-4xl mb-6">Unsere Vision</h2>
-                <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
-                  Verwurzelt im Oberbergischen, offen für jeden. Wir glauben dass gutes Webdesign kein Luxus ist – und das beweisen wir mit jedem Projekt.
-                </p>
-              </div>
-            </AnimatedSection>
-            <AnimatedSection delay={0.15}>
-              <div className="flex gap-6">
-                <div className="flex-1 text-center">
-                  <img src={joshImg} alt="Josh Schlief" className="rounded-2xl object-cover w-full aspect-[3/4]" />
-                  <p className="font-bold text-secondary mt-3">Josh Schlief</p>
-                  <p className="text-sm text-muted-foreground">Webdesign & Kundenberatung</p>
+          <AnimatedSection>
+            <div className="mb-14">
+              <p className="text-xs font-semibold tracking-[3px] uppercase text-primary mb-3">Das Team</p>
+              <h2 className="text-3xl md:text-4xl mb-4">Zwei Köpfe. Eine Mission.</h2>
+              <p className="text-muted-foreground text-base max-w-xl leading-relaxed">
+                Verwurzelt im Oberbergischen – wir glauben, dass gutes Webdesign kein Luxus ist. Das beweisen wir mit jedem Projekt.
+              </p>
+            </div>
+          </AnimatedSection>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {teamMembers.map((member, i) => (
+              <AnimatedSection key={member.name} delay={i * 0.15}>
+                <div className="bg-card rounded-2xl p-8 border border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <div className="w-20 h-20 rounded-xl bg-primary/10 mb-6 overflow-hidden">
+                    <img src={member.img} alt={member.name} className="w-full h-full object-cover object-top" />
+                  </div>
+                  <div className="mb-4">
+                    <h3 className="text-lg font-bold text-secondary">{member.name}</h3>
+                    <p className="text-sm font-medium text-primary">{member.role}</p>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5">{member.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {member.tags.map(tag => (
+                      <span key={tag} className="text-xs font-medium px-3 py-1 rounded-full bg-accent text-muted-foreground">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-2 pt-4 border-t border-border">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="text-xs text-muted-foreground">{member.experience}</span>
+                  </div>
                 </div>
-                <div className="flex-1 text-center">
-                  <img src={miguelImg} alt="Miguel Klees" className="rounded-2xl object-cover w-full aspect-[3/4]" />
-                  <p className="font-bold text-secondary mt-3">Miguel Klees</p>
-                  <p className="text-sm text-muted-foreground">Webdesign & Kundenberatung</p>
-                </div>
-              </div>
-            </AnimatedSection>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Preise */}
+      {/* Angebot / Pakete */}
       <section id="angebot" className="relative section-padding overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef4ff 100%)' }}>
         <HexagonCanvas opacity={0.06} interactive={false} />
         <div className="container-narrow relative" style={{ zIndex: 1 }}>
           <AnimatedSection>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">Unser Angebot</h2>
-              <p className="text-muted-foreground text-lg">Transparent. Fair. Ohne versteckte Kosten.</p>
+            <div className="text-center mb-14">
+              <p className="text-xs font-semibold tracking-[3px] uppercase text-primary mb-3">Unser Angebot</p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Transparent. Fair. Ohne versteckte Kosten.</h2>
+              <p className="text-muted-foreground text-base max-w-lg mx-auto leading-relaxed">
+                Kein Einheitspreis – Ihr Projekt ist einzigartig. Berechnen Sie in wenigen Klicks Ihren persönlichen Richtwert.
+              </p>
             </div>
           </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-
-            {/* Webauftritt Karte */}
-            <div
-              className="flex flex-col relative rounded-2xl p-6 md:p-8"
-              style={{
-                background: '#ffffff',
-                border: '2px solid #7DD3FC',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
-                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-                animation: 'hero-fade-in 0.9s ease-out 0.1s forwards',
-                opacity: 0,
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; e.currentTarget.style.transform = 'translateY(-6px)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.08)'; e.currentTarget.style.transform = 'none'; }}
-              onMouseDown={(e) => { e.currentTarget.style.transform = 'translateY(2px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.06)'; }}
-              onMouseUp={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; }}
-            >
-              <div className="mb-4">
-                <h3 className="text-xl font-bold text-secondary">Webauftritt</h3>
-                <p className="text-sm text-muted-foreground">Ihr professioneller Online-Auftritt – modern, schnell und auf Ihr Unternehmen zugeschnitten.</p>
-              </div>
-              <div className="mb-6">
-                <span className="text-3xl font-bold" style={{ color: '#7DD3FC' }}>500 €</span>
-                <p className="text-xs text-muted-foreground mt-1">zzgl. 100 € / mtl. für Hosting und laufende Betreuung</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                {features.map(f => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-foreground">
-                    <Check size={16} className="text-primary mt-0.5 shrink-0" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button
-                size="lg"
-                className="w-full"
-                style={{ backgroundColor: '#7DD3FC', color: '#ffffff' }}
-                asChild
-              >
-                <a href="#kontakt" onClick={scrollTo("kontakt")}>
-                  Jetzt Webauftritt starten!
-                  <ArrowRight size={16} />
-                </a>
-              </Button>
-            </div>
-
-            {/* KI-Telefonassistent Karte */}
-            <div
-              className="flex flex-col relative rounded-2xl p-6 md:p-8"
-              style={{
-                background: '#ffffff',
-                border: '2px solid #A78BFA',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
-                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-                animation: 'hero-fade-in 0.9s ease-out 0.25s forwards',
-                opacity: 0,
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; e.currentTarget.style.transform = 'translateY(-6px)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.08)'; e.currentTarget.style.transform = 'none'; }}
-              onMouseDown={(e) => { e.currentTarget.style.transform = 'translateY(2px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.06)'; }}
-              onMouseUp={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 28px 80px rgba(0,0,0,0.14)'; }}
-            >
-              <span
-                className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-1 rounded-full"
-                style={{ backgroundColor: '#EDE9FE', color: '#6D28D9' }}
-              >
-                Neu
-              </span>
-              <div className="mb-4">
-                <h3 className="text-xl font-bold text-secondary">KI-Telefonassistent</h3>
-                <p className="text-sm text-muted-foreground">24/7 automatisch für Sie erreichbar – klingt wie ein echter Mensch.</p>
-              </div>
-              <div className="mb-6">
-                <span className="text-3xl font-bold" style={{ color: '#6D28D9' }}>350 €</span>
-                <p className="text-xs text-muted-foreground mt-1">Einmalige Einrichtungsgebühr – kein Abo</p>
-              </div>
-              <ul className="space-y-3 mb-8 flex-1">
-                {['Nimmt Anrufe automatisch entgegen', 'Beantwortet Kundenfragen', 'Bucht Termine im Kalender', 'Klingt wie ein echter Mensch', 'Rund um die Uhr verfügbar', 'Individuelle Konfiguration'].map(f => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-foreground">
-                    <Check size={16} className="text-primary mt-0.5 shrink-0" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-col items-center gap-3 mt-auto">
-                <button
-                  id="vapi-btn"
-                  style={{
-                    background: 'linear-gradient(135deg, #5bc8f5, #3ab0e0)',
-                    color: 'white',
-                    border: 'none',
-                    padding: '16px 32px',
-                    borderRadius: 50,
-                    fontSize: 16,
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    boxShadow: '0 8px 30px rgba(91,200,245,0.4)',
-                  }}
-                  onClick={() => (window as any).startVapi?.()}
-                >
-                  🎙️ KI jetzt testen
-                </button>
-                <div id="vapi-status" style={{ marginTop: 12, fontSize: 13, color: '#888', textAlign: 'center' }} />
-              </div>
-            </div>
-
+            {packages.map((pkg, i) => (
+              <AnimatedSection key={pkg.id} delay={i * 0.15}>
+                <div className={`relative rounded-2xl border-2 ${pkg.borderClass} bg-card p-8 flex flex-col h-full`}>
+                  <span className={`absolute -top-3 left-8 text-xs font-bold px-3 py-1 rounded-full ${pkg.badgeClass}`}>
+                    {pkg.badge}
+                  </span>
+                  <div className="mb-6 mt-2">
+                    <div className="text-3xl mb-3">{pkg.icon}</div>
+                    <h3 className="text-xl font-bold text-secondary mb-2">{pkg.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{pkg.subtitle}</p>
+                  </div>
+                  <div className="mb-6 py-4 border-t border-b border-border">
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Preis</p>
+                    <p className="text-sm font-semibold text-secondary">Preis abhängig von Ihrem Projekt</p>
+                    <p className="text-xs text-muted-foreground mt-1">zzgl. 100 € / mtl. für Hosting &amp; Betreuung</p>
+                  </div>
+                  <ul className="space-y-3 mb-8 flex-1">
+                    {pkg.features.map(f => (
+                      <li key={f} className="flex items-start gap-3 text-sm text-foreground">
+                        <Check size={16} className="text-primary mt-0.5 shrink-0" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button size="lg" className={`w-full ${pkg.btnClass}`} asChild>
+                    <Link to={pkg.href}>
+                      Preis berechnen
+                      <ArrowRight size={16} />
+                    </Link>
+                  </Button>
+                </div>
+              </AnimatedSection>
+            ))}
           </div>
+          <p className="text-center text-xs text-muted-foreground mt-8">
+            Beide Pakete beinhalten eine persönliche Beratung vor dem Start. Wir melden uns innerhalb von 24 Stunden.
+          </p>
         </div>
       </section>
 
